@@ -7,6 +7,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Identity", "Go
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Models", "GoldenVoyage.Models\GoldenVoyage.Models.xproj", "{921AAE15-D28E-459D-BC49-9187D2C321C1}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Api", "GoldenVoyage.Api\GoldenVoyage.Api.xproj", "{7528E57F-469B-4028-A632-AABD53F9810D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.ApiServices", "GoldenVoyage.ApiServices\GoldenVoyage.ApiServices.xproj", "{F7EF9E1B-CC83-4631-A762-463B97F234D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{921AAE15-D28E-459D-BC49-9187D2C321C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{921AAE15-D28E-459D-BC49-9187D2C321C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{921AAE15-D28E-459D-BC49-9187D2C321C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7528E57F-469B-4028-A632-AABD53F9810D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7528E57F-469B-4028-A632-AABD53F9810D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7528E57F-469B-4028-A632-AABD53F9810D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7528E57F-469B-4028-A632-AABD53F9810D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7EF9E1B-CC83-4631-A762-463B97F234D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7EF9E1B-CC83-4631-A762-463B97F234D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7EF9E1B-CC83-4631-A762-463B97F234D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7EF9E1B-CC83-4631-A762-463B97F234D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
