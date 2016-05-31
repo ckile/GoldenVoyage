@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace GoldenVoyage.ApiServices.Services
 {
-    public class ServiceBase
+    public abstract class ServiceBase
     {
         protected ServiceContext ServiceContext { get; private set; }
 
         public void InitServiceContext(ServiceContext serviceContext)
         {
             ServiceContext = serviceContext;
+        }
+
+        protected DbContext GetDbContext()
+        {
+            return ServiceContext.DbContext;
         }
     }
 }
