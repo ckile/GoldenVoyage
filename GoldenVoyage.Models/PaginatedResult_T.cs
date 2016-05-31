@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GoldenVoyage.Models.Entities
+namespace GoldenVoyage.Models
 {
     /// <summary>
     /// 查询结果集

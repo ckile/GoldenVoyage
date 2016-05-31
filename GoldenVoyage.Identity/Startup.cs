@@ -4,14 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using GoldenVoyage.Identity.Configuration;
+using GoldenVoyage.Identity.Extensions;
+using GoldenVoyage.Models;
+using IdentityServer4.Core.Services;
+using IdentityServer4.Core.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using GoldenVoyage.Identity.Configuration;
-using GoldenVoyage.Identity.Extensions;
-using IdentityServer4.Core.Services;
-using IdentityServer4.Core.Validation;
+using Microsoft.Extensions.Logging;
 
 namespace GoldenVoyage.Identity
 {
@@ -22,11 +26,21 @@ namespace GoldenVoyage.Identity
         public Startup(IHostingEnvironment env)
         {
             _environment = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
+
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<PmsDbContext>();
+            services.AddDbContext<PmsDbContext>(options =>
+            options.UseSqlServer(Configuration["Data:PmsConnection:ConnectionString"]));
 
             var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsrv3test.pfx"), "idsrv3test");
 
@@ -41,7 +55,6 @@ namespace GoldenVoyage.Identity
             builder.Services.AddTransient<IProfileService, ProfileService>();
             builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
 
-
             builder.AddCustomGrantValidator<Extensions.CustomGrantValidator>();
 
             // for the UI
@@ -54,12 +67,24 @@ namespace GoldenVoyage.Identity
             services.AddTransient<UI.Login.LoginService>();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            app.Run(async (context) =>
+            loggerFactory.AddConsole(LogLevel.Trace);
+            loggerFactory.AddDebug(LogLevel.Trace);
+
+            app.UseDeveloperExceptionPage();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                await context.Response.WriteAsync("Hello World!");
+                AuthenticationScheme = "Temp",
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false
             });
+
+            app.UseIdentityServer();
+
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

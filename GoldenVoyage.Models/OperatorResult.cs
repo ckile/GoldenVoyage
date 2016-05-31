@@ -101,6 +101,6 @@
     /// </summary>
     public enum ErrorCodes
     {
-        Success, Error, FieldRequired
+        Success, Error, FieldRequired, NotFound, InvalidArgument
     }
 }

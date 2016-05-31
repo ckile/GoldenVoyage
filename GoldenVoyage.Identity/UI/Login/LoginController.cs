@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GoldenVoyage.Models.Entities;
 using IdentityModel;
 using IdentityServer4.Core;
 using IdentityServer4.Core.Services;
-using IdentityServer4.Core.Services.InMemory;
-using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenVoyage.Identity.UI.Login
@@ -48,10 +46,10 @@ namespace GoldenVoyage.Identity.UI.Login
         {
             if (ModelState.IsValid)
             {
-                if (_loginService.ValidateCredentials(model.Username, model.Password))
+                if (await _loginService.ValidateCredentials(model.Username, model.Password))
                 {
-                    var user = _loginService.FindByUsername(model.Username);
-                    await IssueCookie(user, "idsvr", "password");
+                    var login = await _loginService.Login(model.Username);
+                    await IssueCookie(login, "idsvr", "password");
 
                     if (model.SignInId != null)
                     {
@@ -61,7 +59,7 @@ namespace GoldenVoyage.Identity.UI.Login
                     return Redirect("~/");
                 }
 
-                ModelState.AddModelError("", "Invalid username or password.");
+                ModelState.AddModelError("", "无效的用户名或密码.");
             }
 
             var vm = new LoginViewModel(model);
@@ -69,15 +67,14 @@ namespace GoldenVoyage.Identity.UI.Login
         }
 
         private async Task IssueCookie(
-            InMemoryUser user,
+            EmployeeLogin login,
             string idp,
             string amr)
         {
-            var name = user.Claims.Where(x => x.Type == JwtClaimTypes.Name).Select(x => x.Value).FirstOrDefault() ?? user.Username;
-
             var claims = new Claim[] {
-                        new Claim(JwtClaimTypes.Subject, user.Subject),
-                        new Claim(JwtClaimTypes.Name, name),
+                        new Claim(JwtClaimTypes.Subject, login.Id.ToString()),
+                        new Claim(JwtClaimTypes.Name, login.Employee.Name),
+                        new Claim(JwtClaimTypes.Role, login.Employee.Role.ToString()),
                         new Claim(JwtClaimTypes.IdentityProvider, idp),
                         new Claim(JwtClaimTypes.AuthenticationTime, DateTime.UtcNow.ToEpochTime().ToString()),
                     };
@@ -85,58 +82,6 @@ namespace GoldenVoyage.Identity.UI.Login
             var cp = new ClaimsPrincipal(ci);
 
             await HttpContext.Authentication.SignInAsync(Constants.PrimaryAuthenticationType, cp);
-        }
-
-        [HttpGet("/ui/external/{provider}", Name = "External")]
-        public IActionResult External(string provider, string signInId)
-        {
-            return new ChallengeResult(provider, new AuthenticationProperties
-            {
-                RedirectUri = "/ui/external-callback?signInId=" + signInId
-            });
-        }
-
-        [HttpGet("/ui/external-callback")]
-        public async Task<IActionResult> ExternalCallback(string signInId)
-        {
-            var tempUser = await HttpContext.Authentication.AuthenticateAsync("Temp");
-            if (tempUser == null)
-            {
-                throw new Exception();
-            }
-
-            var claims = tempUser.Claims.ToList();
-
-            var userIdClaim = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.Subject);
-            if (userIdClaim == null)
-            {
-                userIdClaim = claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            }
-            if (userIdClaim == null)
-            {
-                throw new Exception("Unknown userid");
-            }
-
-            claims.Remove(userIdClaim);
-
-            var provider = userIdClaim.Issuer;
-            var userId = userIdClaim.Value;
-
-            var user = _loginService.FindByExternalProvider(provider, userId);
-            if (user == null)
-            {
-                user = _loginService.AutoProvisionUser(provider, userId, claims);
-            }
-
-            await IssueCookie(user, provider, "external");
-            await HttpContext.Authentication.SignOutAsync("Temp");
-
-            if (signInId != null)
-            {
-                return new SignInResult(signInId);
-            }
-
-            return Redirect("~/");
         }
     }
 }

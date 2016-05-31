@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GoldenVoyage.ApiServices.Services
 {
@@ -15,15 +13,15 @@ namespace GoldenVoyage.ApiServices.Services
         {
             _serviceProvider = serviceProvider;
             _serviceContext = serviceContext;
-
         }
 
         public TService Create<TService>(int loginId)
         {
             _serviceContext.LoginId = loginId;
             var ser = _serviceProvider.GetService<TService>();
+            var serbase = ser as ServiceBase;
+            serbase?.InitServiceContext(_serviceContext);
+            return ser;
         }
-
-
     }
 }

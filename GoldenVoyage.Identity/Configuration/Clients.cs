@@ -24,7 +24,7 @@ namespace GoldenVoyage.Identity.Configuration
 
                     AllowedScopes = new List<string>
                     {
-                        "api1", "api2"
+                        "api"
                     }
                 },
 
@@ -47,7 +47,7 @@ namespace GoldenVoyage.Identity.Configuration
                         StandardScopes.Email.Name,
                         StandardScopes.OfflineAccess.Name,
 
-                        "api1", "api2"
+                        "api"
                     }
                 },
 
@@ -66,117 +66,37 @@ namespace GoldenVoyage.Identity.Configuration
 
                     AllowedScopes = new List<string>
                     {
-                        "api1", "api2"
+                        "api"
                     },
 
                     AccessTokenType = AccessTokenType.Reference
                 },
 
                 ///////////////////////////////////////////
-                // MVC Implicit Flow Samples
+                // Web Client
                 //////////////////////////////////////////
                 new Client
                 {
-                    ClientId = "mvc_implicit",
-                    ClientName = "MVC Implicit",
-                    ClientUri = "http://identityserver.io",
+                    ClientId = "webclient",
+                    ClientName = "Web Client",
+                    ClientUri = "http://localhost:49288",
 
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
+                    AccessTokenLifetime = 2592000, //秒  30天
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:44077/signin-oidc"
-                    },
-
-                    AllowedScopes = new List<string>
-                    {
-                        StandardScopes.OpenId.Name,
-                        StandardScopes.Profile.Name,
-                        StandardScopes.Email.Name,
-                        StandardScopes.Roles.Name,
-
-                        "api1", "api2"
-                    },
-                },
-
-                ///////////////////////////////////////////
-                // MVC Hybrid Flow Samples
-                //////////////////////////////////////////
-                new Client
-                {
-                    ClientId = "mvc.hybrid",
-                    ClientName = "MVC Hybrid",
-                    ClientSecrets = new List<Secret>
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    ClientUri = "http://identityserver.io",
-
-                    AllowedGrantTypes = GrantTypes.Hybrid,
-                    AllowAccessTokensViaBrowser = false,
-                    RedirectUris = new List<string>
-                    {
-                        "http://localhost:44077/signin-oidc"
-                    },
-
-                    AllowedScopes = new List<string>
-                    {
-                        StandardScopes.OpenId.Name,
-                        StandardScopes.Profile.Name,
-                        StandardScopes.Email.Name,
-                        StandardScopes.Roles.Name,
-                        StandardScopes.OfflineAccess.Name,
-
-                        "api1", "api2",
-                    },
-                },
-
-                ///////////////////////////////////////////
-                // JS OAuth 2.0 Sample
-                //////////////////////////////////////////
-                new Client
-                {
-                    ClientId = "js_oauth",
-                    ClientName = "JavaScript OAuth 2.0 Client",
-                    ClientUri = "http://identityserver.io",
-
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "http://localhost:28895/index.html"
-                    },
-
-                    AllowedScopes = new List<string>
-                    {
-                        "api1", "api2"
-                    },
-                },
-
-                ///////////////////////////////////////////
-                // JS OIDC Sample
-                //////////////////////////////////////////
-                new Client
-                {
-                    ClientId = "js_oidc",
-                    ClientName = "JavaScript OIDC Client",
-                    ClientUri = "http://identityserver.io",
-
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = new List<string>
-                    {
-                        "http://localhost:7017/index.html",
-                        "http://localhost:7017/silent_renew.html",
+                        "http://localhost:49288",
+                        "http://localhost:49288/Home",
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost:7017/index.html",
+                        "http://localhost:49288",
                     },
 
                     AllowedCorsOrigins = new List<string>
                     {
-                        "http://localhost:7017"
+                        "http://localhost:49288"
                     },
 
                     AllowedScopes = new List<string>
@@ -185,7 +105,7 @@ namespace GoldenVoyage.Identity.Configuration
                         StandardScopes.Profile.Name,
                         StandardScopes.Email.Name,
                         StandardScopes.Roles.Name,
-                        "api1", "api2"
+                        "api",
                     },
                 },
             };

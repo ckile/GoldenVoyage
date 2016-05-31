@@ -1,30 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IdentityModel.Tokens.Jwt;
+using GoldenVoyage.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace GoldenVoyage.Api
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public Startup(IHostingEnvironment env)
         {
-            
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.Run(async (context) =>
+            services.AddDbContext<PmsDbContext>(options =>
+              options.UseSqlServer(Configuration["Data:PmsConnection:ConnectionString"],
+               b => b.MigrationsAssembly("GoldenVoyage.Api")));
+
+            services
+                 .AddMvcCore()
+                 .AddJsonFormatters()
+                 .AddAuthorization();
+
+            services.AddWebEncoders();
+            services.AddCors();
+        }
+
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+
+            app.UseCors(policy =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                //policy.WithOrigins(
+                //    "http://localhost:28895",
+                //    "http://localhost:7017");
+                policy.AllowAnyOrigin();
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
             });
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                RequireHttpsMetadata = false,
+                Authority = Constants.BaseAddress,
+                Audience = Constants.BaseAddress + "/resources",
+                AutomaticAuthenticate = true
+            });
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

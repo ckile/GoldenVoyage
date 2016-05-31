@@ -18,7 +18,7 @@ namespace GoldenVoyage.Identity
                 .UseStartup<Startup>()
                 .Build();
 
-            GoldenVoyage.Identity.Run();
+            host.Run();
         }
     }
 }

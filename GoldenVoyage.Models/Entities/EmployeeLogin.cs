@@ -23,5 +23,10 @@ namespace GoldenVoyage.Models.Entities
 
         [Required]
         public DateTime LoginTime { get; set; }
+
+        public DateTime? LogoutTime { get; set; }
+
+        public bool Ended { get; set; }
+
     }
 }

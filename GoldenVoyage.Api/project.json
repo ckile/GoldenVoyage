@@ -30,7 +30,8 @@
     "Microsoft.EntityFrameworkCore.Tools": {
       "type": "build",
       "version": "1.0.0-preview1-final"
-    }
+    },
+    "GoldenVoyage.Models": "1.0.0-*"
   },
 
   "tools": {

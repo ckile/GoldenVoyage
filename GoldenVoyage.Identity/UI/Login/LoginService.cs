@@ -1,81 +1,72 @@
-﻿using IdentityServer4.Core.Services.InMemory;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
-using IdentityModel;
+﻿using System;
+using System.Threading.Tasks;
+using GoldenVoyage.Models;
+using GoldenVoyage.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldenVoyage.Identity.UI.Login
 {
     public class LoginService
     {
-        private readonly List<InMemoryUser> _users;
+        private readonly PmsDbContext _pmsDbContext;
 
-        public LoginService(List<InMemoryUser> users)
+        public LoginService(PmsDbContext pmsDbContext)
         {
-            _users = users;
+            _pmsDbContext = pmsDbContext;
         }
 
-        public bool ValidateCredentials(string username, string password)
+        public async Task<bool> ValidateCredentials(string username, string password)
         {
-            var user = FindByUsername(username);
+            var user = await FindByUsername(username);
             if (user != null)
             {
-                return user.Password.Equals(password);
+                return user.Password.PasswordString.Equals(password);
             }
             return false;
         }
 
-        public InMemoryUser FindByUsername(string username)
+        public async Task<Employee> FindByUsername(string username)
         {
-            return _users.FirstOrDefault(x=>x.Username.Equals(username, System.StringComparison.OrdinalIgnoreCase));
+            return await _pmsDbContext.Set<Employee>()
+                .Include(t => t.Password)
+                .FirstOrDefaultAsync(t => t.UserCode.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
-        public InMemoryUser FindByExternalProvider(string provider, string userId)
+        /// <summary>
+        /// 进行一个登陆
+        /// </summary>
+        /// <param name="username">登陆员工号</param>
+        /// <returns></returns>
+        public async Task<EmployeeLogin> Login(string username)
         {
-            return _users.FirstOrDefault(x => 
-                x.Provider == provider &&
-                x.ProviderId == userId);
-        }
-
-        public InMemoryUser AutoProvisionUser(string provider, string userId, List<Claim> claims)
-        {
-            var filtered = new List<Claim>();
-            foreach(var claim in claims)
+            var employee = await FindByUsername(username);
+            var login = new EmployeeLogin()
             {
-                if (JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.ContainsKey(claim.Type))
-                {
-                    filtered.Add(new Claim(JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap[claim.Type], claim.Value));
-                }
-                else
-                {
-                    filtered.Add(claim);
-                }
-            }
-        
-            if (!filtered.Any(x=>x.Type == JwtClaimTypes.Name))
-            {
-                var first = filtered.FirstOrDefault(x => x.Type == JwtClaimTypes.GivenName)?.Value;
-                var last = filtered.FirstOrDefault(x => x.Type == JwtClaimTypes.FamilyName)?.Value;
-                if (first != null && last != null)
-                {
-                    filtered.Add(new Claim(JwtClaimTypes.Name, first + " " + last));
-                }
-            }
-
-            var sub = Guid.NewGuid().ToString();
-            var user = new InMemoryUser()
-            {
-                Enabled = true,
-                Subject = sub,
-                Username = sub,
-                Provider = provider,
-                ProviderId = userId,
-                Claims = filtered
+                EmployeeId = employee.Id,
+                Employee = employee,
+                LoginTime = DateTime.Now,
             };
-            _users.Add(user);
-            return user;
+
+            var resulTrack = _pmsDbContext.Set<EmployeeLogin>().Add(login);
+            await _pmsDbContext.SaveChangesAsync();
+            return resulTrack.Entity;
+        }
+
+        /// <summary>
+        /// 注销一个登陆
+        /// </summary>
+        /// <param name="loginId">登陆Id</param>
+        /// <returns></returns>
+        public async Task LogOut(int loginId)
+        {
+            var login = await _pmsDbContext.Set<EmployeeLogin>()
+                            .FirstOrDefaultAsync(t => t.Id.Equals(loginId));
+
+            if (login == null) return;
+            login.Ended = true;
+            login.LogoutTime = DateTime.Now;
+            _pmsDbContext.Set<EmployeeLogin>().Update(login);
+            await _pmsDbContext.SaveChangesAsync();
         }
     }
 }

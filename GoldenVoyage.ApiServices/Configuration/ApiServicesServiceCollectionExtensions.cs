@@ -1,9 +1,11 @@
-﻿using GoldenVoyage.ApiServices.Configuration.Options;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GoldenVoyage.ApiServices.Configuration.Options;
+using GoldenVoyage.ApiServices.Services;
+using GoldenVoyage.ApiServices.Services.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GoldenVoyage.ApiServices.Configuration
 {
@@ -25,11 +27,13 @@ namespace GoldenVoyage.ApiServices.Configuration
             services.AddCoreServices();
             services.AddModuleServices();
             return services;
-
         }
 
         private static IServiceCollection AddCoreServices(this IServiceCollection services)
         {
+            services.AddTransient<IApiServicesProvider, ApiServicesProvider>();
+            services.AddTransient<ServiceContext>();
+            services.AddTransient<ILoginService, LoginService>();
             return services;
         }
 
@@ -37,6 +41,5 @@ namespace GoldenVoyage.ApiServices.Configuration
         {
             return services;
         }
-
     }
 }

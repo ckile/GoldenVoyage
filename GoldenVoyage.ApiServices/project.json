@@ -3,6 +3,7 @@
 
   "dependencies": {
     "GoldenVoyage.Models": "1.0.0-*",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
     "NETStandard.Library": "1.5.0-rc2-24027"
   },
 

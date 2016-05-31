@@ -1,12 +1,13 @@
-﻿using IdentityServer4.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer4.Core.Models;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using GoldenVoyage.Models;
 using IdentityModel;
 using IdentityServer4.Core.Extensions;
+using IdentityServer4.Core.Models;
+using IdentityServer4.Core.Services;
 
 namespace GoldenVoyage.Identity.Configuration
 {
