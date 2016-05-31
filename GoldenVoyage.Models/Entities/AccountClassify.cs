@@ -13,7 +13,7 @@ namespace GoldenVoyage.Models.Entities
         /// </summary>
         public int? MarketId { get; set; }
 
-        [ForeignKey("MarketId")]
+        [ForeignKey(nameof(MarketId))]
         public Market Market { get; set; }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace GoldenVoyage.Models.Entities
         /// </summary>
         public int? SourceId { get; set; }
 
-        [ForeignKey("SourceId")]
+        [ForeignKey(nameof(SourceId))]
         public Source Source { get; set; }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace GoldenVoyage.Models.Entities
         /// </summary>
         public int? SalerId { get; set; }
 
-        [ForeignKey("SalerId")]
+        [ForeignKey(nameof(SalerId))]
         public Employee Saler { get; set; }
         }
 }

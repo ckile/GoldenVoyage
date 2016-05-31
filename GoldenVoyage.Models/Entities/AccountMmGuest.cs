@@ -17,7 +17,7 @@ namespace GoldenVoyage.Models.Entities
         // 宾客Id
         public int? GuestId { get; set; }
 
-        [ForeignKey("GuestId")]
+        [ForeignKey(nameof(GuestId))]
         public Guest Guest { get; set; }
 
         // 本次入住使用的证件

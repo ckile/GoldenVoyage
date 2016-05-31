@@ -16,7 +16,7 @@ namespace GoldenVoyage.Models.Entities
 
         // 所属酒店
         public int? HotelId { get; set; }
-        [ForeignKey("HotelId")]
+        [ForeignKey(nameof(HotelId))]
         public Hotel Hotel { get; set; }
 
         // 属性 *
@@ -24,7 +24,7 @@ namespace GoldenVoyage.Models.Entities
 
         // 类型
         public int? TypeId { get; set; }
-        [ForeignKey("TypeId")]
+        [ForeignKey(nameof(TypeId))]
         public CustomerType Type { get; set; }
 
         // 地址列表
@@ -36,7 +36,7 @@ namespace GoldenVoyage.Models.Entities
 
         // 扩展信息
         public int? ProfileId { get; set; }
-        [ForeignKey("ProfileId")]
+        [ForeignKey(nameof(ProfileId))]
         public CustomerProfile Profile { get; set; }
 
     }

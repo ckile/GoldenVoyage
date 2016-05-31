@@ -9,8 +9,6 @@ namespace GoldenVoyage.Models.Entities
     /// </summary>
     public class AccountStay : ItemBase
     {
-
-
         /// <summary>
         /// 人数
         /// </summary>

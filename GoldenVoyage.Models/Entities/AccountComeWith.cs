@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GoldenVoyage.Models.Entities
@@ -19,6 +20,7 @@ namespace GoldenVoyage.Models.Entities
         /// <summary>
         /// 同行全部清单
         /// </summary>
+        [JsonIgnore]
         public ICollection<Account> Accounts { get; set; }
 
         protected override void VerificationFields()

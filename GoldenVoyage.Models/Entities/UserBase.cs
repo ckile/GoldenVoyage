@@ -6,7 +6,7 @@ namespace GoldenVoyage.Models.Entities
     /// <summary>
     /// 登陆用户基础类
     /// </summary>
-    public abstract class UserBase : EntityBase
+    public abstract class UserBase : ItemBase
     {
         [Required]
         public UserRoles Role { get; set; }
@@ -18,6 +18,7 @@ namespace GoldenVoyage.Models.Entities
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+        
 
         [JsonIgnore]
         public Password Password { get; set; }

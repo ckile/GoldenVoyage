@@ -1,4 +1,4 @@
-﻿namespace GoldenVoyage.Models.Entities
+﻿namespace GoldenVoyage.Models
 {
     // 宾客属性
     public enum GuestAttribute

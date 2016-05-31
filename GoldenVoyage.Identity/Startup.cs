@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using GoldenVoyage.Identity.Configuration;
+using GoldenVoyage.Identity.Extensions;
+using IdentityServer4.Core.Services;
+using IdentityServer4.Core.Validation;
 
 namespace GoldenVoyage.Identity
 {
@@ -22,6 +26,8 @@ namespace GoldenVoyage.Identity
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddTransient<PmsDbContext>();
+
             var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsrv3test.pfx"), "idsrv3test");
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -30,11 +36,13 @@ namespace GoldenVoyage.Identity
                 options.SigningCertificate = cert;
             });
 
-            //builder.AddInMemoryClients(Clients.Get());
-            //builder.AddInMemoryScopes(Scopes.Get());
-            //builder.AddInMemoryUsers(Users.Get());
+            builder.AddInMemoryClients(Clients.Get());
+            builder.AddInMemoryScopes(Scopes.Get());
+            builder.Services.AddTransient<IProfileService, ProfileService>();
+            builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
 
-            //builder.AddCustomGrantValidator<CustomGrantValidator>();
+
+            builder.AddCustomGrantValidator<Extensions.CustomGrantValidator>();
 
             // for the UI
             services

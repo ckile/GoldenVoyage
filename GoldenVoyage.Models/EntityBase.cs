@@ -6,7 +6,7 @@ using System.Reflection;
 //using System.Reflection; 提供反射支持的类库
 using Newtonsoft.Json;
 
-namespace GoldenVoyage.Models.Entities
+namespace GoldenVoyage.Models
 {
     /// <summary>
     /// 项目基础类
@@ -70,7 +70,7 @@ namespace GoldenVoyage.Models.Entities
 
         protected void AddVerifyError(string fieldName)
         {
-            _verifyResult.Merge(OperatorResult.Error("错误:" + GetType().Name + "." + fieldName + "\n"));
+            _verifyResult.Merge(OperatorResult.Error($"错误:{ GetType().Name }.{ fieldName }\n"));
         }
     }
 

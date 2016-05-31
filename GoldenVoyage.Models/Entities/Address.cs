@@ -54,7 +54,7 @@ namespace GoldenVoyage.Models.Entities
     /// 地区或城市
     /// </summary>
     public class Region : ValueObjectEntityBase
-    {
+    { 
         public int? ProvinceId { get; set; }
     }
 

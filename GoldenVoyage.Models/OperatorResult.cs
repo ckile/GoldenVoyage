@@ -1,4 +1,4 @@
-﻿namespace GoldenVoyage.Models.Entities
+﻿namespace GoldenVoyage.Models
 {
     /// <summary>
     /// 服务操作结果

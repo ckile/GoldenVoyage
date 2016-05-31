@@ -15,7 +15,7 @@ namespace GoldenVoyage.Models.Entities
 
         // 证件类型
         public int? TypeId { get; set; }
-        [ForeignKey("TypeId")]
+        [ForeignKey(nameof(TypeId))]
         public IdentityType Type { get; set; }
  
         // 证件有效期

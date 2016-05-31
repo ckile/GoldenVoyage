@@ -9,15 +9,16 @@ namespace GoldenVoyage.Models.Entities
     /// 每次登陆将记录登陆信息
     /// 以及登陆的酒店
     /// </summary>
-    public class EmployeeLogin : EntityBase
+    public class EmployeeLogin : ItemBase
     {
         public int EmployeeId { get; set; }
 
-        [ForeignKey("EmployeeId")]
+        [ForeignKey(nameof(EmployeeId))]
         public Employee Employee { get; set; }
 
         public int? CurrentHotelId { get; set; }
 
+        [ForeignKey(nameof(CurrentHotelId))]
         public Hotel CurrentHotel { get; set; }
 
         [Required]

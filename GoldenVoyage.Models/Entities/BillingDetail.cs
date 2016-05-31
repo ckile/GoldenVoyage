@@ -18,9 +18,9 @@ namespace GoldenVoyage.Models.Entities
         [Required]
         public int TransactCodeId { get; set; }
 
-        [ForeignKey("TransactCodeId")]
+        [ForeignKey(nameof(TransactCodeId))]
         public TransactCode TransactCode { get; set; }
-        
+
 
 
         public decimal Amount { get; set; }
@@ -28,7 +28,7 @@ namespace GoldenVoyage.Models.Entities
         [Required]
         public int PackageId { get; set; }
 
-        [ForeignKey("PackageId")]
+        [ForeignKey(nameof(PackageId))]
         public BillingDetailPackage Package { get; set; }
 
         public DateTime PosTime { get; set; }
