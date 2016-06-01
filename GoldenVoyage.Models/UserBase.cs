@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using GoldenVoyage.Models.Entities;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace GoldenVoyage.Models.Entities
+namespace GoldenVoyage.Models
 {
     /// <summary>
     /// 登陆用户基础类

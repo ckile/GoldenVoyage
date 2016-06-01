@@ -18,10 +18,19 @@ namespace GoldenVoyage.ApiServices.Services
         public TService Create<TService>(int loginId)
         {
             _serviceContext.LoginId = loginId;
-            var ser = _serviceProvider.GetService<TService>();
-            var serbase = ser as ServiceBase;
-            serbase?.InitServiceContext(_serviceContext);
-            return ser;
+            try   // 尝试进行服务获取，如果失败则返回空
+            {
+                var ser = _serviceProvider.GetService<TService>();
+                var serbase = ser as ServiceBase;
+                serbase?.InitServiceContext(_serviceContext);
+                return ser;
+
+            }
+            catch (Exception)
+            {
+                return default(TService);
+            }
+
         }
     }
 }

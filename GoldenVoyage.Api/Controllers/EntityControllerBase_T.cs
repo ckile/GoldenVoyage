@@ -3,6 +3,7 @@ using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.Models;
 using Microsoft.AspNetCore.Mvc;
 using static GoldenVoyage.Models.OperatorResult;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenVoyage.Api.Controllers
 {
@@ -34,6 +35,7 @@ namespace GoldenVoyage.Api.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "")]
         [HttpPost]
         public async Task<IActionResult> Post(TEntity entity)
         {
