@@ -6,6 +6,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/plugins/simple-line-icons/simple-line-icons.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/style-responsive.css" />
     <link rel="stylesheet" href="~/css/animate.css" />
@@ -13,6 +19,9 @@
 </head>
 <body>
     <gv-app>
+        <div id="page-loader">
+            <span class="spinner"></span>
+        </div>
     </gv-app>
     <div>
         @RenderBody()

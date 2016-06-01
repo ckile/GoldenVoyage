@@ -1,1 +1,64 @@
-﻿
+﻿<div id="header" class="header navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="javascript:;" class="navbar-brand">GVHS <small>Hotel Name</small></a>
+            <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="hidden-xs" id="top-navbar">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="javascript:;" (click)="walkIn()">
+                        <i class="ion icon-bell"></i><span class="hidden-xs"> 步入</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" (click)="booking()">
+                        <i class="ion icon-call-in"></i><span class="hidden-xs"> 预订</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" (click)="checkIn()">
+                        <i class="ion icon-note"></i><span class="hidden-xs"> 入住</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" (click)="checkOut()">
+                        <i class="ion icon-share-alt"></i><span class="hidden-xs"> 结账</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="ion icon-plus"></i><span class="hidden-xs"> 新建 </span><b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:;" (click)="createGuest()"> 新建客历 ...</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:;" (click)="createCustomer()"> 新建协议客户 ...</a></li> 
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+                <form class="navbar-form full-width">
+                    <div class="form-group">
+                        <input id="header-search" ng-model="vm.searchText"
+                               type="text" class="form-control" placeholder="" />
+                        <button type="submit" class="btn btn-search"><i class="fa fa-search text-warning"></i></button>
+                    </div>
+                </form>
+            </li>
+
+
+        </ul>
+
+    </div>
+
+</div>

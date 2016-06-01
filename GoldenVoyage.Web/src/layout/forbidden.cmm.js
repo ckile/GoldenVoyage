@@ -19,7 +19,7 @@ var ForbiddenComponent = (function () {
     ForbiddenComponent = __decorate([
         core_1.Component({
             selector: 'forbidden',
-            templateUrl: 'layout/cmms/forbidden.cmm.html',
+            templateUrl: 'tmpls/layout/forbidden.cmm.html',
             directives: [common_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

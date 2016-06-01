@@ -5,5 +5,9 @@ import "@angular/http";
 import "@angular/router-deprecated";
 import "jquery";
 import "bootstrap";
-// import "zone.js";
 import "imports?require=>false!zone.js";
+
+import "pace";
+import "toastr";
+import "jquery-ui";
+import "slimscroll";

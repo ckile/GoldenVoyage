@@ -21,6 +21,26 @@ namespace GoldenVoyage.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+
+            var angularRoutes = new[] {
+                "/forbidden",
+                "/authorized",
+                "/authorize",
+                "/unauthorized",
+                "/dashboard", 
+            };
+
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.HasValue && null != angularRoutes.FirstOrDefault(
+                    (ar) => context.Request.Path.Value.StartsWith(ar, StringComparison.OrdinalIgnoreCase)))
+                {
+                    context.Request.Path = new PathString("/");
+                }
+
+                await next();
+            });
+
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }

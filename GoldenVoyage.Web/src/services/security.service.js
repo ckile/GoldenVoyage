@@ -8,20 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-require('rxjs/add/operator/map');
-var app_constants_1 = require('../app.constants');
-var router_deprecated_1 = require('@angular/router-deprecated');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
+var app_constants_1 = require("../app.constants");
+var router_deprecated_1 = require("@angular/router-deprecated");
 var SecurityService = (function () {
     function SecurityService(_http, _configuration, _router) {
         this._http = _http;
         this._configuration = _configuration;
         this._router = _router;
-        this.actionUrl = _configuration.IdentityServer + 'api/DataEventRecords/';
-        this.headers = new http_1.Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
         this.storage = localStorage;
         if (this.retrieve("IsAuthorized") !== "") {
             this.HasAdminRole = this.retrieve("HasAdminRole");
@@ -58,11 +54,11 @@ var SecurityService = (function () {
     SecurityService.prototype.Authorize = function () {
         this.ResetAuthorizationData();
         console.log("BEGIN Authorize, no auth data");
-        var authorizationUrl = 'https://localhost:44345/connect/authorize';
-        var client_id = 'angular2client';
-        var redirect_uri = 'https://localhost:44311';
+        var authorizationUrl = this._configuration.IdentityServer + "/connect/authorize";
+        var client_id = "webclient";
+        var redirect_uri = this._configuration.WebServer;
         var response_type = "id_token token";
-        var scope = "dataEventRecords securedFiles openid";
+        var scope = "api openid";
         var nonce = "N" + Math.random() + "" + Date.now();
         var state = Date.now() + "" + Math.random();
         this.store("authStateControl", state);
@@ -81,8 +77,8 @@ var SecurityService = (function () {
         console.log("BEGIN AuthorizedCallback, no auth data");
         this.ResetAuthorizationData();
         var hash = window.location.hash.substr(1);
-        var result = hash.split('&').reduce(function (result, item) {
-            var parts = item.split('=');
+        var result = hash.split("&").reduce(function (result, item) {
+            var parts = item.split("=");
             result[parts[0]] = parts[1];
             return result;
         }, {});
@@ -114,11 +110,11 @@ var SecurityService = (function () {
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
             console.log(this.retrieve("authorizationData"));
-            this._router.navigate(['DataEventRecords/']);
+            this._router.navigate(["DataEventRecords/"]);
         }
         else {
             this.ResetAuthorizationData();
-            this._router.navigate(['Unauthorized']);
+            this._router.navigate(["Unauthorized"]);
         }
     };
     SecurityService.prototype.Logoff = function () {
@@ -126,41 +122,41 @@ var SecurityService = (function () {
     };
     SecurityService.prototype.HandleError = function (error) {
         console.log(error);
-        if (error.status == 403) {
-            this._router.navigate(['Forbidden']);
+        if (error.status === 403) {
+            this._router.navigate(["Forbidden"]);
         }
-        else if (error.status == 401) {
+        else if (error.status === 401) {
             this.ResetAuthorizationData();
-            this._router.navigate(['Unauthorized']);
+            this._router.navigate(["Unauthorized"]);
         }
     };
     SecurityService.prototype.urlBase64Decode = function (str) {
-        var output = str.replace('-', '+').replace('_', '/');
+        var output = str.replace("-", "+").replace("_", "/");
         switch (output.length % 4) {
             case 0:
                 break;
             case 2:
-                output += '==';
+                output += "==";
                 break;
             case 3:
-                output += '=';
+                output += "=";
                 break;
             default:
-                throw 'Illegal base64url string!';
+                throw "Illegal base64url string!";
         }
         return window.atob(output);
     };
     SecurityService.prototype.getDataFromToken = function (token) {
         var data = {};
-        if (typeof token !== 'undefined') {
-            var encoded = token.split('.')[1];
+        if (typeof token !== "undefined") {
+            var encoded = token.split(".")[1];
             data = JSON.parse(this.urlBase64Decode(encoded));
         }
         return data;
     };
     SecurityService.prototype.retrieve = function (key) {
         var item = this.storage.getItem(key);
-        if (item && item !== 'undefined') {
+        if (item && item !== "undefined") {
             return JSON.parse(this.storage.getItem(key));
         }
         return;

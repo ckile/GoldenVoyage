@@ -23,10 +23,16 @@
     "zone.js": "^0.6.12",
     "rxjs": "5.0.0-beta.6",
     "bootstrap": "^3.3.6",
-    "del": "^2.2.0"
+    "del": "^2.2.0",
+    "toastr": "^2.1.2",
+    "pace": "^0.0.4",
+    "jquery": "^2.2.0",
+    "jquery-ui": "^1.10.5",
+    "slimscroll": "^0.9.1",
+    "jquery.cookie": "^1.4.1"
   },
   "devDependencies": {
-    "jquery": "^2.2.0",
+    "bower": "^1.7.9",
     "typescript": "^1.8.10",
     "typings": "1.0.4",
     "less": "^2.7.1",
@@ -37,6 +43,7 @@
     "css-loader": "^0.23.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
-    "imports-loader": "^0.6.5"
+    "imports-loader": "^0.6.5",
+    "extract-text-webpack-plugin": "^1.0.1"
   }
 }

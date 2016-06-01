@@ -6,16 +6,9 @@ import { Router } from "@angular/router-deprecated";
 
 @Injectable()
 export class SecurityService {
-    private actionUrl: string;
-    private headers: Headers;
     private storage: any;
 
     constructor(private _http: Http, private _configuration: Configuration, private _router: Router) {
-        this.actionUrl = _configuration.IdentityServer + "api/DataEventRecords/";
-
-        this.headers = new Headers();
-        this.headers.append("Content-Type", "application/json");
-        this.headers.append("Accept", "application/json");
         this.storage = localStorage;
 
         if (this.retrieve("IsAuthorized") !== "") {
@@ -65,9 +58,9 @@ export class SecurityService {
 
         console.log("BEGIN Authorize, no auth data");
 
-        var authorizationUrl: string = "https://localhost:44345/connect/authorize";
+        var authorizationUrl: string = this._configuration.IdentityServer + "/connect/authorize";
         var client_id: string = "webclient";
-        var redirect_uri: string = "https://localhost:44311";
+        var redirect_uri: string = this._configuration.WebServer;
         var response_type: string = "id_token token";
         var scope: string = "api openid";
         var nonce: string = "N" + Math.random() + "" + Date.now();

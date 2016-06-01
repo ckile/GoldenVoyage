@@ -4,10 +4,12 @@ import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { AppComponent } from './app.cmm';
 import { Configuration } from './app.constants';
 import { SecurityService } from './services/security.service';
+import { LayoutConfiguration } from "./layout/layout";
 
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     Configuration,
-    SecurityService
+    SecurityService,
+    LayoutConfiguration
 ]);

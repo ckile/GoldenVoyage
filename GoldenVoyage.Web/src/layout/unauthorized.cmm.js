@@ -19,7 +19,7 @@ var UnauthorizedComponent = (function () {
     UnauthorizedComponent = __decorate([
         core_1.Component({
             selector: 'unauthorized',
-            templateUrl: 'app/unauthorized/unauthorized.component.html',
+            templateUrl: 'tmpls/layout/unauthorized.cmm.html',
             directives: [common_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
