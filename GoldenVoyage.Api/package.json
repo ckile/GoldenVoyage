@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^1.8.10",
+    "typings": "^1.0.4",
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1"
+  }
+}

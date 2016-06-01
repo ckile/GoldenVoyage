@@ -3,7 +3,6 @@ using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.Models;
 using Microsoft.AspNetCore.Mvc;
 using static GoldenVoyage.Models.OperatorResult;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenVoyage.Api.Controllers
 {
@@ -18,7 +17,12 @@ namespace GoldenVoyage.Api.Controllers
             return Create<IEntityService<TEntity>>();
         }
 
-        [HttpGet("{id}")]
+        /// <summary>
+        /// Get单个实体
+        /// </summary>
+        /// <param name="id">实体id</param>
+        /// <returns>单个实体或404</returns>
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await GetService().GetBy(id);
@@ -29,15 +33,31 @@ namespace GoldenVoyage.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(PaginateParamter paramter)
         {
-            if (paramter == null) return InvaildArgument();
+            if (paramter == null || paramter.length.Equals(0)) return InvaildArgument();
+
             var result = await GetService().GetBy(paramter);
             if (result == null) return NotFoundEntity();
             return Ok(result);
         }
 
-        [Authorize(Roles = "")]
+        /// <summary>
+        /// 使用Post参数的方法进行Get
+        /// </summary>
+        /// <param name="paramter">分页参数</param>
+        /// <returns>分页结果</returns>
+        [HttpPost("page")]
+        public async Task<IActionResult> PostGet([FromBody] PaginateParamter paramter)
+        {
+            return await Get(paramter);
+        }
+
+        /// <summary>
+        ///  Post添加实体
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Post(TEntity entity)
+        public async Task<IActionResult> Post([FromBody] TEntity entity)
         {
             if (entity == null) return InvaildArgument();
             var result = await GetService().Create(entity);
@@ -45,8 +65,14 @@ namespace GoldenVoyage.Api.Controllers
             return Created("", result);
         }
 
+        /// <summary>
+        ///  Put 修改实体
+        /// </summary>
+        /// <param name="id">实体id</param>
+        /// <param name="entity">实体</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, TEntity entity)
+        public async Task<IActionResult> Put(int id, [FromBody] TEntity entity)
         {
             if (entity == null) return InvaildArgument();
             var result = await GetService().Update(id, entity);
@@ -54,6 +80,11 @@ namespace GoldenVoyage.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        ///  Delete方法 删除实体
+        /// </summary>
+        /// <param name="id">实体id</param>
+        /// <returns>操作结果</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -1,9 +1,8 @@
-﻿import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
-import { Configuration } from '../app.constants';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+﻿import { Injectable } from "@angular/core";
+import { Http, Headers } from "@angular/http";
+import "rxjs/add/operator/map";
+import { Configuration } from "../app.constants";
+import { Router } from "@angular/router-deprecated";
 
 @Injectable()
 export class SecurityService {
@@ -12,11 +11,11 @@ export class SecurityService {
     private storage: any;
 
     constructor(private _http: Http, private _configuration: Configuration, private _router: Router) {
-        this.actionUrl = _configuration.IdentityServer + 'api/DataEventRecords/';
+        this.actionUrl = _configuration.IdentityServer + "api/DataEventRecords/";
 
         this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
+        this.headers.append("Content-Type", "application/json");
+        this.headers.append("Accept", "application/json");
         this.storage = localStorage;
 
         if (this.retrieve("IsAuthorized") !== "") {
@@ -32,7 +31,7 @@ export class SecurityService {
         return this.retrieve("authorizationData");
     }
 
-    public ResetAuthorizationData() {
+    public ResetAuthorizationData(): void {
         this.store("authorizationData", "");
         this.store("authorizationDataIdToken", "");
 
@@ -42,7 +41,7 @@ export class SecurityService {
         this.store("IsAuthorized", false);
     }
 
-    public SetAuthorizationData(token: any, id_token: any) {
+    public SetAuthorizationData(token: any, id_token: any): void {
         if (this.retrieve("authorizationData") !== "") {
             this.store("authorizationData", "");
         }
@@ -53,32 +52,32 @@ export class SecurityService {
         this.store("IsAuthorized", true);
 
         var data: any = this.getDataFromToken(token);
-        for (var i = 0; i < data.role.length; i++) {
+        for (var i: number = 0; i < data.role.length; i++) {
             if (data.role[i] === "dataEventRecords.admin") {
                 this.HasAdminRole = true;
-                this.store("HasAdminRole", true)
+                this.store("HasAdminRole", true);
             }
         }
     }
 
-    public Authorize() {
+    public Authorize(): void {
         this.ResetAuthorizationData();
 
         console.log("BEGIN Authorize, no auth data");
 
-        var authorizationUrl = 'https://localhost:44345/connect/authorize';
-        var client_id = 'angular2client';
-        var redirect_uri = 'https://localhost:44311';
-        var response_type = "id_token token";
-        var scope = "dataEventRecords securedFiles openid";
-        var nonce = "N" + Math.random() + "" + Date.now();
-        var state = Date.now() + "" + Math.random();
+        var authorizationUrl: string = "https://localhost:44345/connect/authorize";
+        var client_id: string = "webclient";
+        var redirect_uri: string = "https://localhost:44311";
+        var response_type: string = "id_token token";
+        var scope: string = "api openid";
+        var nonce: string = "N" + Math.random() + "" + Date.now();
+        var state: string = Date.now() + "" + Math.random();
 
         this.store("authStateControl", state);
         this.store("authNonce", nonce);
         console.log("AuthorizedController created. adding myautostate: " + this.retrieve("authStateControl"));
 
-        var url =
+        var url: string =
             authorizationUrl + "?" +
             "response_type=" + encodeURI(response_type) + "&" +
             "client_id=" + encodeURI(client_id) + "&" +
@@ -90,14 +89,14 @@ export class SecurityService {
         window.location.href = url;
     }
 
-    public AuthorizedCallback() {
+    public AuthorizedCallback(): any {
         console.log("BEGIN AuthorizedCallback, no auth data");
         this.ResetAuthorizationData();
 
-        var hash = window.location.hash.substr(1);
+        var hash: string = window.location.hash.substr(1);
 
-        var result: any = hash.split('&').reduce(function (result, item) {
-            var parts = item.split('=');
+        var result: any = hash.split("&").reduce(function (result: any, item: any): any {
+            var parts: any = item.split("=");
             result[parts[0]] = parts[1];
             return result;
         }, {});
@@ -105,15 +104,15 @@ export class SecurityService {
         console.log(result);
         console.log("AuthorizedCallback created, begin token validation");
 
-        var token = "";
-        var id_token = "";
-        var authResponseIsValid = false;
+        var token: string = "";
+        var id_token: string = "";
+        var authResponseIsValid: boolean = false;
         if (!result.error) {
             if (result.state !== this.retrieve("authStateControl")) {
                 console.log("AuthorizedCallback incorrect state");
             } else {
                 token = result.access_token;
-                id_token = result.id_token
+                id_token = result.id_token;
 
                 var dataIdToken: any = this.getDataFromToken(id_token);
                 console.log(dataIdToken);
@@ -134,54 +133,51 @@ export class SecurityService {
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
             console.log(this.retrieve("authorizationData"));
-
-            this._router.navigate(['DataEventRecords/']);
-        }
-        else {
+            this._router.navigate(["DataEventRecords/"]);
+        } else {
             this.ResetAuthorizationData();
-            this._router.navigate(['Unauthorized']);
+            this._router.navigate(["Unauthorized"]);
         }
     }
 
-    public Logoff() {
+    public Logoff(): void {
         this.ResetAuthorizationData();
 
-        // TODO logout on IdentityServer4
+        // tODO logout on IdentityServer4
     }
 
-    public HandleError(error: any) {
+    public HandleError(error: any): void {
         console.log(error);
-        if (error.status == 403) {
-            this._router.navigate(['Forbidden'])
-        }
-        else if (error.status == 401) {
+        if (error.status === 403) {
+            this._router.navigate(["Forbidden"]);
+        } else if (error.status === 401) {
             this.ResetAuthorizationData();
-            this._router.navigate(['Unauthorized'])
+            this._router.navigate(["Unauthorized"]);
         }
     }
 
-    private urlBase64Decode(str) {
-        var output = str.replace('-', '+').replace('_', '/');
+    private urlBase64Decode(str: string): any {
+        var output: string = str.replace("-", "+").replace("_", "/");
         switch (output.length % 4) {
             case 0:
                 break;
             case 2:
-                output += '==';
+                output += "==";
                 break;
             case 3:
-                output += '=';
+                output += "=";
                 break;
             default:
-                throw 'Illegal base64url string!';
+                throw "Illegal base64url string!";
         }
 
         return window.atob(output);
     }
 
-    private getDataFromToken(token) {
-        var data = {};
-        if (typeof token !== 'undefined') {
-            var encoded = token.split('.')[1];
+    private getDataFromToken(token: string): any {
+        var data: any = {};
+        if (typeof token !== "undefined") {
+            var encoded: any = token.split(".")[1];
             data = JSON.parse(this.urlBase64Decode(encoded));
         }
 
@@ -189,16 +185,16 @@ export class SecurityService {
     }
 
     private retrieve(key: string): any {
-        var item = this.storage.getItem(key);
+        var item: any = this.storage.getItem(key);
 
-        if (item && item !== 'undefined') {
+        if (item && item !== "undefined") {
             return JSON.parse(this.storage.getItem(key));
         }
 
         return;
     }
 
-    private store(key: string, value: any) {
+    private store(key: string, value: any): void {
         this.storage.setItem(key, JSON.stringify(value));
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenVoyage.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AuthorControllerBase : Controller
     {
         private readonly IApiServicesProvider _apiServicesProvider;
@@ -34,7 +34,9 @@ namespace GoldenVoyage.Api.Controllers
 
         private int GetLoginId()
         {
-            var sub = HttpContext.User.Claims.FirstOrDefault(t => t.Type.Equals("sub")).Value;
+            var claims = HttpContext.User.Claims.FirstOrDefault(t => t.Type.Equals("sub"));
+            if (claims == null) return 0;
+            var sub = claims.Value;
             if (string.IsNullOrWhiteSpace(sub)) return 0;
             return Convert.ToInt32(sub);
         }

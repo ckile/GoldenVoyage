@@ -1,39 +1,37 @@
 ﻿import {Component} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {ForbiddenComponent} from './forbidden/forbidden.component';
-import {UnauthorizedComponent} from './unauthorized/unauthorized.component';
+import {ForbiddenComponent} from './layout/forbidden.cmm';
+import {UnauthorizedComponent} from './layout/unauthorized.cmm';
 import {SecurityService} from './services/security.service';
-import {SecureFilesComponent} from './securefile/securefiles.component';
 
-import {DataEventRecordsComponent} from './dataeventrecords/dataeventrecords.component';
-import { DataEventRecordsService } from './dataeventrecords/DataEventRecordsService';
+//import {DataEventRecordsComponent} from './dataeventrecords/dataeventrecords.component';
+//import { DataEventRecordsService } from './dataeventrecords/DataEventRecordsService';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: 'app/app.component.html',
-    styleUrls: ['app/app.component.css'],
+    selector: 'gv-app',
+    templateUrl: 'tmpls/app.cmm.html',
+    // styleUrls: ['css/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        ROUTER_PROVIDERS,
-        DataEventRecordsService
+        ROUTER_PROVIDERS
     ]
 })
 
 @RouteConfig([
     { path: '/Forbidden', name: 'Forbidden', component: ForbiddenComponent },
-    { path: '/Unauthorized', name: 'Unauthorized', component: UnauthorizedComponent },
-    { path: '/securefile/securefiles', name: 'SecureFiles', component: SecureFilesComponent },
-    { path: '/dataeventrecords/...', name: 'DataEventRecords', component: DataEventRecordsComponent, useAsDefault: true }
+    { path: '/Unauthorized', name: 'Unauthorized', component: UnauthorizedComponent }
+    //{ path: '/dataeventrecords/...', name: 'DataEventRecords', component: DataEventRecordsComponent, useAsDefault: true }
 ])
 
 export class AppComponent {
+    public Is
+
     constructor(public securityService: SecurityService) {
     }
 
     ngOnInit() {
-        console.log("ngOnInit _securityService.AuthorizedCallback");
-
         if (window.location.hash) {
+            console.log("ngOnInit _securityService.AuthorizedCallback");
             this.securityService.AuthorizedCallback();
         }
     }

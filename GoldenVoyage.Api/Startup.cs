@@ -1,7 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using GoldenVoyage.ApiServices.Configuration;
 using GoldenVoyage.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,12 +31,15 @@ namespace GoldenVoyage.Api
             services.AddDbContext<PmsDbContext>(options =>
               options.UseSqlServer(Configuration["Data:PmsConnection:ConnectionString"],
                b => b.MigrationsAssembly("GoldenVoyage.Api")));
+            //services
+            //    .AddMvcCore()
+            //     .AddJsonFormatters()
+            //     .AddAuthorization();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddApiServices();
 
-            services
-                 .AddMvcCore()
-                 .AddJsonFormatters()
-                 .AddAuthorization();
-
+            services.AddMvc();
+            services.AddAuthorization();
             services.AddWebEncoders();
             services.AddCors();
         }
@@ -64,6 +69,7 @@ namespace GoldenVoyage.Api
                 AutomaticAuthenticate = true
             });
 
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }

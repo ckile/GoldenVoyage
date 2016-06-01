@@ -2,6 +2,6 @@
   "globalDependencies": {
     "bootstrap": "registry:dt/bootstrap#3.3.5+20160316155526",
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236"
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236" 
   }
 }
