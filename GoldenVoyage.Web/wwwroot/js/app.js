@@ -4,20 +4,22 @@ webpackJsonp([0],{
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var platform_browser_dynamic_1 = __webpack_require__(1);
+	var core_1 = __webpack_require__(1);
+	var platform_browser_dynamic_1 = __webpack_require__(97);
 	var http_1 = __webpack_require__(280);
 	var router_deprecated_1 = __webpack_require__(301);
-	var app_cmm_1 = __webpack_require__(333);
+	var app_cmp_1 = __webpack_require__(333);
 	var app_constants_1 = __webpack_require__(337);
 	var security_service_1 = __webpack_require__(334);
-	var layout_1 = __webpack_require__(344);
-	platform_browser_dynamic_1.bootstrap(app_cmm_1.AppComponent, [
+	var layout_1 = __webpack_require__(345);
+	core_1.enableProdMode();
+	platform_browser_dynamic_1.bootstrap(app_cmp_1.AppComponent, [
 	    router_deprecated_1.ROUTER_PROVIDERS,
 	    http_1.HTTP_PROVIDERS,
 	    app_constants_1.Configuration,
 	    security_service_1.SecurityService,
 	    layout_1.LayoutConfiguration
-	]);
+	]).then(function (success) { return console.log("启动完成！"); }, function (error) { return console.log(error); });
 
 
 /***/ },
@@ -35,15 +37,16 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var router_deprecated_1 = __webpack_require__(301);
 	var security_service_1 = __webpack_require__(334);
-	var header_cmm_1 = __webpack_require__(338);
-	var sidebar_cmm_1 = __webpack_require__(339);
-	var forbidden_cmm_1 = __webpack_require__(340);
-	var unauthorized_cmm_1 = __webpack_require__(341);
-	var dashboard_cmm_1 = __webpack_require__(342);
-	var roomview_cmm_1 = __webpack_require__(343);
+	var header_cmp_1 = __webpack_require__(338);
+	var sidebar_cmp_1 = __webpack_require__(339);
+	var forbidden_cmp_1 = __webpack_require__(340);
+	var unauthorized_cmp_1 = __webpack_require__(341);
+	var dashboard_cmp_1 = __webpack_require__(342);
+	var walkin_cmp_1 = __webpack_require__(343);
+	var roomview_cmp_1 = __webpack_require__(344);
 	var AppComponent = (function () {
 	    function AppComponent(securityService) {
 	        this.securityService = securityService;
@@ -65,17 +68,19 @@ webpackJsonp([0],{
 	    AppComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-app",
-	            templateUrl: "tmpls/app.cmm.html",
-	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmm_1.SidebarComponent, header_cmm_1.HeaderComponent],
+	            templateUrl: "tmpls/app.cmp.html",
+	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmp_1.SidebarComponent, header_cmp_1.HeaderComponent],
 	            providers: [
 	                router_deprecated_1.ROUTER_PROVIDERS
-	            ]
+	            ],
+	            events: []
 	        }),
 	        router_deprecated_1.RouteConfig([
-	            { path: "/Forbidden", name: "Forbidden", component: forbidden_cmm_1.ForbiddenComponent },
-	            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmm_1.UnauthorizedComponent },
-	            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmm_1.DashboardComponent, useAsDefault: true },
-	            { path: "/RoomView", name: "RoomView", component: roomview_cmm_1.RoomviewComponent }
+	            { path: "/Forbidden", name: "Forbidden", component: forbidden_cmp_1.ForbiddenComponent },
+	            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmp_1.UnauthorizedComponent },
+	            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmp_1.DashboardComponent, useAsDefault: true },
+	            { path: "/Walkin", name: "Walkin", component: walkin_cmp_1.WalkinComponent },
+	            { path: "/RoomView", name: "RoomView", component: roomview_cmp_1.RoomviewComponent }
 	        ]), 
 	        __metadata('design:paramtypes', [security_service_1.SecurityService])
 	    ], AppComponent);
@@ -99,7 +104,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var http_1 = __webpack_require__(280);
 	__webpack_require__(335);
 	var app_constants_1 = __webpack_require__(337);
@@ -266,109 +271,6 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 335:
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var Observable_1 = __webpack_require__(41);
-	var map_1 = __webpack_require__(336);
-	Observable_1.Observable.prototype.map = map_1.map;
-	//# sourceMappingURL=map.js.map
-
-/***/ },
-
-/***/ 336:
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var Subscriber_1 = __webpack_require__(46);
-	/**
-	 * Applies a given `project` function to each value emitted by the source
-	 * Observable, and emits the resulting values as an Observable.
-	 *
-	 * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-	 * it passes each source value through a transformation function to get
-	 * corresponding output values.</span>
-	 *
-	 * <img src="./img/map.png" width="100%">
-	 *
-	 * Similar to the well known `Array.prototype.map` function, this operator
-	 * applies a projection to each value and emits that projection in the output
-	 * Observable.
-	 *
-	 * @example <caption>Map every every click to the clientX position of that click</caption>
-	 * var clicks = Rx.Observable.fromEvent(document, 'click');
-	 * var positions = clicks.map(ev => ev.clientX);
-	 * positions.subscribe(x => console.log(x));
-	 *
-	 * @see {@link mapTo}
-	 * @see {@link pluck}
-	 *
-	 * @param {function(value: T, index: number): R} project The function to apply
-	 * to each `value` emitted by the source Observable. The `index` parameter is
-	 * the number `i` for the i-th emission that has happened since the
-	 * subscription, starting from the number `0`.
-	 * @param {any} [thisArg] An optional argument to define what `this` is in the
-	 * `project` function.
-	 * @return {Observable<R>} An Observable that emits the values from the source
-	 * Observable transformed by the given `project` function.
-	 * @method map
-	 * @owner Observable
-	 */
-	function map(project, thisArg) {
-	    if (typeof project !== 'function') {
-	        throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
-	    }
-	    return this.lift(new MapOperator(project, thisArg));
-	}
-	exports.map = map;
-	var MapOperator = (function () {
-	    function MapOperator(project, thisArg) {
-	        this.project = project;
-	        this.thisArg = thisArg;
-	    }
-	    MapOperator.prototype.call = function (subscriber, source) {
-	        return source._subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
-	    };
-	    return MapOperator;
-	}());
-	/**
-	 * We need this JSDoc comment for affecting ESDoc.
-	 * @ignore
-	 * @extends {Ignored}
-	 */
-	var MapSubscriber = (function (_super) {
-	    __extends(MapSubscriber, _super);
-	    function MapSubscriber(destination, project, thisArg) {
-	        _super.call(this, destination);
-	        this.project = project;
-	        this.count = 0;
-	        this.thisArg = thisArg || this;
-	    }
-	    // NOTE: This looks unoptimized, but it's actually purposefully NOT
-	    // using try/catch optimizations.
-	    MapSubscriber.prototype._next = function (value) {
-	        var result;
-	        try {
-	            result = this.project.call(this.thisArg, value, this.count++);
-	        }
-	        catch (err) {
-	            this.destination.error(err);
-	            return;
-	        }
-	        this.destination.next(result);
-	    };
-	    return MapSubscriber;
-	}(Subscriber_1.Subscriber));
-	//# sourceMappingURL=map.js.map
-
-/***/ },
-
 /***/ 337:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -382,7 +284,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var Configuration = (function () {
 	    function Configuration() {
 	        this.IdentityServer = "http://localhost:51647";
@@ -413,7 +315,8 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
+	var router_deprecated_1 = __webpack_require__(301);
 	var HeaderComponent = (function () {
 	    function HeaderComponent() {
 	    }
@@ -422,7 +325,8 @@ webpackJsonp([0],{
 	    HeaderComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-header",
-	            templateUrl: "tmpls/layout/header.cmm.html"
+	            templateUrl: "tmpls/layout/header.cmp.html",
+	            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], HeaderComponent);
@@ -446,7 +350,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var router_deprecated_1 = __webpack_require__(301);
 	var SidebarComponent = (function () {
 	    function SidebarComponent() {
@@ -455,7 +359,7 @@ webpackJsonp([0],{
 	    SidebarComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-sidebar",
-	            templateUrl: "tmpls/layout/sidebar.cmm.html",
+	            templateUrl: "tmpls/layout/sidebar.cmp.html",
 	            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -480,7 +384,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(181);
 	var ForbiddenComponent = (function () {
 	    function ForbiddenComponent() {
@@ -491,7 +395,7 @@ webpackJsonp([0],{
 	    ForbiddenComponent = __decorate([
 	        core_1.Component({
 	            selector: 'forbidden',
-	            templateUrl: 'tmpls/layout/forbidden.cmm.html',
+	            templateUrl: 'tmpls/layout/forbidden.cmp.html',
 	            directives: [common_1.CORE_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -516,7 +420,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(181);
 	var UnauthorizedComponent = (function () {
 	    function UnauthorizedComponent() {
@@ -527,7 +431,7 @@ webpackJsonp([0],{
 	    UnauthorizedComponent = __decorate([
 	        core_1.Component({
 	            selector: 'unauthorized',
-	            templateUrl: 'tmpls/layout/unauthorized.cmm.html',
+	            templateUrl: 'tmpls/layout/unauthorized.cmp.html',
 	            directives: [common_1.CORE_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -552,15 +456,16 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var DashboardComponent = (function () {
 	    function DashboardComponent() {
 	    }
-	    DashboardComponent.prototype.ngOnInit = function () { };
+	    DashboardComponent.prototype.ngOnInit = function () {
+	    };
 	    DashboardComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-dashboard",
-	            templateUrl: "tmpls/layout/dashboard.cmm.html"
+	            templateUrl: "tmpls/layout/dashboard.cmp.html"
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], DashboardComponent);
@@ -584,11 +489,45 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
+	var WalkinComponent = (function () {
+	    function WalkinComponent() {
+	    }
+	    WalkinComponent.prototype.ngOnInit = function () {
+	    };
+	    WalkinComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-walkin",
+	            templateUrl: "tmpls/walkin/walkin.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], WalkinComponent);
+	    return WalkinComponent;
+	}());
+	exports.WalkinComponent = WalkinComponent;
+
+
+/***/ },
+
+/***/ 344:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
 	var RoomviewComponent = (function () {
 	    function RoomviewComponent() {
 	    }
-	    RoomviewComponent.prototype.ngOnInit = function () { };
+	    RoomviewComponent.prototype.ngOnInit = function () {
+	    };
 	    RoomviewComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-roomview",
@@ -603,7 +542,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 344:
+/***/ 345:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -616,7 +555,7 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var core_1 = __webpack_require__(7);
+	var core_1 = __webpack_require__(1);
 	var LayoutConfiguration = (function () {
 	    function LayoutConfiguration() {
 	        this.panelActionRunning = false;
@@ -1493,7 +1432,7 @@ webpackJsonp([0],{
 	}());
 	exports.LayoutConfiguration = LayoutConfiguration;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(345)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
 
 /***/ }
 

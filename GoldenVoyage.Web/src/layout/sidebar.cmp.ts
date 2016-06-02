@@ -2,7 +2,7 @@
 import { ROUTER_DIRECTIVES } from "@angular/router-deprecated";
 @Component({
     selector: "gv-sidebar",
-    templateUrl: "tmpls/layout/sidebar.cmm.html",
+    templateUrl: "tmpls/layout/sidebar.cmp.html",
     directives: [ ROUTER_DIRECTIVES ]
 })
 export class SidebarComponent implements OnInit {

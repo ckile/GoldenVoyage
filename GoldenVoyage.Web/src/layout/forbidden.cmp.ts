@@ -2,17 +2,17 @@
 import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
-    selector: 'unauthorized',
-    templateUrl: 'tmpls/layout/unauthorized.cmm.html',
+    selector: 'forbidden',
+    templateUrl: 'tmpls/layout/forbidden.cmp.html',
     directives: [CORE_DIRECTIVES]
 })
 
-export class UnauthorizedComponent implements OnInit {
+export class ForbiddenComponent implements OnInit {
     public message: string;
     public values: any[];
 
     constructor() {
-        this.message = "UnauthorizedComponent constructor";
+        this.message = "ForbiddenComponent constructor";
     }
 
     ngOnInit() {

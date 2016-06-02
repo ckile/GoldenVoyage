@@ -1,12 +1,12 @@
 ﻿import { Component, OnInit } from "@angular/core";
-
 @Component({
     selector: "gv-dashboard",
-    templateUrl: "tmpls/layout/dashboard.cmm.html"
+    templateUrl: "tmpls/layout/dashboard.cmp.html"
 })
 export class DashboardComponent implements OnInit {
+    constructor() { 
+    }
 
-    constructor() { }
-
-    public ngOnInit(): void { }
+    public ngOnInit(): void { 
+    }
 }

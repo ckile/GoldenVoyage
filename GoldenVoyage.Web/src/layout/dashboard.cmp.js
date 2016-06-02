@@ -17,7 +17,7 @@ var DashboardComponent = (function () {
         core_1.Component({
             selector: "gv-dashboard",
             templateUrl: "tmpls/layout/dashboard.cmm.html"
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], DashboardComponent);
     return DashboardComponent;

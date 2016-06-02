@@ -40,6 +40,7 @@
     "gulp-util": "^3.0.7",
     "webpack": "^1.13.1",
     "ts-loader": "^0.8.2",
+    "html-loader": "^0.4.3",
     "css-loader": "^0.23.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",

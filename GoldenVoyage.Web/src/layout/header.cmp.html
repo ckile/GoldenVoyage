@@ -1,4 +1,4 @@
-<div id="header" class="header navbar navbar-default navbar-fixed-top">
+﻿<div id="header" class="header navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="javascript:;" class="navbar-brand">GVHS <small>Hotel Name</small></a>
@@ -12,7 +12,7 @@
         <div class="hidden-xs" id="top-navbar">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="javascript:;" (click)="walkIn()">
+                    <a href="javascript:;" [routerLink]="['/Walkin/']">
                         <i class="ion icon-bell"></i><span class="hidden-xs"> 步入</span>
                     </a>
                 </li>
@@ -38,7 +38,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="javascript:;" (click)="createGuest()"> 新建客历 ...</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:;" (click)="createCustomer()"> 新建协议客户 ...</a></li> 
+                        <li><a href="javascript:;" (click)="createCustomer()"> 新建协议客户 ...</a></li>
                     </ul>
                 </li>
             </ul>
@@ -55,10 +55,6 @@
                     </div>
                 </form>
             </li>
-
-
         </ul>
-
     </div>
-
 </div>

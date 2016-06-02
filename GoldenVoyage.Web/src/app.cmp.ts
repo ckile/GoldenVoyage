@@ -1,20 +1,23 @@
 ﻿import { Component } from "@angular/core";
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "@angular/router-deprecated";
 import { SecurityService } from "./services/security.service";
-import { HeaderComponent } from "./layout/header.cmm";
-import { SidebarComponent } from "./layout/sidebar.cmm";
+import { HeaderComponent } from "./layout/header.cmp";
+import { SidebarComponent } from "./layout/sidebar.cmp";
 
-import { ForbiddenComponent} from "./layout/forbidden.cmm";
-import { UnauthorizedComponent} from "./layout/unauthorized.cmm";
-import { DashboardComponent } from "./layout/dashboard.cmm";
-import { RoomviewComponent } from "./roomview/roomview.cmm";
+import { ForbiddenComponent} from "./layout/forbidden.cmp";
+import { UnauthorizedComponent} from "./layout/unauthorized.cmp";
+
+import { DashboardComponent } from "./layout/dashboard.cmp";
+import { WalkinComponent } from "./walkin/walkin.cmp";
+
+import { RoomviewComponent } from "./roomview/roomview.cmp";
 
 //import {DataEventRecordsComponent} from "./dataeventrecords/dataeventrecords.component";
 //import { DataEventRecordsService } from "./dataeventrecords/DataEventRecordsService";
 
 @Component({
     selector: "gv-app",
-    templateUrl: "tmpls/app.cmm.html",
+    templateUrl: "tmpls/app.cmp.html",
     // styleUrls: ["css/app.component.css"],
     directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent],
     providers: [
@@ -27,6 +30,7 @@ import { RoomviewComponent } from "./roomview/roomview.cmm";
     { path: "/Forbidden", name: "Forbidden", component: ForbiddenComponent },
     { path: "/Unauthorized", name: "Unauthorized", component: UnauthorizedComponent },
     { path: "/Dashboard", name: "Dashboard", component: DashboardComponent, useAsDefault: true },
+    { path: "/Walkin", name: "Walkin", component: WalkinComponent },
     { path: "/RoomView", name: "RoomView", component: RoomviewComponent }
     //{ path: "/dataeventrecords/...", name: "DataEventRecords", component: DataEventRecordsComponent, useAsDefault: true }
 ])

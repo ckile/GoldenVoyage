@@ -6,6 +6,7 @@ import "@angular/router-deprecated";
 import "jquery";
 import "bootstrap";
 import "imports?require=>false!zone.js";
+import "rxjs";
 
 import "pace";
 import "toastr";
