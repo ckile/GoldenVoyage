@@ -531,7 +531,7 @@ webpackJsonp([0],{
 	    RoomviewComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-roomview",
-	            templateUrl: "tmpls/roomview/roomview.cmp.html"
+	            templateUrl: "tmpls/roomview/roomview.cmm.html"
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], RoomviewComponent);

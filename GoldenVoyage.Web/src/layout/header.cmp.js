@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_deprecated_1 = require("@angular/router-deprecated");
 var HeaderComponent = (function () {
     function HeaderComponent() {
     }
@@ -18,12 +17,11 @@ var HeaderComponent = (function () {
     HeaderComponent = __decorate([
         core_1.Component({
             selector: "gv-header",
-            templateUrl: "tmpls/layout/header.cmp.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+            templateUrl: "tmpls/layout/header.cmm.html"
         }), 
         __metadata('design:paramtypes', [])
     ], HeaderComponent);
     return HeaderComponent;
 }());
 exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.cmp.js.map
+//# sourceMappingURL=header.cmm.js.map

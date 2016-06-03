@@ -7,9 +7,7 @@ require("@angular/router-deprecated");
 require("jquery");
 require("bootstrap");
 require("imports?require=>false!zone.js");
-require("rxjs");
 require("pace");
 require("toastr");
 require("jquery-ui");
-require("slimscroll");
 //# sourceMappingURL=vendor.js.map

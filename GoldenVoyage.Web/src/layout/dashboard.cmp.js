@@ -12,16 +12,15 @@ var core_1 = require("@angular/core");
 var DashboardComponent = (function () {
     function DashboardComponent() {
     }
-    DashboardComponent.prototype.ngOnInit = function () {
-    };
+    DashboardComponent.prototype.ngOnInit = function () { };
     DashboardComponent = __decorate([
         core_1.Component({
             selector: "gv-dashboard",
-            templateUrl: "tmpls/layout/dashboard.cmp.html"
-        }), 
+            templateUrl: "tmpls/layout/dashboard.cmm.html"
+        }),
         __metadata('design:paramtypes', [])
     ], DashboardComponent);
     return DashboardComponent;
 }());
 exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.cmp.js.map
+//# sourceMappingURL=dashboard.cmm.js.map

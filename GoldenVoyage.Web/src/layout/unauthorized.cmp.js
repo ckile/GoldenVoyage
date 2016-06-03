@@ -19,7 +19,7 @@ var UnauthorizedComponent = (function () {
     UnauthorizedComponent = __decorate([
         core_1.Component({
             selector: 'unauthorized',
-            templateUrl: 'tmpls/layout/unauthorized.cmp.html',
+            templateUrl: 'tmpls/layout/unauthorized.cmm.html',
             directives: [common_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
@@ -27,4 +27,4 @@ var UnauthorizedComponent = (function () {
     return UnauthorizedComponent;
 }());
 exports.UnauthorizedComponent = UnauthorizedComponent;
-//# sourceMappingURL=unauthorized.cmp.js.map
+//# sourceMappingURL=unauthorized.cmm.js.map
