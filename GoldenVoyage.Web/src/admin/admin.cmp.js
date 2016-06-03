@@ -9,21 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_deprecated_1 = require("@angular/router-deprecated");
-var HeaderComponent = (function () {
-    function HeaderComponent() {
+var AdminComponent = (function () {
+    function AdminComponent() {
     }
-    HeaderComponent.prototype.ngOnInit = function () {
-    };
-    HeaderComponent = __decorate([
+    AdminComponent.prototype.ngOnInit = function () { };
+    AdminComponent = __decorate([
         core_1.Component({
-            selector: "gv-header",
-            templateUrl: "tmpls/layout/header.cmp.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+            selector: "gv-admin",
+            templateUrl: "tmpls/admin/admin.cmp.html"
         }), 
         __metadata('design:paramtypes', [])
-    ], HeaderComponent);
-    return HeaderComponent;
+    ], AdminComponent);
+    return AdminComponent;
 }());
-exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.cmp.js.map
+exports.AdminComponent = AdminComponent;
+//# sourceMappingURL=admin.cmp.js.map

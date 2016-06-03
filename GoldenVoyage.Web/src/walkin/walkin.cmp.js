@@ -9,21 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_deprecated_1 = require("@angular/router-deprecated");
-var HeaderComponent = (function () {
-    function HeaderComponent() {
+var WalkinComponent = (function () {
+    function WalkinComponent() {
     }
-    HeaderComponent.prototype.ngOnInit = function () {
+    WalkinComponent.prototype.ngOnInit = function () {
     };
-    HeaderComponent = __decorate([
+    WalkinComponent = __decorate([
         core_1.Component({
-            selector: "gv-header",
-            templateUrl: "tmpls/layout/header.cmp.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+            selector: "gv-walkin",
+            templateUrl: "tmpls/walkin/walkin.cmp.html"
         }), 
         __metadata('design:paramtypes', [])
-    ], HeaderComponent);
-    return HeaderComponent;
+    ], WalkinComponent);
+    return WalkinComponent;
 }());
-exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.cmp.js.map
+exports.WalkinComponent = WalkinComponent;
+//# sourceMappingURL=walkin.cmp.js.map

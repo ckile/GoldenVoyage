@@ -9,21 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_deprecated_1 = require("@angular/router-deprecated");
-var HeaderComponent = (function () {
-    function HeaderComponent() {
+var api_service_1 = require("../services/api.service");
+var RoomviewService = (function () {
+    function RoomviewService(_apiService) {
+        this._apiService = _apiService;
     }
-    HeaderComponent.prototype.ngOnInit = function () {
-    };
-    HeaderComponent = __decorate([
-        core_1.Component({
-            selector: "gv-header",
-            templateUrl: "tmpls/layout/header.cmp.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HeaderComponent);
-    return HeaderComponent;
+    RoomviewService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [api_service_1.ApiService])
+    ], RoomviewService);
+    return RoomviewService;
 }());
-exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.cmp.js.map
+exports.RoomviewService = RoomviewService;
+//# sourceMappingURL=roomview.service.js.map
