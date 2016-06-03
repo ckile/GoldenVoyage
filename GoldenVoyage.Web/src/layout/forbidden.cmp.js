@@ -19,7 +19,7 @@ var ForbiddenComponent = (function () {
     ForbiddenComponent = __decorate([
         core_1.Component({
             selector: 'forbidden',
-            templateUrl: 'tmpls/layout/forbidden.cmm.html',
+            templateUrl: 'tmpls/layout/forbidden.cmp.html',
             directives: [common_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
@@ -27,4 +27,4 @@ var ForbiddenComponent = (function () {
     return ForbiddenComponent;
 }());
 exports.ForbiddenComponent = ForbiddenComponent;
-//# sourceMappingURL=forbidden.cmm.js.map
+//# sourceMappingURL=forbidden.cmp.js.map

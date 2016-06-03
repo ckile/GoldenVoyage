@@ -27,7 +27,12 @@ namespace GoldenVoyage.Web
                 "/authorized",
                 "/authorize",
                 "/unauthorized",
-                "/dashboard", 
+                "/dashboard",
+                "/walkin",
+                "/booking",
+                "/roomview",
+                "/accounts",
+                "/guests", 
             };
 
             app.Use(async (context, next) =>

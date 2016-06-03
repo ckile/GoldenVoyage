@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/16debdc8db26b548ddb5f0fca208383af426b3e5/bootstrap.datepicker/bootstrap.datepicker.d.ts",
+    "raw": "registry:dt/bootstrap.datepicker#0.0.0+20160505185215",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/16debdc8db26b548ddb5f0fca208383af426b3e5/bootstrap.datepicker/bootstrap.datepicker.d.ts"
+  }
+}

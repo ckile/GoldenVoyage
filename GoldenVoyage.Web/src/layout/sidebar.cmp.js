@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_deprecated_1 = require("@angular/router-deprecated");
+var routeractive_directive_1 = require("../shared/directives/routeractive.directive");
 var SidebarComponent = (function () {
     function SidebarComponent() {
     }
@@ -17,12 +18,12 @@ var SidebarComponent = (function () {
     SidebarComponent = __decorate([
         core_1.Component({
             selector: "gv-sidebar",
-            templateUrl: "tmpls/layout/sidebar.cmm.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+            templateUrl: "tmpls/layout/sidebar.cmp.html",
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
         }), 
         __metadata('design:paramtypes', [])
     ], SidebarComponent);
     return SidebarComponent;
 }());
 exports.SidebarComponent = SidebarComponent;
-//# sourceMappingURL=sidebar.cmm.js.map
+//# sourceMappingURL=sidebar.cmp.js.map

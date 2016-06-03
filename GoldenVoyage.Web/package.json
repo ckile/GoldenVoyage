@@ -29,7 +29,9 @@
     "jquery": "^2.2.0",
     "jquery-ui": "^1.10.5",
     "slimscroll": "^0.9.1",
-    "jquery.cookie": "^1.4.1"
+    "jquery.cookie": "^1.4.1",
+    "bootstrap-datepicker": "^1.6.1",
+    "bootstrap-select": "^1.10.0"
   },
   "devDependencies": {
     "bower": "^1.7.9",
