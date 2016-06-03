@@ -1,4 +1,7 @@
-<div id="page-container" class="page-container page-header-fixed page-sidebar-minified">
+
+<button *ngIf="!IsAuthorized" (click)="login();"> Login </button>
+
+<div *ngIf="IsAuthorized" id="page-container" class="page-container page-header-fixed page-sidebar-minified">
     <gv-header></gv-header>
     <gv-sidebar></gv-sidebar>
     <div id="content" class="content">

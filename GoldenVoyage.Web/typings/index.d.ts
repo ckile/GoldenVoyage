@@ -1,3 +1,4 @@
+/// <reference path="globals/bootstrap.datepicker/index.d.ts" />
 /// <reference path="globals/bootstrap/index.d.ts" />
 /// <reference path="globals/es6-shim/index.d.ts" />
 /// <reference path="globals/jquery.cookie/index.d.ts" />

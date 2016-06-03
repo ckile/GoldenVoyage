@@ -1,11 +1,17 @@
 <div id="sidebar" class="sidebar">
     <div data-scrollbar="true" data-height="100%">
         <ul class="nav">
-            <li>
-                <a [routerLink]="['/Dashboard/']"><i class="icon-speedometer"></i><span>酒店概览</span></a>
+            <li router-active>
+                <a [routerLink]="['Dashboard']"><i class="icon-dashboard"></i><span>酒店概览</span></a>
             </li>
-            <li>
-                <a [routerLink]="['/RoomView/']"><i class="fa fa-building"></i><span>房态盘</span></a>
+            <li router-active>
+                <a [routerLink]="['RoomView']"><i class="fa fa-building"></i><span>房态盘</span></a>
+            </li>
+            <li router-active>
+                <a [routerLink]="['Guests']"><i class="fa fa-user"></i><span>宾客列表</span></a>
+            </li>
+            <li router-active>
+                <a [routerLink]="['Admin']"><i class="fa fa-wrench"></i><span>管理</span></a>
             </li>
         </ul>
     </div>

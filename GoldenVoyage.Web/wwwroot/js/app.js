@@ -11,7 +11,7 @@ webpackJsonp([0],{
 	var app_cmp_1 = __webpack_require__(333);
 	var app_constants_1 = __webpack_require__(337);
 	var security_service_1 = __webpack_require__(334);
-	var layout_1 = __webpack_require__(345);
+	var layout_1 = __webpack_require__(352);
 	core_1.enableProdMode();
 	platform_browser_dynamic_1.bootstrap(app_cmp_1.AppComponent, [
 	    router_deprecated_1.ROUTER_PROVIDERS,
@@ -39,17 +39,23 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(1);
 	var router_deprecated_1 = __webpack_require__(301);
+	var common_1 = __webpack_require__(181);
 	var security_service_1 = __webpack_require__(334);
 	var header_cmp_1 = __webpack_require__(338);
-	var sidebar_cmp_1 = __webpack_require__(339);
-	var forbidden_cmp_1 = __webpack_require__(340);
-	var unauthorized_cmp_1 = __webpack_require__(341);
-	var dashboard_cmp_1 = __webpack_require__(342);
-	var walkin_cmp_1 = __webpack_require__(343);
-	var roomview_cmp_1 = __webpack_require__(344);
+	var sidebar_cmp_1 = __webpack_require__(340);
+	var forbidden_cmp_1 = __webpack_require__(341);
+	var unauthorized_cmp_1 = __webpack_require__(342);
+	var dashboard_cmp_1 = __webpack_require__(343);
+	var walkin_cmp_1 = __webpack_require__(344);
+	var booking_cmp_1 = __webpack_require__(348);
+	var roomview_cmp_1 = __webpack_require__(349);
+	var guests_cmp_1 = __webpack_require__(350);
+	var admin_cmp_1 = __webpack_require__(351);
 	var AppComponent = (function () {
 	    function AppComponent(securityService) {
 	        this.securityService = securityService;
+	        this.IsAuthorized = false;
+	        this.IsAuthorized = securityService.IsAuthorized;
 	    }
 	    AppComponent.prototype.ngOnInit = function () {
 	        if (window.location.hash) {
@@ -57,11 +63,11 @@ webpackJsonp([0],{
 	            this.securityService.AuthorizedCallback();
 	        }
 	    };
-	    AppComponent.prototype.Login = function () {
+	    AppComponent.prototype.login = function () {
 	        console.log("Do login logic");
-	        this.securityService.Authorize();
+	        this.IsAuthorized = true;
 	    };
-	    AppComponent.prototype.Logout = function () {
+	    AppComponent.prototype.logout = function () {
 	        console.log("Do logout logic");
 	        this.securityService.Logoff();
 	    };
@@ -69,7 +75,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: "gv-app",
 	            templateUrl: "tmpls/app.cmp.html",
-	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmp_1.SidebarComponent, header_cmp_1.HeaderComponent],
+	            directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmp_1.SidebarComponent, header_cmp_1.HeaderComponent],
 	            providers: [
 	                router_deprecated_1.ROUTER_PROVIDERS
 	            ],
@@ -80,7 +86,10 @@ webpackJsonp([0],{
 	            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmp_1.UnauthorizedComponent },
 	            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmp_1.DashboardComponent, useAsDefault: true },
 	            { path: "/Walkin", name: "Walkin", component: walkin_cmp_1.WalkinComponent },
-	            { path: "/RoomView", name: "RoomView", component: roomview_cmp_1.RoomviewComponent }
+	            { path: "/Booking", name: "Booking", component: booking_cmp_1.BookingComponent },
+	            { path: "/RoomView", name: "RoomView", component: roomview_cmp_1.RoomviewComponent },
+	            { path: "/Guests", name: "Guests", component: guests_cmp_1.GuestsComponent },
+	            { path: "/Admin", name: "Admin", component: admin_cmp_1.AdminComponent }
 	        ]), 
 	        __metadata('design:paramtypes', [security_service_1.SecurityService])
 	    ], AppComponent);
@@ -317,6 +326,7 @@ webpackJsonp([0],{
 	};
 	var core_1 = __webpack_require__(1);
 	var router_deprecated_1 = __webpack_require__(301);
+	var routeractive_directive_1 = __webpack_require__(339);
 	var HeaderComponent = (function () {
 	    function HeaderComponent() {
 	    }
@@ -326,7 +336,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: "gv-header",
 	            templateUrl: "tmpls/layout/header.cmp.html",
-	            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], HeaderComponent);
@@ -350,8 +360,84 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
+	var __param = (this && this.__param) || function (paramIndex, decorator) {
+	    return function (target, key) { decorator(target, key, paramIndex); }
+	};
+	var router_deprecated_1 = __webpack_require__(301);
+	var lang_1 = __webpack_require__(4);
+	var core_1 = __webpack_require__(1);
+	var RouterActive = (function () {
+	    function RouterActive(_router, _el, _renderer, _routerLink, routerActiveAttr) {
+	        this._router = _router;
+	        this._el = _el;
+	        this._renderer = _renderer;
+	        this._routerLink = _routerLink;
+	        this.routerActive = null;
+	        this.routerActiveAttr = "active";
+	        this.routerActiveAttr = this.defaultAttrValue(routerActiveAttr);
+	    }
+	    RouterActive.prototype.ngOnInit = function () {
+	        var _this = this;
+	        this._routerLink.changes.subscribe(function () {
+	            if (_this._routerLink.first) {
+	                _this.updateClass();
+	                _this.findRootRouter()
+	                    .subscribe(function () {
+	                    _this.updateClass();
+	                });
+	            }
+	        });
+	    };
+	    RouterActive.prototype.findRootRouter = function () {
+	        var router = this._router;
+	        while (lang_1.isPresent(router.parent)) {
+	            router = router.parent;
+	        }
+	        return router;
+	    };
+	    RouterActive.prototype.updateClass = function () {
+	        var active = this._routerLink.first.isRouteActive;
+	        this._renderer.setElementClass(this._el.nativeElement, this.attrOrProp(), active);
+	    };
+	    RouterActive.prototype.defaultAttrValue = function (attr) {
+	        return this.routerActiveAttr = attr || this.routerActiveAttr;
+	    };
+	    RouterActive.prototype.attrOrProp = function () {
+	        return lang_1.isPresent(this.routerActive) ? this.routerActive : this.routerActiveAttr;
+	    };
+	    RouterActive = __decorate([
+	        core_1.Directive({
+	            selector: "[router-active],[routerActive]",
+	            inputs: ["routerActive"]
+	        }),
+	        __param(3, core_1.Query(router_deprecated_1.RouterLink)),
+	        __param(4, core_1.Optional()),
+	        __param(4, core_1.Attribute("router-active")), 
+	        __metadata('design:paramtypes', [router_deprecated_1.Router, core_1.ElementRef, core_1.Renderer, core_1.QueryList, String])
+	    ], RouterActive);
+	    return RouterActive;
+	}());
+	exports.RouterActive = RouterActive;
+
+
+/***/ },
+
+/***/ 340:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
 	var core_1 = __webpack_require__(1);
 	var router_deprecated_1 = __webpack_require__(301);
+	var routeractive_directive_1 = __webpack_require__(339);
 	var SidebarComponent = (function () {
 	    function SidebarComponent() {
 	    }
@@ -360,7 +446,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: "gv-sidebar",
 	            templateUrl: "tmpls/layout/sidebar.cmp.html",
-	            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
+	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], SidebarComponent);
@@ -371,7 +457,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 340:
+/***/ 341:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -407,7 +493,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 341:
+/***/ 342:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -443,7 +529,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 342:
+/***/ 343:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -476,39 +562,6 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 343:
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-	    return c > 3 && r && Object.defineProperty(target, key, r), r;
-	};
-	var __metadata = (this && this.__metadata) || function (k, v) {
-	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-	};
-	var core_1 = __webpack_require__(1);
-	var WalkinComponent = (function () {
-	    function WalkinComponent() {
-	    }
-	    WalkinComponent.prototype.ngOnInit = function () {
-	    };
-	    WalkinComponent = __decorate([
-	        core_1.Component({
-	            selector: "gv-walkin",
-	            templateUrl: "tmpls/walkin/walkin.cmp.html"
-	        }), 
-	        __metadata('design:paramtypes', [])
-	    ], WalkinComponent);
-	    return WalkinComponent;
-	}());
-	exports.WalkinComponent = WalkinComponent;
-
-
-/***/ },
-
 /***/ 344:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -523,17 +576,271 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
+	var datepicker_cmp_1 = __webpack_require__(345);
+	var combobox_cmp_1 = __webpack_require__(347);
+	var WalkinComponent = (function () {
+	    function WalkinComponent() {
+	        this.item = {
+	            arrival: new Date("2015-01-01"),
+	            hotelId: 1
+	        };
+	    }
+	    WalkinComponent.prototype.ngOnInit = function () {
+	    };
+	    WalkinComponent.prototype.ngAfterContentInit = function () {
+	    };
+	    WalkinComponent.prototype.ngAfterViewInit = function () {
+	    };
+	    WalkinComponent.prototype.setDate = function () {
+	        this.item.arrival = new Date("2015-06-30");
+	    };
+	    WalkinComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-walkin",
+	            templateUrl: "tmpls/walkin/walkin.cmp.html",
+	            directives: [datepicker_cmp_1.DatepickerComponent, combobox_cmp_1.ComboboxComponent]
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], WalkinComponent);
+	    return WalkinComponent;
+	}());
+	exports.WalkinComponent = WalkinComponent;
+
+
+/***/ },
+
+/***/ 345:
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var __param = (this && this.__param) || function (paramIndex, decorator) {
+	    return function (target, key) { decorator(target, key, paramIndex); }
+	};
+	var core_1 = __webpack_require__(1);
+	var common_1 = __webpack_require__(181);
+	var DatepickerComponent = (function () {
+	    function DatepickerComponent(cd, _el) {
+	        this._el = _el;
+	        this.onChange = Function.prototype;
+	        this.onTouched = Function.prototype;
+	        this._now = new Date();
+	        this.cd = cd;
+	        cd.valueAccessor = this;
+	    }
+	    Object.defineProperty(DatepickerComponent.prototype, "activeDate", {
+	        set: function (value) {
+	            this._activeDate = value;
+	            this.updateDatepicker(this._activeDate);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    DatepickerComponent.prototype.ngOnInit = function () {
+	        var _this = this;
+	        var elem = $(this._el.nativeElement);
+	        elem.datepicker({
+	            todayHighlight: true,
+	            language: "zh-CN",
+	            format: 'yyyy-mm-dd',
+	            todayBtn: true
+	        });
+	        elem.on("change", function (e) {
+	            var date = $(elem).datepicker("getDate");
+	            if (_this._activeDate.toLocaleDateString() === date.toLocaleDateString()) {
+	                return;
+	            }
+	            _this._activeDate = date;
+	            _this.cd.viewToModelUpdate(date);
+	        });
+	    };
+	    DatepickerComponent.prototype.updateDatepicker = function (value) {
+	        $(this._el.nativeElement).datepicker("setDate", value);
+	    };
+	    DatepickerComponent.prototype.ngOnChanges = function () {
+	        alert("ngOnChanges");
+	    };
+	    DatepickerComponent.prototype.writeValue = function (value) {
+	        if (value === this._activeDate) {
+	            return;
+	        }
+	        if (value && value instanceof Date) {
+	            this.activeDate = value;
+	            return;
+	        }
+	        this.activeDate = value ? new Date(value) : void 0;
+	    };
+	    DatepickerComponent.prototype.registerOnChange = function (fn) {
+	        this.onChange = fn;
+	    };
+	    DatepickerComponent.prototype.registerOnTouched = function (fn) {
+	        this.onTouched = fn;
+	    };
+	    DatepickerComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-datepicker[ngModel]",
+	            events: ['change'],
+	            template: "<div class=\"input-group date\"><input type=\"text\" class=\"form-control\" placeholder=\"yyyy-mm-dd\" /><span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span></div>",
+	            directives: [common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.NgClass, common_1.NgModel]
+	        }),
+	        __param(0, core_1.Self()), 
+	        __metadata('design:paramtypes', [common_1.NgModel, core_1.ElementRef])
+	    ], DatepickerComponent);
+	    return DatepickerComponent;
+	}());
+	exports.DatepickerComponent = DatepickerComponent;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
+
+/***/ },
+
+/***/ 347:
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var __param = (this && this.__param) || function (paramIndex, decorator) {
+	    return function (target, key) { decorator(target, key, paramIndex); }
+	};
+	var core_1 = __webpack_require__(1);
+	var common_1 = __webpack_require__(181);
+	var ComboboxComponent = (function () {
+	    function ComboboxComponent(_cd, _el) {
+	        this._cd = _cd;
+	        this._el = _el;
+	        this.onChange = Function.prototype;
+	        this.onTouched = Function.prototype;
+	        this.options = [];
+	        _cd.valueAccessor = this;
+	    }
+	    ComboboxComponent.prototype.ngOnInit = function () {
+	        this.initOptions();
+	    };
+	    ComboboxComponent.prototype.ngAfterViewInit = function () {
+	        alert("ngAfterViewInit combo");
+	        $(this._el.nativeElement).selectpicker({
+	            style: "btn-white",
+	            noneSelectedText: '未选择',
+	            noneResultsText: '无匹配',
+	            liveSearch: true
+	        });
+	    };
+	    ComboboxComponent.prototype.initOptions = function () {
+	        this.options.push({ Id: 1, Description: "Option1" });
+	        this.options.push({ Id: 2, Description: "Option2" });
+	        this.options.push({ Id: 3, Description: "Option3" });
+	    };
+	    ComboboxComponent.prototype.ngOnChanges = function (changes) {
+	        console.log(changes["itemsSource"].currentValue);
+	    };
+	    ComboboxComponent.prototype.writeValue = function (value) {
+	        if (value === this._selectedId) {
+	            return;
+	        }
+	        if (value) {
+	            this._selectedId = value;
+	            return;
+	        }
+	        this._selectedId = value ? 0 : void 0;
+	    };
+	    ComboboxComponent.prototype.registerOnChange = function (fn) {
+	        this.onChange = fn;
+	    };
+	    ComboboxComponent.prototype.registerOnTouched = function (fn) {
+	        this.onTouched = fn;
+	    };
+	    ComboboxComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-combobox[ngModel]",
+	            inputs: ["itemsSource"],
+	            template: "<select class=\"form-control\"><option value=\"0\">\u672A\u9009\u62E9</option><option *ngFor=\"let option of options\" [value]=\"option.Id\">{{ option.Description }}<option></select>",
+	            directives: [common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.NgClass, common_1.NgModel]
+	        }),
+	        __param(0, core_1.Self()), 
+	        __metadata('design:paramtypes', [common_1.NgModel, core_1.ElementRef])
+	    ], ComboboxComponent);
+	    return ComboboxComponent;
+	}());
+	exports.ComboboxComponent = ComboboxComponent;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
+
+/***/ },
+
+/***/ 348:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var BookingComponent = (function () {
+	    function BookingComponent() {
+	    }
+	    BookingComponent.prototype.ngOnInit = function () { };
+	    BookingComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-booking",
+	            templateUrl: "tmpls/booking/booking.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], BookingComponent);
+	    return BookingComponent;
+	}());
+	exports.BookingComponent = BookingComponent;
+
+
+/***/ },
+
+/***/ 349:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
 	var RoomviewComponent = (function () {
-	    function RoomviewComponent() {
+	    function RoomviewComponent(_el) {
+	        this._el = _el;
 	    }
 	    RoomviewComponent.prototype.ngOnInit = function () {
 	    };
 	    RoomviewComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-roomview",
-	            templateUrl: "tmpls/roomview/roomview.cmm.html"
+	            templateUrl: "tmpls/roomview/roomview.cmp.html"
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [core_1.ElementRef])
 	    ], RoomviewComponent);
 	    return RoomviewComponent;
 	}());
@@ -542,7 +849,71 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 345:
+/***/ 350:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var GuestsComponent = (function () {
+	    function GuestsComponent() {
+	    }
+	    GuestsComponent.prototype.ngOnInit = function () { };
+	    GuestsComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-guests",
+	            templateUrl: "tmpls/guests/guests.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], GuestsComponent);
+	    return GuestsComponent;
+	}());
+	exports.GuestsComponent = GuestsComponent;
+
+
+/***/ },
+
+/***/ 351:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var AdminComponent = (function () {
+	    function AdminComponent() {
+	    }
+	    AdminComponent.prototype.ngOnInit = function () { };
+	    AdminComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-admin",
+	            templateUrl: "tmpls/admin/admin.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], AdminComponent);
+	    return AdminComponent;
+	}());
+	exports.AdminComponent = AdminComponent;
+
+
+/***/ },
+
+/***/ 352:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";

@@ -11,13 +11,13 @@
 
         <div class="hidden-xs" id="top-navbar">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="javascript:;" [routerLink]="['/Walkin/']">
+                <li router-acitve>
+                    <a href="javascript:;" [routerLink]="['Walkin']">
                         <i class="ion icon-bell"></i><span class="hidden-xs"> 步入</span>
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;" (click)="booking()">
+                    <a href="javascript:;" [routerLink]="['Booking']">
                         <i class="ion icon-call-in"></i><span class="hidden-xs"> 预订</span>
                     </a>
                 </li>

@@ -1,1 +1,10 @@
 ﻿<h1>Walk In</h1>
+<button (click)="setDate()">Set Date</button>
+<div class="form-group">
+
+    <input class="form-control" [ngModel]="item.arrival" />
+
+    <gv-datepicker [(ngModel)]="item.arrival"></gv-datepicker>
+
+    <gv-combobox [(ngModel)]="item.hotelId"></gv-combobox>
+</div>

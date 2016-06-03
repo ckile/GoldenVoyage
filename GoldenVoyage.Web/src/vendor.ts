@@ -5,10 +5,15 @@ import "@angular/http";
 import "@angular/router-deprecated";
 import "jquery";
 import "bootstrap";
-import "imports?require=>false!zone.js";
-import "rxjs";
-
 import "pace";
 import "toastr";
 import "jquery-ui";
-import "slimscroll";
+import "slimscroll"; 
+import "bootstrap-datepicker";
+import "bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min";
+import "bootstrap-select";
+
+
+import "imports?require=>false!zone.js";
+import "rxjs";
+

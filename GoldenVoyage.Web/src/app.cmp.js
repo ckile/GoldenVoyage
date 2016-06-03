@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_deprecated_1 = require("@angular/router-deprecated");
 var security_service_1 = require("./services/security.service");
-var header_cmm_1 = require("./layout/header.cmm");
-var sidebar_cmm_1 = require("./layout/sidebar.cmm");
-var forbidden_cmm_1 = require("./layout/forbidden.cmm");
-var unauthorized_cmm_1 = require("./layout/unauthorized.cmm");
-var dashboard_cmm_1 = require("./layout/dashboard.cmm");
+var header_cmp_1 = require("./layout/header.cmp");
+var sidebar_cmp_1 = require("./layout/sidebar.cmp");
+var forbidden_cmp_1 = require("./layout/forbidden.cmp");
+var unauthorized_cmp_1 = require("./layout/unauthorized.cmp");
+var dashboard_cmp_1 = require("./layout/dashboard.cmp");
+var walkin_cmp_1 = require("./walkin/walkin.cmp");
+var roomview_cmp_1 = require("./roomview/roomview.cmp");
 var AppComponent = (function () {
     function AppComponent(securityService) {
         this.securityService = securityService;
@@ -37,20 +39,23 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: "gv-app",
-            templateUrl: "tmpls/app.cmm.html",
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmm_1.SidebarComponent, header_cmm_1.HeaderComponent],
+            templateUrl: "tmpls/app.cmp.html",
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmp_1.SidebarComponent, header_cmp_1.HeaderComponent],
             providers: [
                 router_deprecated_1.ROUTER_PROVIDERS
-            ]
+            ],
+            events: []
         }),
         router_deprecated_1.RouteConfig([
-            { path: "/Forbidden", name: "Forbidden", component: forbidden_cmm_1.ForbiddenComponent },
-            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmm_1.UnauthorizedComponent },
-            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmm_1.DashboardComponent, useAsDefault: true }
+            { path: "/Forbidden", name: "Forbidden", component: forbidden_cmp_1.ForbiddenComponent },
+            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmp_1.UnauthorizedComponent },
+            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmp_1.DashboardComponent, useAsDefault: true },
+            { path: "/Walkin", name: "Walkin", component: walkin_cmp_1.WalkinComponent },
+            { path: "/RoomView", name: "RoomView", component: roomview_cmp_1.RoomviewComponent }
         ]), 
         __metadata('design:paramtypes', [security_service_1.SecurityService])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.cmm.js.map
+//# sourceMappingURL=app.cmp.js.map
