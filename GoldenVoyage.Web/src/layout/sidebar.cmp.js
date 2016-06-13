@@ -19,6 +19,7 @@ var SidebarComponent = (function () {
         core_1.Component({
             selector: "gv-sidebar",
             templateUrl: "tmpls/layout/sidebar.cmp.html",
+            styleUrls: ["tmpls/layout/sidebar.cmp.css"],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
         }), 
         __metadata('design:paramtypes', [])
@@ -26,4 +27,3 @@ var SidebarComponent = (function () {
     return SidebarComponent;
 }());
 exports.SidebarComponent = SidebarComponent;
-//# sourceMappingURL=sidebar.cmp.js.map

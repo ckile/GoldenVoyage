@@ -22,4 +22,3 @@ var Configuration = (function () {
     return Configuration;
 }());
 exports.Configuration = Configuration;
-//# sourceMappingURL=app.constants.js.map

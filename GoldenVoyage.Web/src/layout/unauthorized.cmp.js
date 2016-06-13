@@ -27,4 +27,3 @@ var UnauthorizedComponent = (function () {
     return UnauthorizedComponent;
 }());
 exports.UnauthorizedComponent = UnauthorizedComponent;
-//# sourceMappingURL=unauthorized.cmp.js.map

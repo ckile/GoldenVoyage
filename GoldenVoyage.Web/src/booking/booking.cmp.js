@@ -23,4 +23,3 @@ var BookingComponent = (function () {
     return BookingComponent;
 }());
 exports.BookingComponent = BookingComponent;
-//# sourceMappingURL=booking.cmp.js.map

@@ -5,13 +5,11 @@ import { RouterActive } from "../shared/directives/routeractive.directive";
 @Component({
     selector: "gv-sidebar",
     templateUrl: "tmpls/layout/sidebar.cmp.html",
-    directives: [ ROUTER_DIRECTIVES, RouterActive ]
+    styleUrls: ["tmpls/layout/sidebar.cmp.css"],
+    directives: [ROUTER_DIRECTIVES, RouterActive]
 })
 export class SidebarComponent implements OnInit {
-
-
     constructor() { }
 
     public ngOnInit(): void { }
-
 }

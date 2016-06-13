@@ -21,4 +21,3 @@ var RoomviewService = (function () {
     return RoomviewService;
 }());
 exports.RoomviewService = RoomviewService;
-//# sourceMappingURL=roomview.service.js.map

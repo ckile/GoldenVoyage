@@ -8,30 +8,22 @@ import { ControlValueAccessor, FORM_DIRECTIVES, CORE_DIRECTIVES, NgModel, NgClas
     directives: [FORM_DIRECTIVES, CORE_DIRECTIVES, NgClass, NgModel]
 })
 export class ComboboxComponent implements OnInit, OnChanges, ControlValueAccessor, AfterViewInit {
-
     public onChange: any = Function.prototype;
     public onTouched: any = Function.prototype;
-     
+
     private options: Array<ComboBoxOption> = [];
     private _selectedId: number;
 
     constructor( @Self() private _cd: NgModel, private _el: ElementRef) {
-         _cd.valueAccessor = this;
+        _cd.valueAccessor = this;
     }
 
     // 组件初始化完成调用1次
     public ngOnInit(): void {
         this.initOptions();
-
     }
 
-    public ngAfterViewInit(): void { 
-         $(this._el.nativeElement).selectpicker({
-            style: "btn-white",
-            noneSelectedText: '未选择',
-            noneResultsText: '无匹配',
-            liveSearch: true
-        });
+    public ngAfterViewInit(): void {
     }
 
     private initOptions() {
@@ -51,10 +43,10 @@ export class ComboboxComponent implements OnInit, OnChanges, ControlValueAccesso
             return;
         }
         if (value) {
-            this._selectedId =  value;
+            this._selectedId = value;
             return;
         }
-        this._selectedId = value ?  0 : void 0;     
+        this._selectedId = value ? 0 : void 0;
     }
 
     public registerOnChange(fn: (_: any) => {}): void {
@@ -64,7 +56,6 @@ export class ComboboxComponent implements OnInit, OnChanges, ControlValueAccesso
     public registerOnTouched(fn: (_: any) => {}): void {
         this.onTouched = fn;
     }
-
 }
 
 export interface ComboBoxOption {

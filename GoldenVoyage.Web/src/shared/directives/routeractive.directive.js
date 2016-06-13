@@ -66,4 +66,3 @@ var RouterActive = (function () {
     return RouterActive;
 }());
 exports.RouterActive = RouterActive;
-//# sourceMappingURL=routeractive.directive.js.map

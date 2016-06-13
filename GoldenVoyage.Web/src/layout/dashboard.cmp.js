@@ -24,4 +24,3 @@ var DashboardComponent = (function () {
     return DashboardComponent;
 }());
 exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=dashboard.cmp.js.map

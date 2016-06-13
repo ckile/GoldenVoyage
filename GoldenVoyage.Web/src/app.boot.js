@@ -15,4 +15,3 @@ platform_browser_dynamic_1.bootstrap(app_cmp_1.AppComponent, [
     security_service_1.SecurityService,
     layout_1.LayoutConfiguration
 ]).then(function (success) { return console.log("启动完成！"); }, function (error) { return console.log(error); });
-//# sourceMappingURL=app.boot.js.map

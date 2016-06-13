@@ -27,4 +27,3 @@ var HeaderComponent = (function () {
     return HeaderComponent;
 }());
 exports.HeaderComponent = HeaderComponent;
-//# sourceMappingURL=header.cmp.js.map

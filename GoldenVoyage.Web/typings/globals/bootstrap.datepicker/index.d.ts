@@ -30,7 +30,6 @@ interface DatepickerEventObject extends JQueryEventObject {
 }
 
 interface JQuery {
-    selectpicker(options: any): any;
     datepicker(): JQuery;
     datepicker(methodName: string): any;
     datepicker(methodName: string, params: any): any;

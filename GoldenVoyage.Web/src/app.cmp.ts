@@ -1,4 +1,4 @@
-﻿import { Component,OnInit } from "@angular/core";
+﻿import { Component, OnInit } from "@angular/core";
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "@angular/router-deprecated";
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from "@angular/common";
 
@@ -24,27 +24,25 @@ import { AdminComponent } from "./admin/admin.cmp";
     selector: "gv-app",
     templateUrl: "tmpls/app.cmp.html",
     // styleUrls: ["css/app.component.css"],
-    directives: [CORE_DIRECTIVES,FORM_DIRECTIVES, ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent],
-    providers: [
-        ROUTER_PROVIDERS
-    ],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent],
     events: []
 })
 
 @RouteConfig([
-    { path: "/Forbidden", name: "Forbidden", component: ForbiddenComponent },
+    {
+        path: "/Forbidden", name: "Forbidden", component: ForbiddenComponent
+    },
     { path: "/Unauthorized", name: "Unauthorized", component: UnauthorizedComponent },
     { path: "/Dashboard", name: "Dashboard", component: DashboardComponent, useAsDefault: true },
     { path: "/Walkin", name: "Walkin", component: WalkinComponent },
     { path: "/Booking", name: "Booking", component: BookingComponent },
     { path: "/RoomView", name: "RoomView", component: RoomviewComponent },
     { path: "/Guests", name: "Guests", component: GuestsComponent },
-    { path: "/Admin", name: "Admin", component: AdminComponent }
+    { path: "/Admin/...", name: "Admin", component: AdminComponent }
     //{ path: "/dataeventrecords/...", name: "DataEventRecords", component: DataEventRecordsComponent, useAsDefault: true }
 ])
 
 export class AppComponent {
-
     public IsAuthorized: boolean = false;
 
     constructor(public securityService: SecurityService) {

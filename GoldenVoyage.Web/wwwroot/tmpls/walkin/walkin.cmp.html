@@ -1,10 +1,29 @@
 <h1>Walk In</h1>
-<button (click)="setDate()">Set Date</button>
-<div class="form-group">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <button type="button" class="btn btn-icon btn-sm btn-success btn-circle"><i class="fa fa-plus"></i></button>
+            <!--<a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>-->
+        </div>
+        <h4 class="panel-title">入住客人资料</h4>
+    </div>
+    <div class="panel-body">
 
-    <input class="form-control" [ngModel]="item.arrival" />
-
-    <gv-datepicker [(ngModel)]="item.arrival"></gv-datepicker>
-
-    <gv-combobox [(ngModel)]="item.hotelId"></gv-combobox>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-1 control-label">来店日期</label>
+                <div class="col-sm-2">
+                    <gv-datepicker [datepicker]="{ format: 'yyyy/mm/dd',language: 'zh-CN',todayBtn: true, todayHighlight: true, startDate: '2016-6-1' }" [timepicker]="false" [(ngModel)]="arrival"></gv-datepicker>
+                </div>
+                <label class="col-sm-1 control-label">姓名</label>
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" [value]="arrival" />
+                </div>
+                <label class="col-sm-1 control-label">类型</label>
+                <div class="col-sm-2">
+                    <gv-select [items]="types"></gv-select>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

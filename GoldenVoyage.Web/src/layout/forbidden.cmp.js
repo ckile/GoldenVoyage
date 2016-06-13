@@ -27,4 +27,3 @@ var ForbiddenComponent = (function () {
     return ForbiddenComponent;
 }());
 exports.ForbiddenComponent = ForbiddenComponent;
-//# sourceMappingURL=forbidden.cmp.js.map

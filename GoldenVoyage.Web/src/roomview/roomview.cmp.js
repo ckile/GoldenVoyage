@@ -25,4 +25,3 @@ var RoomviewComponent = (function () {
     return RoomviewComponent;
 }());
 exports.RoomviewComponent = RoomviewComponent;
-//# sourceMappingURL=roomview.cmp.js.map

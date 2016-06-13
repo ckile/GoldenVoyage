@@ -1,35 +1,48 @@
 ﻿import { Component, OnInit, AfterViewInit, AfterContentInit } from "@angular/core";
-import { DatepickerComponent } from "../shared/components/datepicker.cmp";
-import { ComboboxComponent, ComboBoxOption } from "../shared/components/combobox.cmp";
-
+import { ComponentInstruction, OnActivate } from "@angular/router-deprecated"; 
+import { GV_DIRECTIVES } from "../shared/components/gv.cmp";
 @Component({
     selector: "gv-walkin",
     templateUrl: "tmpls/walkin/walkin.cmp.html",
-    directives: [DatepickerComponent, ComboboxComponent]
+    directives: [GV_DIRECTIVES]
 })
-export class WalkinComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class WalkinComponent implements OnInit, AfterContentInit, AfterViewInit, OnActivate {
+    private disabled: boolean = false;
+    public arrival: Date;
+    private types: Array<any> = [
+        { name: '张先生', value: '1' },
+        { name: '李先生', value: '2' },
+        { name: '王先生', value: '3' },
+        { name: '刘先生', value: '4' },
+        { name: '陈先生', value: '5' },
+        { name: '付先生', value: '6' }
+    ];
 
-    public item: any = {
-        arrival: new Date("2015-01-01"),
-        hotelId: 1
-    };
-     
+    private type: Array<any> = [];
+    private change(value: any) {
+        console.log('Changed data: ', value);
+    }
 
     constructor() { }
     // 组件初始化完成调用1次
     public ngOnInit(): void {
-        //alert("1");
+      //  alert("1");
     }
 
+    // 在内容初始化后
     public ngAfterContentInit(): void {
-        //alert("2");
+      //  alert("2");
+    }
+    // 在视图初始化后
+    public ngAfterViewInit(): void {
+      //  alert("3");
     }
 
-    public ngAfterViewInit(): void {
-        //alert("3");
+    // 在路由切换成功后
+    routerOnActivate(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction): any {
+       // alert("0");
     }
 
     public setDate() {
-        this.item.arrival = new Date("2015-06-30");
     }
 }

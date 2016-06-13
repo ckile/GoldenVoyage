@@ -15,7 +15,9 @@ gulp.task("build", ["component:build", "webpack:build"]);
 // 编译组建html
 gulp.task("component:build", function () {
     gulp.src(src + "/**/*.html")
-		.pipe(gulp.dest(tmpls));
+        .pipe(gulp.dest(tmpls));
+    gulp.src(src + "/**/*.css")
+        .pipe(gulp.dest(tmpls));
 });
 
 gulp.task("webpack:build", function (callback) {

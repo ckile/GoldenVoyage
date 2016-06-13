@@ -11,7 +11,7 @@ webpackJsonp([0],{
 	var app_cmp_1 = __webpack_require__(333);
 	var app_constants_1 = __webpack_require__(337);
 	var security_service_1 = __webpack_require__(334);
-	var layout_1 = __webpack_require__(352);
+	var layout_1 = __webpack_require__(360);
 	core_1.enableProdMode();
 	platform_browser_dynamic_1.bootstrap(app_cmp_1.AppComponent, [
 	    router_deprecated_1.ROUTER_PROVIDERS,
@@ -47,10 +47,10 @@ webpackJsonp([0],{
 	var unauthorized_cmp_1 = __webpack_require__(342);
 	var dashboard_cmp_1 = __webpack_require__(343);
 	var walkin_cmp_1 = __webpack_require__(344);
-	var booking_cmp_1 = __webpack_require__(348);
-	var roomview_cmp_1 = __webpack_require__(349);
-	var guests_cmp_1 = __webpack_require__(350);
-	var admin_cmp_1 = __webpack_require__(351);
+	var booking_cmp_1 = __webpack_require__(353);
+	var roomview_cmp_1 = __webpack_require__(354);
+	var guests_cmp_1 = __webpack_require__(355);
+	var admin_cmp_1 = __webpack_require__(356);
 	var AppComponent = (function () {
 	    function AppComponent(securityService) {
 	        this.securityService = securityService;
@@ -76,20 +76,19 @@ webpackJsonp([0],{
 	            selector: "gv-app",
 	            templateUrl: "tmpls/app.cmp.html",
 	            directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_deprecated_1.ROUTER_DIRECTIVES, sidebar_cmp_1.SidebarComponent, header_cmp_1.HeaderComponent],
-	            providers: [
-	                router_deprecated_1.ROUTER_PROVIDERS
-	            ],
 	            events: []
 	        }),
 	        router_deprecated_1.RouteConfig([
-	            { path: "/Forbidden", name: "Forbidden", component: forbidden_cmp_1.ForbiddenComponent },
+	            {
+	                path: "/Forbidden", name: "Forbidden", component: forbidden_cmp_1.ForbiddenComponent
+	            },
 	            { path: "/Unauthorized", name: "Unauthorized", component: unauthorized_cmp_1.UnauthorizedComponent },
 	            { path: "/Dashboard", name: "Dashboard", component: dashboard_cmp_1.DashboardComponent, useAsDefault: true },
 	            { path: "/Walkin", name: "Walkin", component: walkin_cmp_1.WalkinComponent },
 	            { path: "/Booking", name: "Booking", component: booking_cmp_1.BookingComponent },
 	            { path: "/RoomView", name: "RoomView", component: roomview_cmp_1.RoomviewComponent },
 	            { path: "/Guests", name: "Guests", component: guests_cmp_1.GuestsComponent },
-	            { path: "/Admin", name: "Admin", component: admin_cmp_1.AdminComponent }
+	            { path: "/Admin/...", name: "Admin", component: admin_cmp_1.AdminComponent }
 	        ]), 
 	        __metadata('design:paramtypes', [security_service_1.SecurityService])
 	    ], AppComponent);
@@ -336,6 +335,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: "gv-header",
 	            templateUrl: "tmpls/layout/header.cmp.html",
+	            styleUrls: ["tmpls/layout/header.cmp.css"],
 	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -446,6 +446,7 @@ webpackJsonp([0],{
 	        core_1.Component({
 	            selector: "gv-sidebar",
 	            templateUrl: "tmpls/layout/sidebar.cmp.html",
+	            styleUrls: ["tmpls/layout/sidebar.cmp.css"],
 	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -576,29 +577,38 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var datepicker_cmp_1 = __webpack_require__(345);
-	var combobox_cmp_1 = __webpack_require__(347);
+	var gv_cmp_1 = __webpack_require__(345);
 	var WalkinComponent = (function () {
 	    function WalkinComponent() {
-	        this.item = {
-	            arrival: new Date("2015-01-01"),
-	            hotelId: 1
-	        };
+	        this.disabled = false;
+	        this.types = [
+	            { name: '张先生', value: '1' },
+	            { name: '李先生', value: '2' },
+	            { name: '王先生', value: '3' },
+	            { name: '刘先生', value: '4' },
+	            { name: '陈先生', value: '5' },
+	            { name: '付先生', value: '6' }
+	        ];
+	        this.type = [];
 	    }
+	    WalkinComponent.prototype.change = function (value) {
+	        console.log('Changed data: ', value);
+	    };
 	    WalkinComponent.prototype.ngOnInit = function () {
 	    };
 	    WalkinComponent.prototype.ngAfterContentInit = function () {
 	    };
 	    WalkinComponent.prototype.ngAfterViewInit = function () {
 	    };
+	    WalkinComponent.prototype.routerOnActivate = function (nextInstruction, prevInstruction) {
+	    };
 	    WalkinComponent.prototype.setDate = function () {
-	        this.item.arrival = new Date("2015-06-30");
 	    };
 	    WalkinComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-walkin",
 	            templateUrl: "tmpls/walkin/walkin.cmp.html",
-	            directives: [datepicker_cmp_1.DatepickerComponent, combobox_cmp_1.ComboboxComponent]
+	            directives: [gv_cmp_1.GV_DIRECTIVES]
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], WalkinComponent);
@@ -612,7 +622,23 @@ webpackJsonp([0],{
 /***/ 345:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	"use strict";
+	var select_cmp_1 = __webpack_require__(346);
+	var datepicker_cmp_1 = __webpack_require__(351);
+	exports.GV_DIRECTIVES = [select_cmp_1.GvSelectComponent, datepicker_cmp_1.GvDatePickerComponent];
+
+
+/***/ },
+
+/***/ 346:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
 	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
 	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -622,90 +648,553 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var __param = (this && this.__param) || function (paramIndex, decorator) {
-	    return function (target, key) { decorator(target, key, paramIndex); }
-	};
 	var core_1 = __webpack_require__(1);
-	var common_1 = __webpack_require__(181);
-	var DatepickerComponent = (function () {
-	    function DatepickerComponent(cd, _el) {
-	        this._el = _el;
-	        this.onChange = Function.prototype;
-	        this.onTouched = Function.prototype;
-	        this._now = new Date();
-	        this.cd = cd;
-	        cd.valueAccessor = this;
+	var select_item_1 = __webpack_require__(347);
+	var select_pipes_1 = __webpack_require__(348);
+	var common_1 = __webpack_require__(349);
+	var off_click_1 = __webpack_require__(350);
+	var styles = "\n.ui-select-toggle {\n  position: relative;\n\n  /* hardcoded, should use variable from bootstrap */\n  padding: 0.375rem 0.75rem;\n}\n\n/* Fix Bootstrap dropdown position when inside a input-group */\n.input-group > .dropdown {\n  /* Instead of relative */\n  position: static;\n}\n\n.ui-select-match > .btn {\n  /* Instead of center because of .btn */\n  text-align: left !important;\n}\n\n.ui-select-match > .caret {\n  position: absolute;\n  top: 45%;\n  right: 15px;\n}\n\n.ui-disabled {\n  background-color: #eceeef;\n  border-radius: 4px;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  z-index: 5;\n  opacity: 0.6;\n  top: 0;\n  left: 0;\n  cursor: not-allowed;\n}\n\n.ui-select-choices {\n  width: 100%;\n  height: auto;\n  max-height: 200px;\n  overflow-x: hidden;\n  margin-top: 0;\n}\n\n.ui-select-multiple .ui-select-choices {\n  margin-top: 1px;\n}\n\n.ui-select-multiple {\n  height: auto;\n  padding: 3px 3px 0 3px;\n}\n\n.ui-select-multiple input.ui-select-search {\n  background-color: transparent !important; /* To prevent double background when disabled */\n  border: none;\n  outline: none;\n  height: 1.9em;\n  margin-bottom: 3px;\n\n  /* hardcoded, should use variable from bootstrap, but must be adjusted because... reasons */\n  padding: 0.375rem 0.55rem;\n}\n\n.ui-select-multiple .ui-select-match-item {\n  outline: 0;\n  margin: 0 3px 3px 0;\n}\n";
+	var optionsTemplate = "\n    <ul *ngIf=\"optionsOpened && options && options.length > 0 && !firstItemHasChildren\"\n        class=\"ui-select-choices dropdown-menu\" role=\"menu\">\n      <li *ngFor=\"let o of options\" role=\"menuitem\">\n        <div class=\"ui-select-choices-row\"\n             [class.active]=\"isActive(o)\"\n             (mouseenter)=\"selectActive(o)\"\n             (click)=\"selectMatch(o, $event)\">\n          <a href=\"javascript:void(0)\" class=\"dropdown-item\">\n            <div [innerHtml]=\"o.text | highlight:inputValue\"></div>\n          </a>\n        </div>\n      </li>\n    </ul>\n\n    <ul *ngIf=\"optionsOpened && options && options.length > 0 && firstItemHasChildren\"\n        class=\"ui-select-choices dropdown-menu\" role=\"menu\">\n      <li *ngFor=\"let c of options; let index=index\" role=\"menuitem\">\n        <div class=\"divider dropdown-divider\" *ngIf=\"index > 0\"></div>\n        <div class=\"dropdown-header\">{{c.text}}</div>\n\n        <div *ngFor=\"let o of c.children\"\n             class=\"ui-select-choices-row\"\n             [class.active]=\"isActive(o)\"\n             (mouseenter)=\"selectActive(o)\"\n             (click)=\"selectMatch(o, $event)\"\n             [ngClass]=\"{'active': isActive(o)}\">\n          <a href=\"javascript:void(0)\" class=\"dropdown-item\">\n            <div [innerHtml]=\"o.text | highlight:inputValue\"></div>\n          </a>\n        </div>\n      </li>\n    </ul>\n";
+	var GvSelectComponent = (function () {
+	    function GvSelectComponent(element) {
+	        this.allowClear = false;
+	        this.placeholder = '';
+	        this.idField = 'value';
+	        this.textField = 'name';
+	        this.initData = [];
+	        this.multiple = false;
+	        this.data = new core_1.EventEmitter();
+	        this.selected = new core_1.EventEmitter();
+	        this.removed = new core_1.EventEmitter();
+	        this.typed = new core_1.EventEmitter();
+	        this.options = [];
+	        this.itemObjects = [];
+	        this.active = [];
+	        this.inputMode = false;
+	        this.optionsOpened = false;
+	        this.inputValue = '';
+	        this._items = [];
+	        this._disabled = false;
+	        this.element = element;
+	        this.clickedOutside = this.clickedOutside.bind(this);
 	    }
-	    Object.defineProperty(DatepickerComponent.prototype, "activeDate", {
+	    Object.defineProperty(GvSelectComponent.prototype, "items", {
 	        set: function (value) {
-	            this._activeDate = value;
-	            this.updateDatepicker(this._activeDate);
+	            var _this = this;
+	            this._items = value;
+	            this.itemObjects = this._items.map(function (item) { return (typeof item === 'string' ? new select_item_1.SelectItem(item) : new select_item_1.SelectItem({ id: item[_this.idField], text: item[_this.textField] })); });
 	        },
 	        enumerable: true,
 	        configurable: true
 	    });
-	    DatepickerComponent.prototype.ngOnInit = function () {
-	        var _this = this;
-	        var elem = $(this._el.nativeElement);
-	        elem.datepicker({
-	            todayHighlight: true,
-	            language: "zh-CN",
-	            format: 'yyyy-mm-dd',
-	            todayBtn: true
-	        });
-	        elem.on("change", function (e) {
-	            var date = $(elem).datepicker("getDate");
-	            if (_this._activeDate.toLocaleDateString() === date.toLocaleDateString()) {
-	                return;
+	    Object.defineProperty(GvSelectComponent.prototype, "disabled", {
+	        set: function (value) {
+	            this._disabled = value;
+	            if (this._disabled === true) {
+	                this.hideOptions();
 	            }
-	            _this._activeDate = date;
-	            _this.cd.viewToModelUpdate(date);
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    GvSelectComponent.prototype.inputEvent = function (e, isUpMode) {
+	        if (isUpMode === void 0) { isUpMode = false; }
+	        if (e.keyCode === 9) {
+	            return;
+	        }
+	        if (isUpMode && (e.keyCode === 37 || e.keyCode === 39 || e.keyCode === 38 ||
+	            e.keyCode === 40 || e.keyCode === 13)) {
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 8) {
+	            var el = this.element.nativeElement
+	                .querySelector('div.ui-select-container > input');
+	            if (!el.value || el.value.length <= 0) {
+	                if (this.active.length > 0) {
+	                    this.remove(this.active[this.active.length - 1]);
+	                }
+	                e.preventDefault();
+	            }
+	        }
+	        if (!isUpMode && e.keyCode === 27) {
+	            this.hideOptions();
+	            this.element.nativeElement.children[0].focus();
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 46) {
+	            if (this.active.length > 0) {
+	                this.remove(this.active[this.active.length - 1]);
+	            }
+	            e.preventDefault();
+	        }
+	        if (!isUpMode && e.keyCode === 37 && this._items.length > 0) {
+	            this.behavior.first();
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 39 && this._items.length > 0) {
+	            this.behavior.last();
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 38) {
+	            this.behavior.prev();
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 40) {
+	            this.behavior.next();
+	            e.preventDefault();
+	            return;
+	        }
+	        if (!isUpMode && e.keyCode === 13) {
+	            if (this.active.indexOf(this.activeOption) === -1) {
+	                this.selectActiveMatch();
+	                this.behavior.next();
+	            }
+	            e.preventDefault();
+	            return;
+	        }
+	        if (e.srcElement) {
+	            this.inputValue = e.srcElement.value;
+	            this.behavior.filter(new RegExp(common_1.escapeRegexp(this.inputValue), 'ig'));
+	            this.doEvent('typed', this.inputValue);
+	        }
+	    };
+	    GvSelectComponent.prototype.ngOnInit = function () {
+	        var _this = this;
+	        this.behavior = (this.firstItemHasChildren) ?
+	            new ChildrenBehavior(this) : new GenericBehavior(this);
+	        if (this.initData) {
+	            this.active = this.initData.map(function (data) { return (typeof data === 'string' ? new select_item_1.SelectItem(data) : new select_item_1.SelectItem({ id: data[_this.idField], text: data[_this.textField] })); });
+	            this.data.emit(this.active);
+	        }
+	    };
+	    GvSelectComponent.prototype.remove = function (item) {
+	        if (this._disabled === true) {
+	            return;
+	        }
+	        if (this.multiple === true && this.active) {
+	            var index = this.active.indexOf(item);
+	            this.active.splice(index, 1);
+	            this.data.next(this.active);
+	            this.doEvent('removed', item);
+	        }
+	        if (this.multiple === false) {
+	            this.active = [];
+	            this.data.next(this.active);
+	            this.doEvent('removed', item);
+	        }
+	    };
+	    GvSelectComponent.prototype.doEvent = function (type, value) {
+	        if (this[type] && value) {
+	            this[type].next(value);
+	        }
+	    };
+	    GvSelectComponent.prototype.clickedOutside = function () {
+	        this.inputMode = false;
+	        this.optionsOpened = false;
+	    };
+	    Object.defineProperty(GvSelectComponent.prototype, "firstItemHasChildren", {
+	        get: function () {
+	            return this.itemObjects[0] && this.itemObjects[0].hasChildren();
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    GvSelectComponent.prototype.matchClick = function (e) {
+	        if (this._disabled === true) {
+	            return;
+	        }
+	        this.inputMode = !this.inputMode;
+	        if (this.inputMode === true && ((this.multiple === true && e) || this.multiple === false)) {
+	            this.focusToInput();
+	            this.open();
+	        }
+	    };
+	    GvSelectComponent.prototype.mainClick = function (event) {
+	        if (this.inputMode === true || this._disabled === true) {
+	            return;
+	        }
+	        if (event.keyCode === 46) {
+	            event.preventDefault();
+	            this.inputEvent(event);
+	            return;
+	        }
+	        if (event.keyCode === 8) {
+	            event.preventDefault();
+	            this.inputEvent(event, true);
+	            return;
+	        }
+	        if (event.keyCode === 9 || event.keyCode === 13 ||
+	            event.keyCode === 27 || (event.keyCode >= 37 && event.keyCode <= 40)) {
+	            event.preventDefault();
+	            return;
+	        }
+	        this.inputMode = true;
+	        var value = String
+	            .fromCharCode(96 <= event.keyCode && event.keyCode <= 105 ? event.keyCode - 48 : event.keyCode)
+	            .toLowerCase();
+	        this.focusToInput(value);
+	        this.open();
+	        event.srcElement.value = value;
+	        this.inputEvent(event);
+	    };
+	    GvSelectComponent.prototype.selectActive = function (value) {
+	        this.activeOption = value;
+	    };
+	    GvSelectComponent.prototype.isActive = function (value) {
+	        return this.activeOption.text === value.text;
+	    };
+	    GvSelectComponent.prototype.focusToInput = function (value) {
+	        var _this = this;
+	        if (value === void 0) { value = ''; }
+	        setTimeout(function () {
+	            var el = _this.element.nativeElement.querySelector('div.ui-select-container > input');
+	            if (el) {
+	                el.focus();
+	                el.value = value;
+	            }
+	        }, 0);
+	    };
+	    GvSelectComponent.prototype.open = function () {
+	        var _this = this;
+	        this.options = this.itemObjects
+	            .filter(function (option) { return (_this.multiple === false ||
+	            _this.multiple === true &&
+	                !_this.active.find(function (o) { return option.text === o.text; })); });
+	        if (this.options.length > 0) {
+	            this.behavior.first();
+	        }
+	        this.optionsOpened = true;
+	    };
+	    GvSelectComponent.prototype.hideOptions = function () {
+	        this.inputMode = false;
+	        this.optionsOpened = false;
+	    };
+	    GvSelectComponent.prototype.selectActiveMatch = function () {
+	        this.selectMatch(this.activeOption);
+	    };
+	    GvSelectComponent.prototype.selectMatch = function (value, e) {
+	        if (e === void 0) { e = void 0; }
+	        if (e) {
+	            e.stopPropagation();
+	            e.preventDefault();
+	        }
+	        if (this.options.length <= 0) {
+	            return;
+	        }
+	        if (this.multiple === true) {
+	            this.active.push(value);
+	            this.data.next(this.active);
+	        }
+	        if (this.multiple === false) {
+	            this.active[0] = value;
+	            this.data.next(this.active[0]);
+	        }
+	        this.doEvent('selected', value);
+	        this.hideOptions();
+	        if (this.multiple === true) {
+	            this.focusToInput('');
+	        }
+	        else {
+	            this.focusToInput(select_pipes_1.stripTags(value.text));
+	            this.element.nativeElement.querySelector('.ui-select-container').focus();
+	        }
+	    };
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Boolean)
+	    ], GvSelectComponent.prototype, "allowClear", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', String)
+	    ], GvSelectComponent.prototype, "placeholder", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', String)
+	    ], GvSelectComponent.prototype, "idField", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', String)
+	    ], GvSelectComponent.prototype, "textField", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Array)
+	    ], GvSelectComponent.prototype, "initData", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Boolean)
+	    ], GvSelectComponent.prototype, "multiple", void 0);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Array), 
+	        __metadata('design:paramtypes', [Array])
+	    ], GvSelectComponent.prototype, "items", null);
+	    __decorate([
+	        core_1.Input(), 
+	        __metadata('design:type', Boolean), 
+	        __metadata('design:paramtypes', [Boolean])
+	    ], GvSelectComponent.prototype, "disabled", null);
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], GvSelectComponent.prototype, "data", void 0);
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], GvSelectComponent.prototype, "selected", void 0);
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], GvSelectComponent.prototype, "removed", void 0);
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], GvSelectComponent.prototype, "typed", void 0);
+	    GvSelectComponent = __decorate([
+	        core_1.Component({
+	            selector: 'gv-select',
+	            directives: [off_click_1.OffClickDirective],
+	            pipes: [select_pipes_1.HighlightPipe],
+	            styles: [styles],
+	            template: "\n  <div tabindex=\"0\"\n     *ngIf=\"multiple === false\"\n     (keyup)=\"mainClick($event)\"\n     [offClick]=\"clickedOutside\"\n     class=\"ui-select-container dropdown open\">\n    <div [ngClass]=\"{'ui-disabled': disabled}\"></div>\n    <div class=\"ui-select-match\"\n         *ngIf=\"!inputMode\">\n      <span tabindex=\"-1\"\n          class=\"btn btn-default btn-secondary form-control ui-select-toggle\"\n          (click)=\"matchClick($event)\"\n          style=\"outline: 0;\">\n        <span *ngIf=\"active.length <= 0\" class=\"ui-select-placeholder text-muted\">{{placeholder}}</span>\n        <span *ngIf=\"active.length > 0\" class=\"ui-select-match-text pull-left\"\n              [ngClass]=\"{'ui-select-allow-clear': allowClear && active.length > 0}\"\n              [innerHTML]=\"active[0].text\"></span>\n        <i class=\"dropdown-toggle pull-right\"></i>\n        <i class=\"caret pull-right\"></i>\n        <a *ngIf=\"allowClear && active.length>0\" style=\"margin-right: 10px; padding: 0;\"\n          (click)=\"remove(activeOption)\" class=\"close pull-right\">\n          &times;\n        </a>\n      </span>\n    </div>\n    <input type=\"text\" autocomplete=\"false\" tabindex=\"-1\"\n           (keydown)=\"inputEvent($event)\"\n           (keyup)=\"inputEvent($event, true)\"\n           [disabled]=\"disabled\"\n           class=\"form-control ui-select-search\"\n           *ngIf=\"inputMode\"\n           placeholder=\"{{active.length <= 0 ? placeholder : ''}}\">\n      " + optionsTemplate + "\n  </div>\n\n  <div tabindex=\"0\"\n     *ngIf=\"multiple === true\"\n     (keyup)=\"mainClick($event)\"\n     (focus)=\"focusToInput('')\"\n     class=\"ui-select-container ui-select-multiple dropdown form-control open\">\n    <div [ngClass]=\"{'ui-disabled': disabled}\"></div>\n    <span class=\"ui-select-match\">\n        <span *ngFor=\"let a of active\">\n            <span class=\"ui-select-match-item btn btn-default btn-secondary btn-sm\"\n                  tabindex=\"-1\"\n                  type=\"button\"\n                  [ngClass]=\"{'btn-default': true}\">\n               <a class=\"close\"\n                  style=\"margin-left: 10px; padding: 0;\"\n                  (click)=\"remove(a)\">&times;</a>\n               <span>{{a.text}}</span>\n           </span>\n        </span>\n    </span>\n    <input type=\"text\"\n           (keydown)=\"inputEvent($event)\"\n           (keyup)=\"inputEvent($event, true)\"\n           (click)=\"matchClick($event)\"\n           [disabled]=\"disabled\"\n           autocomplete=\"false\"\n           autocorrect=\"off\"\n           autocapitalize=\"off\"\n           spellcheck=\"false\"\n           class=\"form-control ui-select-search\"\n           placeholder=\"{{active.length <= 0 ? placeholder : ''}}\"\n           role=\"combobox\">\n    " + optionsTemplate + "\n  </div>\n  "
+	        }), 
+	        __metadata('design:paramtypes', [core_1.ElementRef])
+	    ], GvSelectComponent);
+	    return GvSelectComponent;
+	}());
+	exports.GvSelectComponent = GvSelectComponent;
+	var Behavior = (function () {
+	    function Behavior(actor) {
+	        this.optionsMap = new Map();
+	        this.actor = actor;
+	    }
+	    Behavior.prototype.fillOptionsMap = function () {
+	        var _this = this;
+	        this.optionsMap.clear();
+	        var startPos = 0;
+	        this.actor.itemObjects
+	            .map(function (item) {
+	            startPos = item.fillChildrenHash(_this.optionsMap, startPos);
 	        });
 	    };
-	    DatepickerComponent.prototype.updateDatepicker = function (value) {
-	        $(this._el.nativeElement).datepicker("setDate", value);
-	    };
-	    DatepickerComponent.prototype.ngOnChanges = function () {
-	        alert("ngOnChanges");
-	    };
-	    DatepickerComponent.prototype.writeValue = function (value) {
-	        if (value === this._activeDate) {
+	    Behavior.prototype.ensureHighlightVisible = function (optionsMap) {
+	        if (optionsMap === void 0) { optionsMap = void 0; }
+	        var container = this.actor.element.nativeElement.querySelector('.ui-select-choices-content');
+	        if (!container) {
 	            return;
 	        }
-	        if (value && value instanceof Date) {
-	            this.activeDate = value;
+	        var choices = container.querySelectorAll('.ui-select-choices-row');
+	        if (choices.length < 1) {
 	            return;
 	        }
-	        this.activeDate = value ? new Date(value) : void 0;
+	        var activeIndex = this.getActiveIndex(optionsMap);
+	        if (activeIndex < 0) {
+	            return;
+	        }
+	        var highlighted = choices[activeIndex];
+	        if (!highlighted) {
+	            return;
+	        }
+	        var posY = highlighted.offsetTop + highlighted.clientHeight - container.scrollTop;
+	        var height = container.offsetHeight;
+	        if (posY > height) {
+	            container.scrollTop += posY - height;
+	        }
+	        else if (posY < highlighted.clientHeight) {
+	            container.scrollTop -= highlighted.clientHeight - posY;
+	        }
 	    };
-	    DatepickerComponent.prototype.registerOnChange = function (fn) {
-	        this.onChange = fn;
+	    Behavior.prototype.getActiveIndex = function (optionsMap) {
+	        if (optionsMap === void 0) { optionsMap = void 0; }
+	        var ai = this.actor.options.indexOf(this.actor.activeOption);
+	        if (ai < 0 && optionsMap !== void 0) {
+	            ai = optionsMap.get(this.actor.activeOption.id);
+	        }
+	        return ai;
 	    };
-	    DatepickerComponent.prototype.registerOnTouched = function (fn) {
-	        this.onTouched = fn;
-	    };
-	    DatepickerComponent = __decorate([
-	        core_1.Component({
-	            selector: "gv-datepicker[ngModel]",
-	            events: ['change'],
-	            template: "<div class=\"input-group date\"><input type=\"text\" class=\"form-control\" placeholder=\"yyyy-mm-dd\" /><span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span></div>",
-	            directives: [common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.NgClass, common_1.NgModel]
-	        }),
-	        __param(0, core_1.Self()), 
-	        __metadata('design:paramtypes', [common_1.NgModel, core_1.ElementRef])
-	    ], DatepickerComponent);
-	    return DatepickerComponent;
+	    return Behavior;
 	}());
-	exports.DatepickerComponent = DatepickerComponent;
+	exports.Behavior = Behavior;
+	var GenericBehavior = (function (_super) {
+	    __extends(GenericBehavior, _super);
+	    function GenericBehavior(actor) {
+	        _super.call(this, actor);
+	    }
+	    GenericBehavior.prototype.first = function () {
+	        this.actor.activeOption = this.actor.options[0];
+	        _super.prototype.ensureHighlightVisible.call(this);
+	    };
+	    GenericBehavior.prototype.last = function () {
+	        this.actor.activeOption = this.actor.options[this.actor.options.length - 1];
+	        _super.prototype.ensureHighlightVisible.call(this);
+	    };
+	    GenericBehavior.prototype.prev = function () {
+	        var index = this.actor.options.indexOf(this.actor.activeOption);
+	        this.actor.activeOption = this.actor
+	            .options[index - 1 < 0 ? this.actor.options.length - 1 : index - 1];
+	        _super.prototype.ensureHighlightVisible.call(this);
+	    };
+	    GenericBehavior.prototype.next = function () {
+	        var index = this.actor.options.indexOf(this.actor.activeOption);
+	        this.actor.activeOption = this.actor
+	            .options[index + 1 > this.actor.options.length - 1 ? 0 : index + 1];
+	        _super.prototype.ensureHighlightVisible.call(this);
+	    };
+	    GenericBehavior.prototype.filter = function (query) {
+	        var _this = this;
+	        var options = this.actor.itemObjects
+	            .filter(function (option) {
+	            return select_pipes_1.stripTags(option.text).match(query) &&
+	                (_this.actor.multiple === false ||
+	                    (_this.actor.multiple === true && _this.actor.active.map(function (item) { return item.id; }).indexOf(option.id) < 0));
+	        });
+	        this.actor.options = options;
+	        if (this.actor.options.length > 0) {
+	            this.actor.activeOption = this.actor.options[0];
+	            _super.prototype.ensureHighlightVisible.call(this);
+	        }
+	    };
+	    return GenericBehavior;
+	}(Behavior));
+	exports.GenericBehavior = GenericBehavior;
+	var ChildrenBehavior = (function (_super) {
+	    __extends(ChildrenBehavior, _super);
+	    function ChildrenBehavior(actor) {
+	        _super.call(this, actor);
+	    }
+	    ChildrenBehavior.prototype.first = function () {
+	        this.actor.activeOption = this.actor.options[0].children[0];
+	        this.fillOptionsMap();
+	        this.ensureHighlightVisible(this.optionsMap);
+	    };
+	    ChildrenBehavior.prototype.last = function () {
+	        this.actor.activeOption =
+	            this.actor
+	                .options[this.actor.options.length - 1]
+	                .children[this.actor.options[this.actor.options.length - 1].children.length - 1];
+	        this.fillOptionsMap();
+	        this.ensureHighlightVisible(this.optionsMap);
+	    };
+	    ChildrenBehavior.prototype.prev = function () {
+	        var _this = this;
+	        var indexParent = this.actor.options
+	            .findIndex(function (option) { return _this.actor.activeOption.parent && _this.actor.activeOption.parent.id === option.id; });
+	        var index = this.actor.options[indexParent].children
+	            .findIndex(function (option) { return _this.actor.activeOption && _this.actor.activeOption.id === option.id; });
+	        this.actor.activeOption = this.actor.options[indexParent].children[index - 1];
+	        if (!this.actor.activeOption) {
+	            if (this.actor.options[indexParent - 1]) {
+	                this.actor.activeOption = this.actor
+	                    .options[indexParent - 1]
+	                    .children[this.actor.options[indexParent - 1].children.length - 1];
+	            }
+	        }
+	        if (!this.actor.activeOption) {
+	            this.last();
+	        }
+	        this.fillOptionsMap();
+	        this.ensureHighlightVisible(this.optionsMap);
+	    };
+	    ChildrenBehavior.prototype.next = function () {
+	        var _this = this;
+	        var indexParent = this.actor.options
+	            .findIndex(function (option) { return _this.actor.activeOption.parent && _this.actor.activeOption.parent.id === option.id; });
+	        var index = this.actor.options[indexParent].children
+	            .findIndex(function (option) { return _this.actor.activeOption && _this.actor.activeOption.id === option.id; });
+	        this.actor.activeOption = this.actor.options[indexParent].children[index + 1];
+	        if (!this.actor.activeOption) {
+	            if (this.actor.options[indexParent + 1]) {
+	                this.actor.activeOption = this.actor.options[indexParent + 1].children[0];
+	            }
+	        }
+	        if (!this.actor.activeOption) {
+	            this.first();
+	        }
+	        this.fillOptionsMap();
+	        this.ensureHighlightVisible(this.optionsMap);
+	    };
+	    ChildrenBehavior.prototype.filter = function (query) {
+	        var options = [];
+	        var optionsMap = new Map();
+	        var startPos = 0;
+	        for (var _i = 0, _a = this.actor.itemObjects; _i < _a.length; _i++) {
+	            var si = _a[_i];
+	            var children = si.children.filter(function (option) { return query.test(option.text); });
+	            startPos = si.fillChildrenHash(optionsMap, startPos);
+	            if (children.length > 0) {
+	                var newSi = si.getSimilar();
+	                newSi.children = children;
+	                options.push(newSi);
+	            }
+	        }
+	        this.actor.options = options;
+	        if (this.actor.options.length > 0) {
+	            this.actor.activeOption = this.actor.options[0].children[0];
+	            _super.prototype.ensureHighlightVisible.call(this, optionsMap);
+	        }
+	    };
+	    return ChildrenBehavior;
+	}(Behavior));
+	exports.ChildrenBehavior = ChildrenBehavior;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
 
 /***/ },
 
 /***/ 347:
+/***/ function(module, exports) {
+
+	"use strict";
+	var SelectItem = (function () {
+	    function SelectItem(source) {
+	        var _this = this;
+	        if (typeof source === 'string') {
+	            this.id = this.text = source;
+	        }
+	        if (typeof source === 'object') {
+	            this.id = source.id || source.text;
+	            this.text = source.text;
+	            if (source.children && source.text) {
+	                this.children = source.children.map(function (c) {
+	                    var r = new SelectItem(c);
+	                    r.parent = _this;
+	                    return r;
+	                });
+	                this.text = source.text;
+	            }
+	        }
+	    }
+	    SelectItem.prototype.fillChildrenHash = function (optionsMap, startIndex) {
+	        var i = startIndex;
+	        this.children.map(function (child) {
+	            optionsMap.set(child.id, i++);
+	        });
+	        return i;
+	    };
+	    SelectItem.prototype.hasChildren = function () {
+	        return this.children && this.children.length > 0;
+	    };
+	    SelectItem.prototype.getSimilar = function () {
+	        var r = new SelectItem(false);
+	        r.id = this.id;
+	        r.text = this.text;
+	        r.parent = this.parent;
+	        return r;
+	    };
+	    return SelectItem;
+	}());
+	exports.SelectItem = SelectItem;
+
+
+/***/ },
+
+/***/ 348:
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {"use strict";
+	"use strict";
 	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
 	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
 	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -715,75 +1204,262 @@ webpackJsonp([0],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	var __param = (this && this.__param) || function (paramIndex, decorator) {
-	    return function (target, key) { decorator(target, key, paramIndex); }
-	};
 	var core_1 = __webpack_require__(1);
-	var common_1 = __webpack_require__(181);
-	var ComboboxComponent = (function () {
-	    function ComboboxComponent(_cd, _el) {
-	        this._cd = _cd;
-	        this._el = _el;
-	        this.onChange = Function.prototype;
-	        this.onTouched = Function.prototype;
-	        this.options = [];
-	        _cd.valueAccessor = this;
+	var common_1 = __webpack_require__(349);
+	var HighlightPipe = (function () {
+	    function HighlightPipe() {
 	    }
-	    ComboboxComponent.prototype.ngOnInit = function () {
-	        this.initOptions();
-	    };
-	    ComboboxComponent.prototype.ngAfterViewInit = function () {
-	        alert("ngAfterViewInit combo");
-	        $(this._el.nativeElement).selectpicker({
-	            style: "btn-white",
-	            noneSelectedText: '未选择',
-	            noneResultsText: '无匹配',
-	            liveSearch: true
-	        });
-	    };
-	    ComboboxComponent.prototype.initOptions = function () {
-	        this.options.push({ Id: 1, Description: "Option1" });
-	        this.options.push({ Id: 2, Description: "Option2" });
-	        this.options.push({ Id: 3, Description: "Option3" });
-	    };
-	    ComboboxComponent.prototype.ngOnChanges = function (changes) {
-	        console.log(changes["itemsSource"].currentValue);
-	    };
-	    ComboboxComponent.prototype.writeValue = function (value) {
-	        if (value === this._selectedId) {
-	            return;
+	    HighlightPipe.prototype.transform = function (value, args) {
+	        if (args.length < 1) {
+	            return value;
 	        }
-	        if (value) {
-	            this._selectedId = value;
-	            return;
+	        var query = args[0];
+	        if (query) {
+	            var tagRE = new RegExp('<[^<>]*>', 'ig');
+	            var tagList = value.match(tagRE);
+	            var tmpValue = value.replace(tagRE, '$!$');
+	            value = tmpValue.replace(new RegExp(common_1.escapeRegexp(query), 'gi'), '<strong>$&</strong>');
+	            for (var i = 0; value.indexOf('$!$') > -1; i++) {
+	                value = value.replace('$!$', tagList[i]);
+	            }
 	        }
-	        this._selectedId = value ? 0 : void 0;
+	        return value;
 	    };
-	    ComboboxComponent.prototype.registerOnChange = function (fn) {
-	        this.onChange = fn;
-	    };
-	    ComboboxComponent.prototype.registerOnTouched = function (fn) {
-	        this.onTouched = fn;
-	    };
-	    ComboboxComponent = __decorate([
-	        core_1.Component({
-	            selector: "gv-combobox[ngModel]",
-	            inputs: ["itemsSource"],
-	            template: "<select class=\"form-control\"><option value=\"0\">\u672A\u9009\u62E9</option><option *ngFor=\"let option of options\" [value]=\"option.Id\">{{ option.Description }}<option></select>",
-	            directives: [common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.NgClass, common_1.NgModel]
-	        }),
-	        __param(0, core_1.Self()), 
-	        __metadata('design:paramtypes', [common_1.NgModel, core_1.ElementRef])
-	    ], ComboboxComponent);
-	    return ComboboxComponent;
+	    HighlightPipe = __decorate([
+	        core_1.Pipe({ name: 'highlight' }), 
+	        __metadata('design:paramtypes', [])
+	    ], HighlightPipe);
+	    return HighlightPipe;
 	}());
-	exports.ComboboxComponent = ComboboxComponent;
+	exports.HighlightPipe = HighlightPipe;
+	function stripTags(input) {
+	    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+	    var commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+	    return input.replace(commentsAndPhpTags, '').replace(tags, '');
+	}
+	exports.stripTags = stripTags;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
 
 /***/ },
 
-/***/ 348:
+/***/ 349:
+/***/ function(module, exports) {
+
+	"use strict";
+	function escapeRegexp(queryToEscape) {
+	    return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+	}
+	exports.escapeRegexp = escapeRegexp;
+
+
+/***/ },
+
+/***/ 350:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var OffClickDirective = (function () {
+	    function OffClickDirective() {
+	    }
+	    OffClickDirective.prototype.onClick = function ($event) {
+	        $event.stopPropagation();
+	    };
+	    OffClickDirective.prototype.ngOnInit = function () {
+	        var _this = this;
+	        setTimeout(function () { document.addEventListener('click', _this.offClickHandler); }, 0);
+	    };
+	    OffClickDirective.prototype.ngOnDestroy = function () {
+	        document.removeEventListener('click', this.offClickHandler);
+	    };
+	    __decorate([
+	        core_1.Input('offClick'), 
+	        __metadata('design:type', Object)
+	    ], OffClickDirective.prototype, "offClickHandler", void 0);
+	    __decorate([
+	        core_1.HostListener('click', ['$event']), 
+	        __metadata('design:type', Function), 
+	        __metadata('design:paramtypes', [MouseEvent]), 
+	        __metadata('design:returntype', void 0)
+	    ], OffClickDirective.prototype, "onClick", null);
+	    OffClickDirective = __decorate([
+	        core_1.Directive({
+	            selector: '[offClick]'
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], OffClickDirective);
+	    return OffClickDirective;
+	}());
+	exports.OffClickDirective = OffClickDirective;
+
+
+/***/ },
+
+/***/ 351:
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($, jQuery) {"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var common_1 = __webpack_require__(181);
+	var GvDatePickerComponent = (function () {
+	    function GvDatePickerComponent(ngControl) {
+	        this.dateChange = new core_1.EventEmitter();
+	        this.timepickerOptions = {};
+	        this.datepickerOptions = {};
+	        this.idDatePicker = uniqueId('q-datepicker_');
+	        this.idTimePicker = uniqueId('q-timepicker_');
+	        this.onChange = function (_) {
+	        };
+	        this.onTouched = function () {
+	        };
+	        ngControl.valueAccessor = this;
+	    }
+	    GvDatePickerComponent.prototype.ngAfterViewInit = function () {
+	        this.init();
+	    };
+	    GvDatePickerComponent.prototype.ngOnDestroy = function () {
+	        if (this.datepicker) {
+	        }
+	    };
+	    GvDatePickerComponent.prototype.writeValue = function (value) {
+	        var _this = this;
+	        this.date = value;
+	        if (isDate(this.date)) {
+	            setTimeout(function () {
+	                _this.updateModel(_this.date);
+	            }, 0);
+	        }
+	    };
+	    GvDatePickerComponent.prototype.registerOnChange = function (fn) {
+	        this.onChange = fn;
+	    };
+	    GvDatePickerComponent.prototype.registerOnTouched = function (fn) {
+	        this.onTouched = fn;
+	    };
+	    GvDatePickerComponent.prototype.init = function () {
+	        var _this = this;
+	        if (!this.datepicker && this.datepickerOptions !== false) {
+	            this.datepicker = $('#' + this.idDatePicker).datepicker(this.datepickerOptions);
+	            this.datepicker
+	                .on('changeDate', function (e) {
+	                var newDate = e.date;
+	                if (isDate(_this.date) && isDate(newDate)) {
+	                    var h = _this.date.getHours();
+	                    var m = _this.date.getMinutes();
+	                    newDate.setHours(h);
+	                    newDate.setMinutes(m);
+	                }
+	                _this.date = newDate;
+	                _this.dateChange.emit(newDate);
+	            });
+	        }
+	        else if (this.datepickerOptions === false) {
+	            $('#' + this.idDatePicker).remove();
+	        }
+	        if (!this.timepicker && this.timepickerOptions !== false) {
+	            var options = jQuery.extend({ defaultTime: false }, this.timepickerOptions);
+	            this.timepicker = $('#' + this.idTimePicker).timepicker(options);
+	            this.timepicker
+	                .on('changeTime.timepicker', function (e) {
+	                var meridian = e.time.meridian;
+	                var hours = e.time.hours;
+	                if (meridian) {
+	                    if (meridian === 'PM' && hours < 12) {
+	                        hours = hours + 12;
+	                    }
+	                    if (meridian === 'AM' && hours === 12) {
+	                        hours = hours - 12;
+	                    }
+	                    hours = _this.pad(hours);
+	                }
+	                if (!isDate(_this.date)) {
+	                    _this.date = new Date();
+	                    if (_this.datepicker !== undefined) {
+	                        _this.datepicker.datepicker('update', _this.date.toLocaleDateString('zh-CN'));
+	                    }
+	                }
+	                _this.date.setHours(parseInt(hours));
+	                _this.date.setMinutes(e.time.minutes);
+	                _this.dateChange.emit(_this.date);
+	            });
+	        }
+	        else if (this.timepickerOptions === false) {
+	            $('#' + this.idTimePicker).parent().remove();
+	        }
+	    };
+	    GvDatePickerComponent.prototype.updateModel = function (date) {
+	        if (this.datepicker !== undefined) {
+	            this.datepicker.datepicker('update', date.toLocaleDateString('en-US'));
+	        }
+	        if (this.timepicker !== undefined) {
+	            var hours = this.date.getHours();
+	            if (this.timepickerOptions.showMeridian) {
+	                hours = (hours === 0 || hours === 12) ? 12 : hours % 12;
+	            }
+	            var meridian = this.date.getHours() >= 12 ? ' PM' : ' AM';
+	            this.timepicker.timepicker('setTime', this.pad(hours) + ':' + this.date.getMinutes() + meridian);
+	        }
+	    };
+	    GvDatePickerComponent.prototype.pad = function (value) {
+	        return (value && value.toString().length < 2) ? '0' + value : value.toString();
+	    };
+	    __decorate([
+	        core_1.Output(), 
+	        __metadata('design:type', core_1.EventEmitter)
+	    ], GvDatePickerComponent.prototype, "dateChange", void 0);
+	    __decorate([
+	        core_1.Input("timepicker"), 
+	        __metadata('design:type', Object)
+	    ], GvDatePickerComponent.prototype, "timepickerOptions", void 0);
+	    __decorate([
+	        core_1.Input("datepicker"), 
+	        __metadata('design:type', Object)
+	    ], GvDatePickerComponent.prototype, "datepickerOptions", void 0);
+	    __decorate([
+	        core_1.HostListener('dateChange', ['$event']), 
+	        __metadata('design:type', Object)
+	    ], GvDatePickerComponent.prototype, "onChange", void 0);
+	    GvDatePickerComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-datepicker",
+	            template: "\n    <div class=\"form-inline\">\n        <div id=\"{{idDatePicker}}\" class=\"input-group date\"> \n            <input type=\"text\" class=\"form-control\"/>\n            <div class=\"input-group-addon\">\n                <span [ngClass]=\"datepickerOptions.icon || 'glyphicon glyphicon-th'\"></span>\n            </div>\n        </div>\n        <div class=\"input-group bootstrap-timepicker timepicker\">\n            <input id=\"{{idTimePicker}}\" type=\"text\" class=\"form-control input-small\">\n            <span class=\"input-group-addon\"><i [ngClass]=\"timepickerOptions.icon || 'glyphicon glyphicon-time'\"></i></span>\n        </div>\n    </div>\n    "
+	        }), 
+	        __metadata('design:paramtypes', [common_1.NgControl])
+	    ], GvDatePickerComponent);
+	    return GvDatePickerComponent;
+	}());
+	exports.GvDatePickerComponent = GvDatePickerComponent;
+	var id = 0;
+	function uniqueId(prefix) {
+	    return prefix + ++id;
+	}
+	function isDate(obj) {
+	    return Object.prototype.toString.call(obj) === '[object Date]';
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(352), __webpack_require__(352)))
+
+/***/ },
+
+/***/ 353:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -815,7 +1491,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 349:
+/***/ 354:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -849,7 +1525,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 350:
+/***/ 355:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -881,7 +1557,7 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 351:
+/***/ 356:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -895,6 +1571,11 @@ webpackJsonp([0],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
+	var router_deprecated_1 = __webpack_require__(301);
+	var hotel_cmp_1 = __webpack_require__(357);
+	var roomtype_cmp_1 = __webpack_require__(358);
+	var home_cmp_1 = __webpack_require__(359);
+	var routeractive_directive_1 = __webpack_require__(339);
 	var AdminComponent = (function () {
 	    function AdminComponent() {
 	    }
@@ -902,8 +1583,14 @@ webpackJsonp([0],{
 	    AdminComponent = __decorate([
 	        core_1.Component({
 	            selector: "gv-admin",
-	            templateUrl: "tmpls/admin/admin.cmp.html"
-	        }), 
+	            templateUrl: "tmpls/admin/admin.cmp.html",
+	            directives: [router_deprecated_1.ROUTER_DIRECTIVES, routeractive_directive_1.RouterActive]
+	        }),
+	        router_deprecated_1.RouteConfig([
+	            { path: "/", name: "Home", component: home_cmp_1.HomeComponent, useAsDefault: true },
+	            { path: "/Hotel", name: "Hotel", component: hotel_cmp_1.HotelComponent },
+	            { path: "/RoomType", name: "RoomType", component: roomtype_cmp_1.RoomTypeComponent }
+	        ]), 
 	        __metadata('design:paramtypes', [])
 	    ], AdminComponent);
 	    return AdminComponent;
@@ -913,7 +1600,100 @@ webpackJsonp([0],{
 
 /***/ },
 
-/***/ 352:
+/***/ 357:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var HotelComponent = (function () {
+	    function HotelComponent() {
+	    }
+	    HotelComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-admin-hotel",
+	            templateUrl: "tmpls/admin/entities/hotel.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], HotelComponent);
+	    return HotelComponent;
+	}());
+	exports.HotelComponent = HotelComponent;
+
+
+/***/ },
+
+/***/ 358:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var RoomTypeComponent = (function () {
+	    function RoomTypeComponent() {
+	    }
+	    RoomTypeComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-admin-roomtype",
+	            templateUrl: "tmpls/admin/entities/roomtype.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], RoomTypeComponent);
+	    return RoomTypeComponent;
+	}());
+	exports.RoomTypeComponent = RoomTypeComponent;
+
+
+/***/ },
+
+/***/ 359:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var HomeComponent = (function () {
+	    function HomeComponent() {
+	    }
+	    HomeComponent = __decorate([
+	        core_1.Component({
+	            selector: "gv-admin-home",
+	            templateUrl: "tmpls/admin/home.cmp.html"
+	        }), 
+	        __metadata('design:paramtypes', [])
+	    ], HomeComponent);
+	    return HomeComponent;
+	}());
+	exports.HomeComponent = HomeComponent;
+
+
+/***/ },
+
+/***/ 360:
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {"use strict";
@@ -1803,7 +2583,7 @@ webpackJsonp([0],{
 	}());
 	exports.LayoutConfiguration = LayoutConfiguration;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(346)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(352)))
 
 /***/ }
 
