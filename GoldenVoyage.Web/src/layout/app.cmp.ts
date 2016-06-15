@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "@angular/router-deprecated";
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from "@angular/common";
 
@@ -35,7 +36,8 @@ import { WalkinComponent, BookingComponent, RoomviewComponent, GuestsComponent, 
 export class AppComponent {
     public IsAuthorized: boolean = false;
 
-    constructor(public securityService: SecurityService) {
+    constructor(public securityService: SecurityService, public appTitle: Title) {
+        appTitle.setTitle("GVHS");
         this.IsAuthorized = securityService.IsAuthorized;
     }
 

@@ -5,7 +5,7 @@
     <base href="/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title> 
+    <title>@ViewBag.Title</title>
 </head>
 <body>
     <gv-app>
@@ -13,9 +13,9 @@
             <span class="spinner"></span>
         </div>
     </gv-app>
-        @RenderBody()
-    <script src="~/js/polyfills.bundle.js"></script>
-    <script src="~/js/vendor.bundle.js"></script>
-    <script src="~/js/app.bundle.js"></script>
+    @RenderBody()
+    <script type="text/javascript" src="polyfills.bundle.js"></script>
+    <script type="text/javascript" src="vendor.bundle.js"></script>
+    <script type="text/javascript" src="app.bundle.js"></script>
 </body>
 </html>
