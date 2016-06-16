@@ -56,11 +56,11 @@ module.exports = {
          *
          * See: https://github.com/ampedandwired/html-webpack-plugin
          */
-        //new HtmlWebpackPlugin({
-        //    template: 'Views/Shared/_Layout.cshtml',
-        //    chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main']),
-        //    filename: "../Views/Shared/_Layout.cshtml"
-        //})
+        new HtmlWebpackPlugin({
+            template: 'Views/Shared/_Layout.cshtml',
+            chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main']),
+            //filename: "../Views/Shared/_Layout.cshtml"
+        })
 
     ],
 

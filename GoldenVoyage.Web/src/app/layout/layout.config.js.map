@@ -1,0 +1,1 @@
+{"version":3,"file":"layout.config.js","sourceRoot":"","sources":["layout.config.ts"],"names":[],"mappings":";AAAC,qBAAyB,eAAe,CAAC,CAAA;AAC1C,uCAAmC,0BAA0B,CAAC,CAAA;AAI9D;IACI,sBAAoB,SAA+B;QAA/B,cAAS,GAAT,SAAS,CAAsB;QAC/C,IAAI,CAAC,OAAO,EAAE,CAAC;IACnB,CAAC;IAEO,8BAAO,GAAf;IA0CA,CAAC;IAhDL;QAAC,iBAAU,EAAE;;oBAAA;IAiDb,mBAAC;AAAD,CAAC,AAhDD,IAgDC;AAhDY,oBAAY,eAgDxB,CAAA"}

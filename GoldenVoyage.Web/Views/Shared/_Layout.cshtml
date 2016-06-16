@@ -6,13 +6,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/Ionicons/css/ionicons.min.css" />
+    <link rel="stylesheet" href="initial.css" />
 </head>
 <body>
-    <gv-app>
-        <div id="page-loader">
-            <span class="spinner"></span>
-        </div>
-    </gv-app>
+    <gv-app></gv-app>
+    <div id="preloader">
+        <div></div>
+    </div>
     @RenderBody()
     <script type="text/javascript" src="polyfills.bundle.js"></script>
     <script type="text/javascript" src="vendor.bundle.js"></script>
