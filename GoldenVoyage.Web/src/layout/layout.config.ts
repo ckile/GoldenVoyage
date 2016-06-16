@@ -3,7 +3,7 @@ import {LayoutConfigProvider} from './layout.config.provider';
 import {colorHelper} from './layout.constants';
 
 @Injectable()
-export class BaThemeConfig {
+export class LayoutConfig {
     constructor(private _baConfig: LayoutConfigProvider) {
         this._config();
     }

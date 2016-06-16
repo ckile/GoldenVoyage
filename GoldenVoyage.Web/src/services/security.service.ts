@@ -1,24 +1,23 @@
 ﻿import { Injectable } from "@angular/core";
-import { Http, Headers } from "@angular/http";
+import { Headers } from "@angular/http";
 import "rxjs/add/operator/map";
-import { Configuration } from "../app.constants";
-import { Router } from "@angular/router-deprecated";
+import { appConstants } from "../app.constants"; 
 
 @Injectable()
 export class SecurityService {
-    private storage: any;
-
-    constructor(private _http: Http, private _configuration: Configuration, private _router: Router) {
-        this.storage = localStorage;
-
+    private storage: any; 
+    constructor( ) {
+        this.storage = localStorage; 
         if (this.retrieve("IsAuthorized") !== "") {
             this.HasAdminRole = this.retrieve("HasAdminRole");
             this.IsAuthorized = this.retrieve("IsAuthorized");
         }
     }
 
-    public IsAuthorized: boolean;
-    public HasAdminRole: boolean;
+    // 是否验证
+    public IsAuthorized: boolean = false;
+    // 是否管理员
+    public HasAdminRole: boolean = false;
 
     public GetToken(): any {
         return this.retrieve("authorizationData");
@@ -58,9 +57,9 @@ export class SecurityService {
 
         console.log("BEGIN Authorize, no auth data");
 
-        var authorizationUrl: string = this._configuration.IdentityServer + "/connect/authorize";
+        var authorizationUrl: string = appConstants.IdentityServer + "/connect/authorize";
         var client_id: string = "webclient";
-        var redirect_uri: string = this._configuration.WebServer;
+        var redirect_uri: string = appConstants.WebServer;
         var response_type: string = "id_token token";
         var scope: string = "api openid";
         var nonce: string = "N" + Math.random() + "" + Date.now();
@@ -125,11 +124,9 @@ export class SecurityService {
 
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
-            console.log(this.retrieve("authorizationData"));
-            this._router.navigate(["DataEventRecords/"]);
+            console.log(this.retrieve("authorizationData")); 
         } else {
-            this.ResetAuthorizationData();
-            this._router.navigate(["Unauthorized"]);
+            this.ResetAuthorizationData(); 
         }
     }
 
@@ -141,11 +138,10 @@ export class SecurityService {
 
     public HandleError(error: any): void {
         console.log(error);
-        if (error.status === 403) {
-            this._router.navigate(["Forbidden"]);
+        if (error.status === 403) { 
+
         } else if (error.status === 401) {
-            this.ResetAuthorizationData();
-            this._router.navigate(["Unauthorized"]);
+            this.ResetAuthorizationData(); 
         }
     }
 
@@ -177,7 +173,7 @@ export class SecurityService {
         return data;
     }
 
-    private retrieve(key: string): any {
+    public retrieve(key: string): any {
         var item: any = this.storage.getItem(key);
 
         if (item && item !== "undefined") {

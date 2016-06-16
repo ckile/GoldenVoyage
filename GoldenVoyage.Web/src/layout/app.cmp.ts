@@ -33,12 +33,10 @@ import { WalkinComponent, BookingComponent, RoomviewComponent, GuestsComponent, 
     //{ path: "/dataeventrecords/...", name: "DataEventRecords", component: DataEventRecordsComponent, useAsDefault: true }
 ])
 
-export class AppComponent {
-    public IsAuthorized: boolean = false;
+export class AppComponent { 
 
     constructor(public securityService: SecurityService, public appTitle: Title) {
-        appTitle.setTitle("GVHS");
-        this.IsAuthorized = securityService.IsAuthorized;
+        appTitle.setTitle("GVHS"); 
     }
 
     ngOnInit() {
@@ -49,8 +47,7 @@ export class AppComponent {
     }
 
     public login() {
-        console.log("Do login logic");
-        this.IsAuthorized = true;
+        console.log("Do login logic"); 
         //this.securityService.Authorize();
     }
 
