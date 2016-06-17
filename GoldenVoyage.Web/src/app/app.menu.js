@@ -8,6 +8,33 @@ exports.menuItems = [
         expanded: false,
         order: 0,
         subMenu: []
+    },
+    {
+        title: "Room View",
+        component: "RoomView",
+        icon: "ion-android-home",
+        selected: false,
+        expanded: false,
+        order: 0,
+        subMenu: []
+    },
+    {
+        title: "Guests",
+        component: "Guests",
+        icon: "ion-android-home",
+        selected: false,
+        expanded: false,
+        order: 0,
+        subMenu: []
+    },
+    {
+        title: "Admin",
+        component: "Admin",
+        icon: "ion-android-home",
+        selected: false,
+        expanded: false,
+        order: 0,
+        subMenu: []
     }
 ];
 //# sourceMappingURL=app.menu.js.map

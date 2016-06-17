@@ -7,7 +7,7 @@ var services_1 = require("./services");
 __export(require('./app.cmp'));
 exports.APP_PROVIDERS = [
     app_state_1.AppState,
-    services_1.ApiService,
-    services_1.SecurityService
+    services_1.SecurityService,
+    services_1.ApiService
 ];
 //# sourceMappingURL=index.js.map

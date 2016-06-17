@@ -1,18 +1,18 @@
 "use strict";
 var core_1 = require('@angular/core');
 var layout_config_provider_1 = require('./layout.config.provider');
-var LayoutConfig = (function () {
-    function LayoutConfig(_baConfig) {
-        this._baConfig = _baConfig;
+var GvLayoutConfig = (function () {
+    function GvLayoutConfig(_gvConfig) {
+        this._gvConfig = _gvConfig;
         this._config();
     }
-    LayoutConfig.prototype._config = function () {
+    GvLayoutConfig.prototype._config = function () {
     };
-    LayoutConfig = __decorate([
+    GvLayoutConfig = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [layout_config_provider_1.LayoutConfigProvider])
-    ], LayoutConfig);
-    return LayoutConfig;
+        __metadata('design:paramtypes', [layout_config_provider_1.GvLayoutConfigProvider])
+    ], GvLayoutConfig);
+    return GvLayoutConfig;
 }());
-exports.LayoutConfig = LayoutConfig;
+exports.GvLayoutConfig = GvLayoutConfig;
 //# sourceMappingURL=layout.config.js.map

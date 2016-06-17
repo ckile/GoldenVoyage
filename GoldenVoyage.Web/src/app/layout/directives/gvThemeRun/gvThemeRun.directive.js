@@ -1,10 +1,10 @@
 "use strict";
 var core_1 = require('@angular/core');
-var layout_1 = require('../../../layout');
+var layout_1 = require("../../../layout");
 var GvThemeRun = (function () {
-    function GvThemeRun(_baConfig) {
-        this._baConfig = _baConfig;
+    function GvThemeRun() {
         this._classes = [];
+        this._baConfig = new layout_1.GvLayoutConfigProvider();
     }
     GvThemeRun.prototype.ngOnInit = function () {
         this._assignTheme();
@@ -30,7 +30,7 @@ var GvThemeRun = (function () {
         core_1.Directive({
             selector: '[gvThemeRun]'
         }), 
-        __metadata('design:paramtypes', [layout_1.LayoutConfigProvider])
+        __metadata('design:paramtypes', [])
     ], GvThemeRun);
     return GvThemeRun;
 }());

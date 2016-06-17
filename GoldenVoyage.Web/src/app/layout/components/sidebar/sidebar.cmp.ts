@@ -23,12 +23,14 @@ export class SidebarComponent implements OnInit {
     public hoverElemHeight: number;
     public hoverElemTop: number;
 
+    public outOfArea: number = -200;
+
     constructor(private _elementRef: ElementRef,
         private _router: Router,
         private _state: AppState,
         private _sidebarService: SidebarService) {
         this.menuItems = _sidebarService.getMenuItems();
-
+        this._router.root.subscribe((path) => this._selectMenuItem(path));
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
@@ -99,4 +101,15 @@ export class SidebarComponent implements OnInit {
     private _shouldMenuCollapse(): boolean {
         return window.innerWidth <= layoutSizes.resWidthCollapseSidebar;
     }
+
+    private _selectMenuItem(currentPath = null): void {
+
+        let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems, currentPath);
+        this._state.notifyDataChanged('menu.activeLink', currentMenu);
+        // hide menu after natigation on mobile devises
+        if (this._shouldMenuCollapse()) {
+            this.menuCollapse();
+        }
+    }
+
 }

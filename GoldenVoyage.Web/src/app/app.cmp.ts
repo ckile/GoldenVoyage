@@ -12,6 +12,7 @@ import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
 
 import { layoutPaths } from "./layout";
 
+import { Md5 } from "ts-md5/dist/md5";
 
 import { PagesComponent } from "./pages";
 

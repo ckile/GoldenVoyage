@@ -43,13 +43,6 @@ export class SecurityService {
         this.IsAuthorized = true;
         this.store("IsAuthorized", true);
 
-        var data: any = this.getDataFromToken(token);
-        for (var i: number = 0; i < data.role.length; i++) {
-            if (data.role[i] === "dataEventRecords.admin") {
-                this.HasAdminRole = true;
-                this.store("HasAdminRole", true);
-            }
-        }
     }
 
     public Authorize(): void {
@@ -125,6 +118,7 @@ export class SecurityService {
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
             console.log(this.retrieve("authorizationData")); 
+            
         } else {
             this.ResetAuthorizationData(); 
         }
@@ -183,7 +177,7 @@ export class SecurityService {
         return;
     }
 
-    private store(key: string, value: any): void {
+    public store(key: string, value: any): void {
         this.storage.setItem(key, JSON.stringify(value));
     }
 }

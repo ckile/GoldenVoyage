@@ -5,8 +5,7 @@
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 0 
     },
     {
         title: "Room View",
@@ -14,8 +13,7 @@
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 100 
     },
     {
         title: "Guests",
@@ -23,8 +21,7 @@
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 200 
     },
     {
         title: "Admin",
@@ -32,8 +29,7 @@
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 300 
     }
 
 ];

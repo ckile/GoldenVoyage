@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var layout_constants_1 = require('./layout.constants');
-var LayoutConfigProvider = (function () {
-    function LayoutConfigProvider() {
+var GvLayoutConfigProvider = (function () {
+    function GvLayoutConfigProvider() {
         this.basic = {
             default: '#ffffff',
             defaultText: '#ffffff',
@@ -61,20 +61,20 @@ var LayoutConfigProvider = (function () {
             }
         };
     }
-    LayoutConfigProvider.prototype.get = function () {
+    GvLayoutConfigProvider.prototype.get = function () {
         return this.conf;
     };
-    LayoutConfigProvider.prototype.changeTheme = function (theme) {
+    GvLayoutConfigProvider.prototype.changeTheme = function (theme) {
         _.merge(this.get().theme, theme);
     };
-    LayoutConfigProvider.prototype.changeColors = function (colors) {
+    GvLayoutConfigProvider.prototype.changeColors = function (colors) {
         _.merge(this.get().colors, colors);
     };
-    LayoutConfigProvider = __decorate([
+    GvLayoutConfigProvider = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], LayoutConfigProvider);
-    return LayoutConfigProvider;
+    ], GvLayoutConfigProvider);
+    return GvLayoutConfigProvider;
 }());
-exports.LayoutConfigProvider = LayoutConfigProvider;
+exports.GvLayoutConfigProvider = GvLayoutConfigProvider;
 //# sourceMappingURL=layout.config.provider.js.map

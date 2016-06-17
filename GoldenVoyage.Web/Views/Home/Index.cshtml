@@ -1,1 +1,97 @@
-﻿
+﻿@*<script>
+    var token;
+    // 地址回调
+    if (window.location.hash) {
+        token = processTokenCallback();
+
+    }
+
+    if (token) {
+
+        document.querySelector("body").className = "token";
+
+    }
+
+    function getToken() {
+        var authorizationUrl = "http://localhost:51647/connect/authorize";
+        var client_id = "webclient";
+        var redirect_url = "http://localhost:49288";
+        var response_typ = "id_token token";
+        var scope = "api openid";
+        var nonce = "N" + Math.random() + "" + Date.now();
+        var state = Date.now() + "" + Math.random();
+        localStorage["state"] = state;
+        localStorage["nonce"] = nonce;
+
+        var url =
+            authorizationUrl + "?" +
+            "client_id=" + encodeURI(client_id) + "&" +
+            "redirect_uri=" + encodeURI(redirect_uri) + "&" +
+            "response_type=" + encodeURI(response_type) + "&" +
+            "scope=" + encodeURI(scope) + "&" +
+            "nonce=" + encodeURI(nonce) + "&" +
+            "state=" + encodeURI(state);
+        window.location.href = url;
+
+    }
+    function urlBase64Decode(str) {
+        var output = str.replace("-", "+").replace("_", "/");
+        switch (output.length % 4) {
+            case 0:
+                break;
+            case 2:
+                output += "==";
+                break;
+            case 3:
+                output += "=";
+                break;
+            default:
+                throw "Illegal base64url string!";
+        }
+
+        return window.atob(output);
+
+    }
+
+    function getDataFromToken(token) {
+        var data = {};
+        if (typeof token !== "undefined") {
+            var encoded = token.split(".")[1];
+            data = JSON.parse(urlBase64Decode(encoded));
+        }
+        return data;
+    }
+
+    function processTokenCallback() {
+        console.log("开始解析认证返回!");
+        var hash = window.location.hash.substr(1);
+        var result = hash.split('&').reduce(function (result, item) {
+            var parts = item.split('=');
+            result[parts[0]] = parts[1];
+            return result;
+        }, {});
+
+        console.log(result);
+
+        var token = "";
+        var id_token = "";
+
+        if (!result.error) {
+            if (result.state !== localStorage["state"]) {
+                alert("invalid state");
+            }
+            else {
+                token = result.access_token;
+                id_token = result.id_token;
+                localStorage.removeItem("state");
+                localStorage.removeItem("nonce");
+
+                localStorage["authorizationData"] = token;
+                localStorage["authorizationDataToken"] = id_token;
+                localStorage["IsAuthorized"] = true;
+                return result.access_token;
+            }
+        }
+
+    }
+</script>*@
