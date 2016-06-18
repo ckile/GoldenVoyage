@@ -8,7 +8,9 @@ import { ENV_PROVIDERS } from "./platform/environment";
 
  
 
-import { AppComponent, APP_PROVIDERS, SecurityService } from './app';
+import { AppComponent, APP_PROVIDERS } from './app';
+
+import { SecurityService } from "./app/services";
 
  
 

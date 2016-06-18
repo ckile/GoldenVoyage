@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkCheckerPlugin = require("awesome-typescript-loader").ForkCheckerPlugin;
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var path = require("path");
+
 var outPath = "./wwwroot";
 var src = "./src";
 
@@ -17,52 +17,12 @@ const METADATA = {
 
 module.exports = {
     metadata: METADATA,
+
     entry: {
         "polyfills": src + "/polyfills.ts",
         "vendor": src + "/vendor.ts",
         "app": src + "/app.boot.ts"
     },
-
-    plugins: [
-        new ExtractTextPlugin('initial.css', {
-            allChunks: true
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery",
-            toastr: "toastr"
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: helpers.reverse(['polyfills', 'vendor'])
-        }),
-          /*
-         * Plugin: CopyWebpackPlugin
-         * Description: Copy files and directories in webpack.
-         *
-         * Copies project static assets.
-         *
-         * See: https://www.npmjs.com/package/copy-webpack-plugin
-         */
-        new CopyWebpackPlugin([{
-            from: 'src/assets',
-            to: 'assets'
-        }]),
-        /* 将包直接插入引用的文件
-         * Plugin: HtmlWebpackPlugin
-         * Description: Simplifies creation of HTML files to serve your webpack bundles.
-         * This is especially useful for webpack bundles that include a hash in the filename
-         * which changes every compilation.
-         *
-         * See: https://github.com/ampedandwired/html-webpack-plugin
-         */
-        new HtmlWebpackPlugin({
-            template: 'Views/Shared/_Layout.cshtml',
-            chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main']),
-            //filename: "../Views/Shared/_Layout.cshtml"
-        })
-
-    ],
 
     resolve: {
         extensions: ["", ".ts", ".js", ".css", ".scss"],
@@ -72,18 +32,10 @@ module.exports = {
 
     module: {
         preLoaders: [
-
-               /*
-               * Source map loader support for *.js files
-               * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-               *
-               * See: https://github.com/webpack/source-map-loader
-               */
               {
                   test: /\.js$/,
                   loader: 'source-map-loader',
-                  exclude: [
-                    // these packages have problems with their sourcemaps
+                  exclude: [ 
                     helpers.root('node_modules/rxjs')
                   ]
               }
@@ -92,18 +44,13 @@ module.exports = {
         loaders: [
           {
               test: /\.ts$/,
-              loader: "awesome-typescript-loader"
+              loader: "awesome-typescript-loader",
+              exclude: [/\.(spec|e2e)\.ts$/]
           },
           {
               test: /\.json$/,
               loader: "json-loader"
           },
-           /*
-           * Raw loader support for *.css files
-           * Returns file content as string
-           *
-           * See: https://github.com/webpack/raw-loader
-           */
           {
               test: /\.css$/,
               loader: 'raw-loader'
@@ -128,30 +75,58 @@ module.exports = {
               test: /bootstrap\/dist\/js\/umd\//,
               loader: 'imports?jQuery=jquery'
           },
-       /* Raw loader support for *.html
-       * Returns file content as string
-       *
-       * See: https://github.com/webpack/raw-loader
-       */
-      {
-          test: /\.html$/,
-          loader: 'raw-loader'
-      },
+          {
+              test: /\.html$/,
+              loader: 'raw-loader',
+              exculde: [helpers.root("Views/Shared/index.cshtml")]
+          },
 
         ],
+    },
 
-        /**
-         * Static analysis linter for TypeScript advanced options configuration
-         * Description: An extensible linter for the TypeScript language.
-         *
-         * See: https://github.com/wbuchwalter/tslint-loader
-         */
-        tslint: {
-            emitErrors: false,
-            failOnHint: false,
-            resourcePath: 'src'
-        },
 
-        noParse: [path.join(__dirname, 'node_modules', 'bundles', './src', 'zone.js')]
+    plugins: [
+        new ExtractTextPlugin('initial.css', {
+            allChunks: true
+        }),
+
+        new webpack.ResolverPlugin(
+          new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+        ),
+
+        new ForkCheckerPlugin(),
+
+        new webpack.optimize.OccurenceOrderPlugin(true),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: helpers.reverse(['polyfills', 'vendor'])
+        }),
+
+        new CopyWebpackPlugin([{
+            from: 'src/assets',
+            to: 'assets'
+        }]),
+
+        new HtmlWebpackPlugin({
+            template: 'Views/Shared/_Layout.cshtml',
+            chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main']),
+            //filename: "../Views/Shared/_Layout.cshtml"
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+            "Tether": "tether",
+            "window.Tether": "tether"
+        })
+
+    ],
+
+    node: {
+        global: 'window',
+        crypto: 'empty',
+        module: false,
+        clearImmediate: false,
+        setImmediate: false
     }
 };

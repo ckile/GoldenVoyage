@@ -30,7 +30,7 @@ export class GvLayoutConfigProvider {
 
     conf = {
         theme: {
-            name: 'ng2',
+            name: 'blur',
         },
         colors: {
             default: this.basic.default,

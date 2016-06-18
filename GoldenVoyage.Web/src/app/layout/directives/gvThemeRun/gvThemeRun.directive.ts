@@ -1,4 +1,4 @@
-import {Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 import { GvLayoutConfigProvider, isMobile } from "../../../layout"; 
 
@@ -7,12 +7,12 @@ import { GvLayoutConfigProvider, isMobile } from "../../../layout";
 })
 export class GvThemeRun {
 
-    private _baConfig: GvLayoutConfigProvider;
+    private _gvConfig: GvLayoutConfigProvider;
   private _classes:Array<string> = [];
   @HostBinding('class') classesString:string;
 
-    constructor( ) {
-        this._baConfig = new GvLayoutConfigProvider();
+  constructor() { 
+      this._gvConfig = new GvLayoutConfigProvider();
   }
 
   public ngOnInit():void {
@@ -21,7 +21,7 @@ export class GvThemeRun {
   }
 
   private _assignTheme():void {
-    this._addClass(this._baConfig.get().theme.name);
+      this._addClass(this._gvConfig.get().theme.name);
   }
 
   private _assignMobile():void {

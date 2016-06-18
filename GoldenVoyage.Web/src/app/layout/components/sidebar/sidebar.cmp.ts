@@ -7,10 +7,11 @@ import { SidebarService } from "./sidebar.service";
 
 @Component({
     selector: "gv-sidebar",
-    template: require("./sidebar.cmp.html"),
+    encapsulation: ViewEncapsulation.None,
     styles: [require("./sidebar.cmp.scss")],
-    directives: [ROUTER_DIRECTIVES, GvSlimScroll],
-    providers: [SidebarService]
+    template: require("./sidebar.cmp.html"),
+    providers: [SidebarService],
+    directives: [GvSlimScroll]
 })
 export class SidebarComponent implements OnInit {
     public menuItems: Array<any>;
@@ -29,6 +30,7 @@ export class SidebarComponent implements OnInit {
         private _router: Router,
         private _state: AppState,
         private _sidebarService: SidebarService) {
+
         this.menuItems = _sidebarService.getMenuItems();
         this._router.root.subscribe((path) => this._selectMenuItem(path));
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {

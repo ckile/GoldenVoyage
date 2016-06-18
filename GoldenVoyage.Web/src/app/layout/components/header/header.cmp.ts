@@ -4,8 +4,8 @@ import { AppState } from "../../../app.state";
 import { GvScrollPosition } from "../../directives";
 @Component({
     selector: "gv-header",
-    template: require("./header.cmp.html"),
     styles: [require("./header.cmp.scss")],
+    template: require("./header.cmp.html"),
     directives: [ROUTER_DIRECTIVES, GvScrollPosition],
     encapsulation: ViewEncapsulation.None
 })

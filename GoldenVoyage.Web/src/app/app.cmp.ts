@@ -2,50 +2,63 @@
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Title } from '@angular/platform-browser';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from "@angular/router-deprecated";
-
-import { AppState } from "./app.state";
-import { SecurityService, ApiService } from "./services";
-import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner, GvThemeRun } from "./layout";
-
-import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
-
-import { layoutPaths } from "./layout";
-
-import { Md5 } from "ts-md5/dist/md5";
+import { RouteConfig } from "@angular/router-deprecated";
 
 import { PagesComponent } from "./pages";
+import { AppState } from "./app.state";
+import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
+import { GvThemeRun } from "./layout/directives";
+import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner } from "./layout/services";
 
+import { SecurityService, ApiService } from "./services";
+
+
+import { layoutPaths } from "./layout"; 
+
+
+/**
+ * Top Level Component
+ */
 @Component({
-    selector: "gv-app",
+    selector: "app",
     pipes: [],
-    directives: [ROUTER_DIRECTIVES, GvThemeRun],
+    directives: [GvThemeRun],
     providers: [GvLayoutConfigProvider, GvLayoutConfig, GvImageLoaderService, GvThemeSpinner],
     encapsulation: ViewEncapsulation.None,
     styles: [require("normalize.css"), require("./app.scss")],
-    template: require("./app.cmp.html")
+    template: `
+        <main [ngClass]="{'menu-collapsed': isMenuCollapsed}" gvThemeRun>
+            <div class="additional-bg"></div>
+            <router-outlet></router-outlet>
+        </main>
+        `
 })
 
 @RouteConfig([
-        { path: "/pages/...", name: "Pages", component: PagesComponent, useAsDefault: true },
+        {
+            path: "/pages/...",
+            name: "Pages",
+            component: PagesComponent,
+            useAsDefault: true
+        },
         {
             path: "/**",
             redirectTo: ["Pages"]
         }
 ])
 export class AppComponent {
+
     isMenuCollapsed: boolean = false;
 
     constructor(private _state: AppState,
         private _imageLoader: GvImageLoaderService,
         private _spinner: GvThemeSpinner, 
-        private _config: GvLayoutConfig,
-        private _securityService: SecurityService,
+        private _config: GvLayoutConfig, 
         private _appTitle: Title) {
 
         _appTitle.setTitle("GVHS");
 
-        this._loadImages();
+       // this._loadImages();
 
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
@@ -65,22 +78,11 @@ export class AppComponent {
         GvThemePreloader.load().then((values) => {
             this._spinner.hide();
         });
-    }
-
-    public login() {
-        console.log("Do login logic");
-        //this.securityService.Authorize();
-    }
-
-    public logout() {
-        console.log("Do logout logic");
-        this._securityService.Logoff();
-    }
-
+    } 
 
     private _loadImages(): void {
         // register some loaders
-        GvThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'sky-bg.jpg'));
+        GvThemePreloader.registerLoader(this._imageLoader.load(layoutPaths.images.root + 'blue-bg.jpg'));
     }
 
 }

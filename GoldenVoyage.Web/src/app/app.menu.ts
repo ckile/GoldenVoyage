@@ -1,6 +1,6 @@
 ﻿export const menuItems = [
     {
-        title: "Dashboard",
+        title: "仪表盘",
         component: "Dashboard",
         icon: "ion-android-home",
         selected: false,
@@ -8,25 +8,25 @@
         order: 0 
     },
     {
-        title: "Room View",
+        title: "房态盘",
         component: "RoomView",
-        icon: "ion-android-home",
+        icon: "ion-grid",
         selected: false,
         expanded: false,
         order: 100 
     },
     {
-        title: "Guests",
+        title: "宾客列表",
         component: "Guests",
-        icon: "ion-android-home",
+        icon: "ion-person-stalker",
         selected: false,
         expanded: false,
         order: 200 
     },
     {
-        title: "Admin",
+        title: "管理",
         component: "Admin",
-        icon: "ion-android-home",
+        icon: "ion-ios-toggle",
         selected: false,
         expanded: false,
         order: 300 
