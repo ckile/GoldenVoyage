@@ -1,10 +1,11 @@
 ﻿import { Hotel} from "./hotel";
 
 export class Employee {
+	Id: number;
 
 	Name: string;
 
-	UserRoles: number;
+	Role: number;
 
 	UserCode: string;
 
@@ -22,6 +23,8 @@ export class Employee {
 }
 
 export class EmployeeLogin {
+	Id: number;
+
 	EmployeeId: number;
 
 	Employee: Employee;

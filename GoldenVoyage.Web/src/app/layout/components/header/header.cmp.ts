@@ -2,11 +2,12 @@
 import { ROUTER_DIRECTIVES } from "@angular/router-deprecated";
 import { AppState } from "../../../app.state";
 import { GvScrollPosition } from "../../directives";
+import { UserInfoComponent } from "../userinfo";
 @Component({
     selector: "gv-header",
     styles: [require("./header.cmp.scss")],
     template: require("./header.cmp.html"),
-    directives: [ROUTER_DIRECTIVES, GvScrollPosition],
+    directives: [ROUTER_DIRECTIVES, GvScrollPosition, UserInfoComponent],
     encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {

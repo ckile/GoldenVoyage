@@ -7,12 +7,13 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class AppState {
+
     private _data = new Subject<Object>();
 
     private _dataStream$ = this._data.asObservable();
 
     // Map 是个字典对应key， value
-    private _subscriptions: Map<string, Array<Function>> = new Map<string, Array<Function>>();
+    private _subscridata: Map<string, Array<Function>> = new Map<string, Array<Function>>();
 
     constructor() {
         this._dataStream$.subscribe((data) => this._onEvent(data));
@@ -30,13 +31,13 @@ export class AppState {
     }
 
     subscribe(event: string, callback: Function): void {
-        var subscribers = this._subscriptions.get(event) || [];
+        var subscribers = this._subscridata.get(event) || [];
         subscribers.push(callback);
-        this._subscriptions.set(event, subscribers);
+        this._subscridata.set(event, subscribers);
     }
 
     private _onEvent(data: any): void {
-        var subscribers = this._subscriptions.get(data['event']) || [];
+        var subscribers = this._subscridata.get(data['event']) || [];
 
         subscribers.forEach((callback) => {
             callback.call(null, data['data']);

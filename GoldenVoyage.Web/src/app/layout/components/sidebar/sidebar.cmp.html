@@ -1,13 +1,14 @@
 ﻿<aside class="al-sidebar" (mouseleave)="hoverElemTop=outOfArea" sidebarResize>
     <ul id="al-sidebar-list" class="al-sidebar-list" gvSlimScroll [gvSlimScrollOptions]="{height: menuHeight}">
         <li *ngFor="let item of menuItems" class="al-sidebar-list-item"
-            [ngClass]="{'selected': item.selected && !item.expanded, 'with-sub-menu': item.subMenu, 'ba-sidebar-item-expanded': item.expanded}">
+            [ngClass]="{'selected': item.selected && !item.expanded, 'with-sub-menu': item.subMenu, 'ba-sidebar-item-expanded': item.expanded}"
+            >
 
-            <a *ngIf="!item.component && !item.subMenu" [attr.href]="item.url || ''" [attr.target]="item.target || ''" class="al-sidebar-list-link">
+            <a *ngIf="!item.component && !item.subMenu && item.enable" [attr.href]="item.url || ''" [attr.target]="item.target || ''" class="al-sidebar-list-link">
                 <i class="{{ item.icon }}"></i><span>{{ item.title }}</span>
             </a>
 
-            <a *ngIf="item.component && !item.subMenu" [routerLink]="[item.component]" [attr.target]="item.target || ''" class="al-sidebar-list-link">
+            <a *ngIf="item.component && !item.subMenu && item.enable" [routerLink]="[item.component]" [attr.target]="item.target || ''" class="al-sidebar-list-link">
                 <i class="{{ item.icon }}"></i><span>{{ item.title }}</span>
             </a>
 
@@ -58,21 +59,3 @@
          [ngClass]="{'show-hover-elem': showHoverElem }"></div>
 </aside>
 
-<!--<div id="sidebar" class="sidebar">
-    <div data-scrollbar="true" data-height="100%">
-        <ul class="nav">
-            <li router-active>
-                <a [routerLink]="['Dashboard']"><i class="fa fa-dashboard"></i><span>酒店概览</span></a>
-            </li>
-            <li router-active>
-                <a [routerLink]="['RoomView']"><i class="fa fa-building"></i><span>房态盘</span></a>
-            </li>
-            <li router-active>
-                <a [routerLink]="['Guests']"><i class="fa fa-user"></i><span>宾客列表</span></a>
-            </li>
-            <li router-active>
-                <a [routerLink]="['Admin']"><i class="fa fa-wrench"></i><span>管理</span></a>
-            </li>
-        </ul>
-    </div>
-</div>-->

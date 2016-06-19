@@ -4,6 +4,10 @@ import { ROUTER_DIRECTIVES, Router } from "@angular/router-deprecated";
 import { AppState } from "../../../app.state";
 import { layoutSizes, GvSlimScroll } from "../../../layout";
 import { SidebarService } from "./sidebar.service";
+import { UserService } from "../../../services";
+import { EmployeeLogin } from "../../../models";
+
+
 
 @Component({
     selector: "gv-sidebar",
@@ -29,12 +33,16 @@ export class SidebarComponent implements OnInit {
     constructor(private _elementRef: ElementRef,
         private _router: Router,
         private _state: AppState,
-        private _sidebarService: SidebarService) {
+        private _sidebarService: SidebarService,
+        private _userService: UserService) {
 
         this.menuItems = _sidebarService.getMenuItems();
         this._router.root.subscribe((path) => this._selectMenuItem(path));
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
+        });
+        this._userService.currentEmployeeLogin.subscribe(login => {
+            this._updateEmployeeLogin(login);
         });
     }
 
@@ -111,6 +119,18 @@ export class SidebarComponent implements OnInit {
         // hide menu after natigation on mobile devises
         if (this._shouldMenuCollapse()) {
             this.menuCollapse();
+        }
+    }
+
+    private _updateEmployeeLogin(login: EmployeeLogin): void {
+        var role = login && login.Employee && login.Employee.Role || 0;
+        if ( role === 1) {
+            this.menuItems.forEach(item => {
+                if (item.component === "Admin") {
+                    console.log(role);
+                    item.enable = true;
+                }
+            });
         }
     }
 

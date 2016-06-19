@@ -1,19 +1,20 @@
-import { }
 export class Hotel {
-	
-	Name: string;
+    Id: number;
 
-	ProfileId: number;
+    Name: string;
 
-	Profile: HotelProfile;
+    ProfileId: number;
 
+    Profile: HotelProfile;
 }
 
-export class HotelProfile{
+export class HotelProfile {
 
-	HotelDate: Date;
+    Id: number;
 
-	ReportDate: Date;
+    HotelDate: Date;
 
-	LocalServiceAddress: string;
+    ReportDate: Date;
+
+    LocalServiceAddress: string;
 }

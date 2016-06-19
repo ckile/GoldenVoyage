@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenVoyage.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AuthorControllerBase : Controller
     {
         private readonly IApiServicesProvider _apiServicesProvider;

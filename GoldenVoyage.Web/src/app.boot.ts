@@ -1,18 +1,15 @@
-﻿ 
-import { bootstrap } from '@angular/platform-browser-dynamic';
+﻿import { bootstrap } from '@angular/platform-browser-dynamic';
 
 import { Title } from "@angular/platform-browser";
 
 import { DIRECTIVES, PIPES, PROVIDERS } from "./platform/browser";
 import { ENV_PROVIDERS } from "./platform/environment";
 
- 
-
 import { AppComponent, APP_PROVIDERS } from './app';
 
-import { SecurityService } from "./app/services";
+import { COMMON_PROVIDERS } from "./app/services";
 
- 
+import { SecurityService } from "./app/services";
 
 // 1、此处进行身份验证
 
@@ -35,23 +32,18 @@ if (!secSer.IsAuthorized) {
     }
 }
 
-
-
-
 // 2、引导程序
 
 export function main(initialHmrState?: any): Promise<any> {
-
-
     return bootstrap(AppComponent, [
         PROVIDERS,
         ENV_PROVIDERS,
         DIRECTIVES,
         PIPES,
         APP_PROVIDERS,
+        COMMON_PROVIDERS,
         Title
     ]).catch(err => console.error(err));
-
 }
 
 /*
@@ -60,7 +52,6 @@ export function main(initialHmrState?: any): Promise<any> {
  * You can also import them in vendors to ensure that they are bundled in one file
  * Also see custom-typings.d.ts as you also need to do `typings install x` where `x` is your module
  */
-
 
 /*
  * Hot Module Reload
@@ -73,10 +64,8 @@ if ('development' === ENV && HMR === true) {
 } else {
     // bootstrap when documetn is ready
     document.addEventListener('DOMContentLoaded', () => {
-
         if (secSer.IsAuthorized) {
-             main();
+            main();
         }
-
-    } );
+    });
 }
