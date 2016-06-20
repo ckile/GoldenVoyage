@@ -41,7 +41,7 @@
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #e85656;
+    border-top-color: #f95372;
     transform: translate3d(0, 0, 0);
     animation: spin 2s linear infinite;
     /* Chrome, Firefox 16+, IE 10+, Opera */ }
@@ -54,7 +54,7 @@
       bottom: 5px;
       border-radius: 50%;
       border: 3px solid transparent;
-      border-top-color: #209e91;
+      border-top-color: #00abff;
       -webkit-animation: spin 3s linear infinite;
       /* Chrome, Opera 15+, Safari 5+ */
       animation: spin 3s linear infinite;
@@ -68,7 +68,7 @@
       bottom: 15px;
       border-radius: 50%;
       border: 3px solid transparent;
-      border-top-color: #dfb81c;
+      border-top-color: #e7ba08;
       animation: spin 1.5s linear infinite;
       /* Chrome, Firefox 16+, IE 10+, Opera */ }
 

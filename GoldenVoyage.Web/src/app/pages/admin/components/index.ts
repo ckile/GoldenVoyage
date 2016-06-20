@@ -1,2 +1,2 @@
-﻿export * from "./hotel.cmp";
-export * from "./roomtype.cmp";
+﻿export * from "./hotel/hotel.cmp";
+export * from "./roomtype/roomtype.cmp";

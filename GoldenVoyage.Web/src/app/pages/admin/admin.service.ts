@@ -2,7 +2,7 @@
 import { ApiService } from "../../services";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
-import { OperatorResult } from "../../models";
+import { OperatorResult, PaginatedResult } from "../../models";
 
 @Injectable()
 export class AdminService<T> {
