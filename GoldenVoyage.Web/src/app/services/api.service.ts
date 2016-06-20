@@ -33,6 +33,11 @@ export class ApiService {
         return this._http.get(this.getUrl(actionUrl), { headers: this.headers });
     }
 
+    getById(actionUrl: string, id: number): Observable<Response> {
+        this.setHeaders();
+        return this._http.get(this.getUrl(actionUrl) + "/" + id, { headers: this.headers });
+    }
+
     post(actionUrl: string, item: any): Observable<Response> {
         this.setHeaders();
         return this._http.post(this.getUrl(actionUrl), JSON.stringify(item), { headers: this.headers });

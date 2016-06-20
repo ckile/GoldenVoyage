@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, AfterViewInit, AfterContentInit } from "@angular/core";
 import { ComponentInstruction, OnActivate } from "@angular/router-deprecated";
-import { GV_DIRECTIVES } from "../../ui/components";
+import { GV_DIRECTIVES } from "../../common/components";
 @Component({
     selector: "gv-walkin",
     template: require("./walkin.cmp.html"),
