@@ -15,5 +15,13 @@ export class HotelListComponent {
          
     }
 
+    updateData(): void {
+
+        this._adminService.get().subscribe(result => {
+            this.items = result.data;
+        });
+
+    }
+
 
 }

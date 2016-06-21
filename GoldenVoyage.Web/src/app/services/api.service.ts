@@ -3,6 +3,7 @@ import { Http, Response, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { appConstants } from "../app.constants";
 import { SecurityService } from "./security.service";
+import { PaginatedResult,PaginateParamter } from "../models";
 @Injectable()
 export class ApiService {
     private hostUrl: string;
@@ -31,6 +32,11 @@ export class ApiService {
     get(actionUrl: string): Observable<Response> {
         this.setHeaders();
         return this._http.get(this.getUrl(actionUrl), { headers: this.headers });
+    }
+
+    postGet(actionUrl: string, paramter: any): Observable<Response> {
+        this.setHeaders();
+        return this._http.post(this.getUrl(actionUrl), JSON.stringify(paramter), { headers: this.headers });
     }
 
     getById(actionUrl: string, id: number): Observable<Response> {

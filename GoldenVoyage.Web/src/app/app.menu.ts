@@ -33,7 +33,18 @@
         icon: "ion-ios-toggle",
         selected: false,
         expanded: false,
-        order: 300 
+        order: 300,
+        subMenu: [
+            {
+                enable: true,
+                title: "Hotel",
+                component: "Hotel",
+                icon: "ion-ios-toggle",
+                selected: false,
+                expanded: false,
+                order:100
+            }
+        ]
     }
 
 ];
