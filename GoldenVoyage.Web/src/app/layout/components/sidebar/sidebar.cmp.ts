@@ -115,6 +115,7 @@ export class SidebarComponent implements OnInit {
     private _selectMenuItem(currentPath = null): void {
 
         let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems, currentPath);
+
         this._state.notifyDataChanged('menu.activeLink', currentMenu);
         // hide menu after natigation on mobile devises
         if (this._shouldMenuCollapse()) {
@@ -123,15 +124,15 @@ export class SidebarComponent implements OnInit {
     }
 
     private _updateEmployeeLogin(login: EmployeeLogin): void {
-        var role = login && login.Employee && login.Employee.Role || 0;
-        if ( role === 1) {
-            this.menuItems.forEach(item => {
-                if (item.component === "Admin") {
-                    console.log(role);
-                    item.enable = true;
-                }
-            });
-        }
+        //var role = login && login.Employee && login.Employee.Role || 0;
+        //if ( role === 1) {
+        //    this.menuItems.forEach(item => {
+        //        if (item.component === "Admin") {
+        //            console.log(role);
+        //            item.enable = true;
+        //        }
+        //    });
+        //}
     }
 
 }

@@ -36,7 +36,7 @@ export class ApiService {
 
     postGet(actionUrl: string, paramter: any): Observable<Response> {
         this.setHeaders();
-        return this._http.post(this.getUrl(actionUrl), JSON.stringify(paramter), { headers: this.headers });
+        return this._http.post(this.getUrl(actionUrl + "/page"), JSON.stringify(paramter), { headers: this.headers });
     }
 
     getById(actionUrl: string, id: number): Observable<Response> {

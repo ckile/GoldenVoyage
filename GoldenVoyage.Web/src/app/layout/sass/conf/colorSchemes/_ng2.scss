@@ -1,4 +1,4 @@
-$default: #ffffff; // default colors for layout
+$default: #000; // default colors for layout
 $body-bg: #F0F3F4; // default bg color
 
 $default-text: $default; // default text color layout (usually is the same as $default)
@@ -8,15 +8,17 @@ $help-text: $default-text; // additional text color for hits
 $label-text: $default-text; // labels color
 $disabled: rgba(255, 255, 255, 0.4); // color for disabled state
 $disabled-bg: tint($disabled, 15%); // background color for disable state
-$border: rgba(255, 255, 255, 0.5); // border color
-$border-light: rgba(255, 255, 255, 0.3); // lighter version of border color (for hovers)
-$input-border: rgba(255, 255, 255, 0.6); // input border color
+$border: rgba(0, 0, 0, 0.3); // border color
+$border-light: rgba(0, 0, 0, 0.1); // lighter version of border color (for hovers)
+$input-border: rgba(0, 0, 0, 0.1); // input border color
 $input-background: rgba(255, 255, 255, 0.1); // input border color for hover
 $dropdown-text: #7d7d7d; // dropdown text color
 
 // sidebar colors
 $sidebar: #282828;
+$headerbar: rgba(#ffffff, 0.8);
 $sidebar-text: #ffffff;
+$headerbar-text:$default;
 
 // specific components colors
 $mail-box: whitesmoke;
@@ -25,9 +27,9 @@ $progress-background: rgba(0, 0, 0, 0.15);
 $progress-default: rgba($default-text, 0.95);
 
 // bootstrap card panel styles
-$bootstrap-panel-radius: 7px;
-$bootstrap-panel-text: #ffffff;
-$bootstrap-panel-bg: rgba(255, 255, 255, 0.1);
+$bootstrap-panel-radius: 2px;
+$bootstrap-panel-text: #000000;
+$bootstrap-panel-bg: rgba(255, 255, 255, 0.98);
 $bootstrap-panel-header-bg: transparent;
 $bootstrap-panel-header-border: 1px solid $border-light;
 $bootstrap-panel-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
@@ -65,7 +67,7 @@ $hoverlink: darken($activelink, 20%);
 @mixin body-bg() {
   background-color: $body-bg;
 
-  $mainBgUrl: $images-root + 'blue-bg.jpg';
+  $mainBgUrl: $images-root + 'peachy-bg.jpg';
 
   &::before {
     content: '';
@@ -74,7 +76,7 @@ $hoverlink: darken($activelink, 20%);
     height: 100%;
     top: 0;
     left: 0;
-    background: url($mainBgUrl) no-repeat center center;
+   // background: url($mainBgUrl) no-repeat center center;
     background-size: cover;
     will-change: transform;
     z-index: 0;

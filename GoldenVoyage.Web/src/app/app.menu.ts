@@ -27,7 +27,7 @@
         order: 200 
     },
     {
-        enable: false,
+        enable: true,
         title: "管理",
         component: "Admin",
         icon: "ion-ios-toggle",
@@ -37,12 +37,18 @@
         subMenu: [
             {
                 enable: true,
-                title: "Hotel",
-                component: "Hotel",
-                icon: "ion-ios-toggle",
-                selected: false,
-                expanded: false,
-                order:100
+                title: "酒店",
+                component: "Hotel" 
+            },
+            {
+                enable: true,
+                title: "房间类型",
+                component: "RoomType" 
+            },
+            {
+                enable: true,
+                title: "房间属性",
+                component: "RoomFeature"
             }
         ]
     }

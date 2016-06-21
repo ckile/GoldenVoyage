@@ -12,7 +12,7 @@ export class GvContentTop {
   public activePageTitle:string = '';
 
   constructor(private _state:AppState) {
-    this._state.subscribe('menu.activeLink', (activeLink) => {
+      this._state.subscribe('menu.activeLink', (activeLink) => {
       if (activeLink) {
         this.activePageTitle = activeLink.title;
       }

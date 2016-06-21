@@ -9,7 +9,7 @@ import {GvCardBlur} from './gvCardBlur.directive';
   template: require('./gvCard.html'),
   encapsulation: ViewEncapsulation.None
 })
-export class BaCard {
+export class GvCard {
   @Input() title:String;
-  @Input() baCardClass:String;
+  @Input() gvCardClass:String;
 }

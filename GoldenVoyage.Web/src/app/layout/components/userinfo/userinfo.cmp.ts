@@ -7,6 +7,7 @@ import { GvProfilePicturePipe } from "../../pipes";
     selector: "gv-user-info",
     template: `
     <div class="user-profile clearfix">
+    <a href="#" class="al-sub-logo clearfix hidden-xs">金航酒店1</a>
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
         <img src="{{ ( 'Nasta' | gvProfilePicture ) }}">

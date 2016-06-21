@@ -6,3 +6,4 @@ export * from "./unauthorized.cmp";
 export * from "./gvBackTop";
 export * from "./gvContentTop";
 export * from "./gvModal/gvModal.cmp";
+export * from "./gvCard";

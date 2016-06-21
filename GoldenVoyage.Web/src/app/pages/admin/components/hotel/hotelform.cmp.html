@@ -1,0 +1,20 @@
+﻿<form [ngFormModel]="itemForm" (ngSubmit)="onSubmit(itemForm.value)">
+    <div class="form-group" [class.has-warning]="!name.valid && name.touched">
+        <label for="hotelName1">酒店名称</label>
+        <input type="text" class="form-control" id="hotelName1" ngControl="name">
+    </div>
+    <div class="form-group">
+        <label for="hotelDate1">账务日期</label>
+        <input type="date" class="form-control" id="hotelDate1" ngControl="hotelDate">
+    </div>
+    <div class="form-group">
+        <label for="reportDate1">报表日期</label>
+        <input type="date" class="form-control" id="reportDate1" ngControl="reportDate">
+    </div>
+    <div class="form-group">
+        <label for="localApi1">本地服务位置</label>
+        <input type="text" class="form-control" id="localApi1" ngControl="localApi">
+    </div>
+
+    <button [class.sr-only]="!itemForm.valid" type="submit" class="btn btn-success">添加</button>
+</form>

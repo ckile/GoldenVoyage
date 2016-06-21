@@ -1,0 +1,22 @@
+﻿<div class="horizontal-scroll">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="table-id">#</th>
+                <th class="header">代码</th>
+                <th class="header">描述</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td class="table-id">{{ item.Id }}</td>
+                <td>{{ item.Code }}</td>
+                <td>{{ item.Description }}</td>
+                <td>
+                    <button class="status-button btn btn-xs btn-info" (click)="onEdit(item)">修改</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

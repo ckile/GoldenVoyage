@@ -1,12 +1,11 @@
-﻿<div class="page-top clearfix" gvScrollPositon maxHeight="50" (scrollChange)="scrolledChanged($event)" [ngClass]="{scrolled: isScrolled}">
-    <a href="#" class="al-logo clearfix"><span>GV-</span>HS</a>
+﻿<div class="page-top clearfix blur" gvScrollPositon maxHeight="50" (scrollChange)="scrolledChanged($event)" [ngClass]="{scrolled: isScrolled}">
+    <!--<a href="#" class="al-logo clearfix"><span>GV-</span>HS</a>-->
     <a (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
 
     <div class="search">
         <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
         <input id="searchInput" type="text" placeholder="搜索 ...">
     </div>
-
     <gv-user-info></gv-user-info>
 </div>
 

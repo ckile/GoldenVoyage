@@ -2,7 +2,7 @@
 import { ApiService } from "../../services";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
-import { OperatorResult, PaginatedResult } from "../../models";
+import { OperatorResult, PaginatedResult,PaginateParamter } from "../../models";
 
 @Injectable()
 export class AdminService<T> {
@@ -22,6 +22,13 @@ export class AdminService<T> {
             return res.json();
         });
     }
+
+    postGet(paramter: PaginateParamter): Observable<PaginatedResult<T>> {
+        return (<any>this._apiService.postGet(this.url, paramter)).map(res => {
+            return res.json();
+        });
+    }
+
 
     getById(id: number): Observable<T> {
         return (<any>this._apiService.getById(this.url,id)).map(res => {

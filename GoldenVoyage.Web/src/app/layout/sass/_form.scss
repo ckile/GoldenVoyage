@@ -43,7 +43,7 @@
   color: $content-text;
   @include placeholderStyle($content-text, 0.7);
   border: 1px solid $input-border;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: $input-background;
   box-shadow: none;
   font-size: 14px;

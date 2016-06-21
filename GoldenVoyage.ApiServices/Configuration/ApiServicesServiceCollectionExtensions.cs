@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using GoldenVoyage.ApiServices.Configuration.Options;
 using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.ApiServices.Services.Core;
-using Microsoft.Extensions.DependencyInjection;
-using GoldenVoyage.Models.Entities;
+using GoldenVoyage.ApiServices.Services.Entities;
 using GoldenVoyage.Models;
+using GoldenVoyage.Models.Entities;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GoldenVoyage.ApiServices.Configuration
 {
@@ -41,7 +42,7 @@ namespace GoldenVoyage.ApiServices.Configuration
 
         private static IServiceCollection AddModuleServices(this IServiceCollection services)
         {
-            services.AddEntityService<Hotel>();
+            services.AddTransient<IEntityService<Hotel>, HotelService>();
             services.AddEntityService<RoomType>();
             services.AddEntityService<RoomFeature>();
             services.AddEntityService<OutOfOrderReason>();
@@ -66,11 +67,8 @@ namespace GoldenVoyage.ApiServices.Configuration
             services.AddEntityService<TransactCode>();
             services.AddEntityService<TransactClassify>();
 
-
-
             return services;
         }
-
 
         private static IServiceCollection AddEntityService<TEntity>(this IServiceCollection services)
             where TEntity : ItemBase
