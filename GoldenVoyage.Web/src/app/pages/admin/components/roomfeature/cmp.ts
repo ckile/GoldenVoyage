@@ -7,13 +7,15 @@ import { FormComponent } from "./form";
 
 @Component({
     selector: "gv-admin-feature",
-    template: require("./cmp.html"),
+    template: require("../common/cmp.html"),
     providers: [AdminService],
     directives: [GvCard, FormComponent, ListComponent],
 
 })
 export class RoomFeatureComponent {
+    title: string;
     constructor(private _adminService: AdminService<Entity>) {
+        this.title = "房间属性";
         _adminService.setEntityUrl("/RoomFeature");
     }
 }

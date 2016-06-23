@@ -1,19 +1,18 @@
 ﻿export const menuItems = [
-    {
-        enable: true,
-        title: "快速菜单",
-        component: "QuickMenu",
-        icon: "",
-        selected: false,
-        expanded: false,
-        order: 0,
-        subMenu: [
-            { enable: true, title: "步入", component: "WalkIn" },
-            { enable: true, title: "预订", component: "Booking" },
-            { enable: true, title: "退房", component: "CheckOut" }
-        ]
-
-    },
+    //{
+    //    enable: true,
+    //    title: "快速菜单",
+    //    component: "QuickMenu",
+    //    icon: "",
+    //    selected: false,
+    //    expanded: false,
+    //    order: 0,
+    //    subMenu: [
+    //        { enable: true, title: "步入", component: "WalkIn" },
+    //        { enable: true, title: "预订", component: "Booking" },
+    //        { enable: true, title: "退房", component: "CheckOut" }
+    //    ]
+    //},
 
     {
         enable: true,
@@ -22,7 +21,7 @@
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 1 
+        order: 1
     },
     {
         enable: true,
@@ -31,7 +30,7 @@
         icon: "ion-grid",
         selected: false,
         expanded: false,
-        order: 100 
+        order: 100
     },
     {
         enable: true,
@@ -40,7 +39,7 @@
         icon: "ion-person-stalker",
         selected: false,
         expanded: false,
-        order: 200 
+        order: 200
     },
     {
         enable: true,
@@ -53,19 +52,27 @@
         subMenu: [
             {
                 enable: true,
-                title: "酒店",
-                component: "Hotel" 
-            },
-            {
-                enable: true,
-                title: "房间类型",
-                component: "RoomType" 
-            },
-            {
-                enable: true,
-                title: "房间属性",
-                component: "RoomFeature"
+                title: "客房配置",
+                component: "RoomConfig",                 
+                subMenu: [
+                    {
+                        enable: true,
+                        title: "酒店",
+                        component: "Hotel"
+                    },
+                    {
+                        enable: true,
+                        title: "房间类型",
+                        component: "RoomType"
+                    },
+                    {
+                        enable: true,
+                        title: "房间属性",
+                        component: "RoomFeature"
+                    }
+                ]
             }
+
         ]
     }
 

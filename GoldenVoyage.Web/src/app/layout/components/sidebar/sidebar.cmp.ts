@@ -7,8 +7,6 @@ import { SidebarService } from "./sidebar.service";
 import { UserService } from "../../../services";
 import { EmployeeLogin } from "../../../models";
 
-
-
 @Component({
     selector: "gv-sidebar",
     encapsulation: ViewEncapsulation.None,
@@ -35,7 +33,6 @@ export class SidebarComponent implements OnInit {
         private _state: AppState,
         private _sidebarService: SidebarService,
         private _userService: UserService) {
-
         this.menuItems = _sidebarService.getMenuItems();
         this._router.root.subscribe((path) => this._selectMenuItem(path));
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
@@ -93,7 +90,7 @@ export class SidebarComponent implements OnInit {
     }
 
     public toggleSubMenu($event, item): boolean {
-        var submenu = $($event.currentTarget).next();
+        var submenu = jQuery($event.currentTarget).next();
 
         if (this.isMenuCollapsed) {
             this.menuExpand();
@@ -113,7 +110,6 @@ export class SidebarComponent implements OnInit {
     }
 
     private _selectMenuItem(currentPath = null): void {
-
         let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems, currentPath);
 
         this._state.notifyDataChanged('menu.activeLink', currentMenu);
@@ -134,5 +130,4 @@ export class SidebarComponent implements OnInit {
         //    });
         //}
     }
-
 }

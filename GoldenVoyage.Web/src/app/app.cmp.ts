@@ -12,7 +12,6 @@ import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner } from "./layout
 
 import { SecurityService, ApiService } from "./services";
 
-
 import { layoutPaths } from "./layout"; 
 
 
@@ -33,7 +32,6 @@ import { layoutPaths } from "./layout";
         </main>
         `
 })
-
 @RouteConfig([
         {
             path: "/pages/...",
@@ -64,13 +62,6 @@ export class AppComponent {
             this.isMenuCollapsed = isCollapsed;
         });
     }
-
-    //ngOnInit() {
-    //    if (window.location.hash) {
-    //        console.log("ngOnInit _securityService.AuthorizedCallback");
-    //        this.securityService.AuthorizedCallback();
-    //    }
-    //}
 
     
     public ngAfterViewInit(): void {

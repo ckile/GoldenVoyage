@@ -1,5 +1,5 @@
-﻿using GoldenVoyage.Models.Entities;
-using GoldenVoyage.ApiServices.Services;
+﻿using GoldenVoyage.ApiServices.Services;
+using GoldenVoyage.Models.Entities;
 
 namespace GoldenVoyage.Api.Controllers.Entities
 {
@@ -148,10 +148,16 @@ namespace GoldenVoyage.Api.Controllers.Entities
         }
     }
 
-
     public class TransactClassifyController : EntityControllerBase<TransactClassify>
     {
         public TransactClassifyController(IApiServicesProvider apiServicesProvider) : base(apiServicesProvider)
+        {
+        }
+    }
+
+    public class EmployeeController : EntityControllerBase<Employee>
+    {
+        public EmployeeController(IApiServicesProvider apiServicesProvider) : base(apiServicesProvider)
         {
         }
     }

@@ -1,16 +1,14 @@
-﻿
-// TypeScript 全局变量与js无关
-//declare var $: any;
+﻿// TypeScript 全局变量与js无关
+
+declare var jQuery: any;
 //declare var L: any;
 declare var ENV: string;
 declare var HMR: boolean;
-
 
 interface GlobalEnvironment {
     ENV;
     HMR;
 }
-
 
 interface WebpackModule {
     hot: {
@@ -32,19 +30,15 @@ interface WebpackRequire {
     context(file: string, flag?: boolean, exp?: RegExp): any;
 }
 
-
 interface ErrorStackTraceLimit {
     stackTraceLimit: number;
 }
-
-
 
 // Extend typings
 interface NodeRequire extends WebpackRequire { }
 interface ErrorConstructor extends ErrorStackTraceLimit { }
 interface NodeModule extends WebpackModule { }
 interface Global extends GlobalEnvironment { }
-
 
 declare namespace Reflect {
     function decorate(decorators: ClassDecorator[], target: Function): Function;
@@ -79,7 +73,6 @@ declare namespace Reflect {
     function deleteMetadata(metadataKey: any, target: Object): boolean;
     function deleteMetadata(metadataKey: any, target: Object, targetKey: string | symbol): boolean;
 }
-
 
 // We need this here since there is a problem with Zone.js typings
 interface Thenable<T> {

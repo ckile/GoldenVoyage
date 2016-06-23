@@ -12,6 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "TypeScriptCompileBlocked": "true",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },

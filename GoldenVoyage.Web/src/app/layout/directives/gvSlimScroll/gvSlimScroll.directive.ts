@@ -21,10 +21,10 @@ export class GvSlimScroll {
     }
 
     private _init() {
-        $(this._elementRef.nativeElement).slimScroll(this.gvSlimScrollOptions);
+        jQuery(this._elementRef.nativeElement).slimScroll(this.gvSlimScrollOptions);
     }
 
     private _destroy() {
-        (<any>$(this._elementRef.nativeElement)).slimScroll({ destroy: true });
+        jQuery(this._elementRef.nativeElement).slimScroll({ destroy: true });
     }
 }

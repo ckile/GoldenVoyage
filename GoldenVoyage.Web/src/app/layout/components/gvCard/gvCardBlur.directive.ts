@@ -1,8 +1,8 @@
 import {Directive, ElementRef, HostListener, HostBinding} from '@angular/core';
-import {GvLayoutConfigProvider} from '../../../layout';
 
 import {GvCardBlurHelper} from './gvCardBlurHelper.service';
 import {GvMetrics} from './gvMetrics';
+import {GvLayoutConfigProvider} from '../../../layout';
 
 @Directive({
   selector: '[gvCardBlur]',
@@ -53,6 +53,6 @@ export class GvCardBlur {
   }
 
   private _isEnabled() {
-    return this._gvConfig.get().theme.name == 'blur';
+      return this._gvConfig.get().theme.name == 'blur';
   }
 }

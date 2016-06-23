@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { colorHelper } from './layout.constants';
+import * as _ from 'lodash';
 
 @Injectable()
 export class GvLayoutConfigProvider {
@@ -30,7 +31,7 @@ export class GvLayoutConfigProvider {
 
     conf = {
         theme: {
-            name: 'blur',
+            name: 'ng2',
         },
         colors: {
             default: this.basic.default,
