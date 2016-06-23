@@ -17,7 +17,8 @@ var AdminComponent = (function () {
         router_deprecated_1.RouteConfig([
             { path: "/", name: "Home", component: home_cmp_1.HomeComponent, useAsDefault: true },
             { path: "/Hotel", name: "Hotel", component: components_1.HotelComponent },
-            { path: "/RoomType", name: "RoomType", component: components_1.RoomTypeComponent }
+            { path: "/RoomType", name: "RoomType", component: components_1.RoomTypeComponent },
+            { path: "/RoomFeature", name: "RoomFeature", component: components_1.RoomFeatureComponent }
         ]), 
         __metadata('design:paramtypes', [])
     ], AdminComponent);

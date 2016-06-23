@@ -4,18 +4,25 @@ var router_deprecated_1 = require("@angular/router-deprecated");
 var app_state_1 = require("../../../app.state");
 var layout_1 = require("../../../layout");
 var sidebar_service_1 = require("./sidebar.service");
+var services_1 = require("../../../services");
 var SidebarComponent = (function () {
-    function SidebarComponent(_elementRef, _router, _state, _sidebarService) {
+    function SidebarComponent(_elementRef, _router, _state, _sidebarService, _userService) {
         var _this = this;
         this._elementRef = _elementRef;
         this._router = _router;
         this._state = _state;
         this._sidebarService = _sidebarService;
+        this._userService = _userService;
         this.isMenuCollapsed = false;
         this.isMenuShouldCollapsed = false;
+        this.outOfArea = -200;
         this.menuItems = _sidebarService.getMenuItems();
+        this._router.root.subscribe(function (path) { return _this._selectMenuItem(path); });
         this._state.subscribe("menu.isCollapsed", function (isCollapsed) {
             _this.isMenuCollapsed = isCollapsed;
+        });
+        this._userService.currentEmployeeLogin.subscribe(function (login) {
+            _this._updateEmployeeLogin(login);
         });
     }
     SidebarComponent.prototype.ngOnInit = function () {
@@ -69,6 +76,16 @@ var SidebarComponent = (function () {
     SidebarComponent.prototype._shouldMenuCollapse = function () {
         return window.innerWidth <= layout_1.layoutSizes.resWidthCollapseSidebar;
     };
+    SidebarComponent.prototype._selectMenuItem = function (currentPath) {
+        if (currentPath === void 0) { currentPath = null; }
+        var currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems, currentPath);
+        this._state.notifyDataChanged('menu.activeLink', currentMenu);
+        if (this._shouldMenuCollapse()) {
+            this.menuCollapse();
+        }
+    };
+    SidebarComponent.prototype._updateEmployeeLogin = function (login) {
+    };
     __decorate([
         core_1.HostListener('window:resize'), 
         __metadata('design:type', Function), 
@@ -78,12 +95,13 @@ var SidebarComponent = (function () {
     SidebarComponent = __decorate([
         core_1.Component({
             selector: "gv-sidebar",
-            template: require("./sidebar.cmp.html"),
+            encapsulation: core_1.ViewEncapsulation.None,
             styles: [require("./sidebar.cmp.scss")],
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES, layout_1.GvSlimScroll],
-            providers: [sidebar_service_1.SidebarService]
+            template: require("./sidebar.cmp.html"),
+            providers: [sidebar_service_1.SidebarService],
+            directives: [layout_1.GvSlimScroll]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, router_deprecated_1.Router, app_state_1.AppState, sidebar_service_1.SidebarService])
+        __metadata('design:paramtypes', [core_1.ElementRef, router_deprecated_1.Router, app_state_1.AppState, sidebar_service_1.SidebarService, services_1.UserService])
     ], SidebarComponent);
     return SidebarComponent;
 }());

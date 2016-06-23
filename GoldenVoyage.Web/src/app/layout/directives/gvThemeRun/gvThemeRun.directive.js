@@ -4,14 +4,14 @@ var layout_1 = require("../../../layout");
 var GvThemeRun = (function () {
     function GvThemeRun() {
         this._classes = [];
-        this._baConfig = new layout_1.GvLayoutConfigProvider();
+        this._gvConfig = new layout_1.GvLayoutConfigProvider();
     }
     GvThemeRun.prototype.ngOnInit = function () {
         this._assignTheme();
         this._assignMobile();
     };
     GvThemeRun.prototype._assignTheme = function () {
-        this._addClass(this._baConfig.get().theme.name);
+        this._addClass(this._gvConfig.get().theme.name);
     };
     GvThemeRun.prototype._assignMobile = function () {
         if (layout_1.isMobile()) {

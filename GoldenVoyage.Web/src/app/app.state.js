@@ -6,7 +6,7 @@ var AppState = (function () {
         var _this = this;
         this._data = new Subject_1.Subject();
         this._dataStream$ = this._data.asObservable();
-        this._subscriptions = new Map();
+        this._subscridata = new Map();
         this._dataStream$.subscribe(function (data) { return _this._onEvent(data); });
     }
     AppState.prototype.notifyDataChanged = function (event, value) {
@@ -20,12 +20,12 @@ var AppState = (function () {
         }
     };
     AppState.prototype.subscribe = function (event, callback) {
-        var subscribers = this._subscriptions.get(event) || [];
+        var subscribers = this._subscridata.get(event) || [];
         subscribers.push(callback);
-        this._subscriptions.set(event, subscribers);
+        this._subscridata.set(event, subscribers);
     };
     AppState.prototype._onEvent = function (data) {
-        var subscribers = this._subscriptions.get(data['event']) || [];
+        var subscribers = this._subscridata.get(data['event']) || [];
         subscribers.forEach(function (callback) {
             callback.call(null, data['data']);
         });

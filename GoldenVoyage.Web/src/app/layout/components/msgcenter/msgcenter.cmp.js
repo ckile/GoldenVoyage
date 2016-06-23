@@ -1,17 +1,19 @@
 "use strict";
 var core_1 = require('@angular/core');
-var BaMsgCenter = (function () {
-    function BaMsgCenter() {
+var pipes_1 = require("../../pipes");
+var GvMsgCenter = (function () {
+    function GvMsgCenter() {
     }
-    BaMsgCenter = __decorate([
+    GvMsgCenter = __decorate([
         core_1.Component({
-            selector: 'ba-msg-center',
+            selector: 'gv-msg-center',
             styles: [require('./msgcenter.cmp.scss')],
-            template: require('./msgcenter.cmp.html')
+            template: require('./msgcenter.cmp.html'),
+            pipes: [pipes_1.GvProfilePicturePipe]
         }), 
         __metadata('design:paramtypes', [])
-    ], BaMsgCenter);
-    return BaMsgCenter;
+    ], GvMsgCenter);
+    return GvMsgCenter;
 }());
-exports.BaMsgCenter = BaMsgCenter;
+exports.GvMsgCenter = GvMsgCenter;
 //# sourceMappingURL=msgcenter.cmp.js.map

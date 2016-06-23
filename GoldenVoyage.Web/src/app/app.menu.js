@@ -1,40 +1,57 @@
 "use strict";
 exports.menuItems = [
     {
-        title: "Dashboard",
+        enable: true,
+        title: "仪表盘",
         component: "Dashboard",
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 0
     },
     {
-        title: "Room View",
+        enable: true,
+        title: "房态盘",
         component: "RoomView",
-        icon: "ion-android-home",
+        icon: "ion-grid",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 100
     },
     {
-        title: "Guests",
+        enable: true,
+        title: "宾客列表",
         component: "Guests",
-        icon: "ion-android-home",
+        icon: "ion-person-stalker",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 200
     },
     {
-        title: "Admin",
+        enable: true,
+        title: "管理",
         component: "Admin",
-        icon: "ion-android-home",
+        icon: "ion-ios-toggle",
         selected: false,
         expanded: false,
-        order: 0,
-        subMenu: []
+        order: 300,
+        subMenu: [
+            {
+                enable: true,
+                title: "酒店",
+                component: "Hotel"
+            },
+            {
+                enable: true,
+                title: "房间类型",
+                component: "RoomType"
+            },
+            {
+                enable: true,
+                title: "房间属性",
+                component: "RoomFeature"
+            }
+        ]
     }
 ];
 //# sourceMappingURL=app.menu.js.map

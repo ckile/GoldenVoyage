@@ -26,6 +26,14 @@ var ApiService = (function () {
         this.setHeaders();
         return this._http.get(this.getUrl(actionUrl), { headers: this.headers });
     };
+    ApiService.prototype.postGet = function (actionUrl, paramter) {
+        this.setHeaders();
+        return this._http.post(this.getUrl(actionUrl + "/page"), JSON.stringify(paramter), { headers: this.headers });
+    };
+    ApiService.prototype.getById = function (actionUrl, id) {
+        this.setHeaders();
+        return this._http.get(this.getUrl(actionUrl) + "/" + id, { headers: this.headers });
+    };
     ApiService.prototype.post = function (actionUrl, item) {
         this.setHeaders();
         return this._http.post(this.getUrl(actionUrl), JSON.stringify(item), { headers: this.headers });

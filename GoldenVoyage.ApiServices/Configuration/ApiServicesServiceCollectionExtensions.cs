@@ -43,10 +43,11 @@ namespace GoldenVoyage.ApiServices.Configuration
         private static IServiceCollection AddModuleServices(this IServiceCollection services)
         {
             services.AddTransient<IEntityService<Hotel>, HotelService>();
+            services.AddTransient<IEntityService<Employee>, EmployeeService>();
             services.AddEntityService<RoomType>();
             services.AddEntityService<RoomFeature>();
             services.AddEntityService<OutOfOrderReason>();
-            services.AddEntityService<Room>();
+            services.AddTransient<IEntityService<Room>, RoomService>();
             services.AddEntityService<ReservationType>();
             services.AddEntityService<AccountType>();
             services.AddEntityService<Market>();

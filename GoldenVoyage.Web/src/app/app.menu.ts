@@ -1,12 +1,28 @@
 ﻿export const menuItems = [
     {
         enable: true,
+        title: "快速菜单",
+        component: "QuickMenu",
+        icon: "",
+        selected: false,
+        expanded: false,
+        order: 0,
+        subMenu: [
+            { enable: true, title: "步入", component: "WalkIn" },
+            { enable: true, title: "预订", component: "Booking" },
+            { enable: true, title: "退房", component: "CheckOut" }
+        ]
+
+    },
+
+    {
+        enable: true,
         title: "仪表盘",
         component: "Dashboard",
         icon: "ion-android-home",
         selected: false,
         expanded: false,
-        order: 0 
+        order: 1 
     },
     {
         enable: true,

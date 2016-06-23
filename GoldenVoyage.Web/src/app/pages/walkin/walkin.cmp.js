@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var components_1 = require("../../ui/components");
+var components_1 = require("../../common/components");
 var WalkinComponent = (function () {
     function WalkinComponent() {
         this.disabled = false;

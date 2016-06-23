@@ -9,4 +9,6 @@ __export(require("./msgcenter"));
 __export(require("./unauthorized.cmp"));
 __export(require("./gvBackTop"));
 __export(require("./gvContentTop"));
+__export(require("./gvModal/gvModal.cmp"));
+__export(require("./gvCard"));
 //# sourceMappingURL=index.js.map
