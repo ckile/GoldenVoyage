@@ -2,37 +2,15 @@
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Validators  } from "@angular/common";
 import { AdminService } from "../../admin.service";
 import { Entity } from "../../../../models";
+import { EntityFormComponent } from "../common/entityform";
 @Component({
     selector: "gv-form",
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
-    template: require("./form.html")
+    template: require("../common/entityform.html")
 })
-export class FormComponent {
-    currentPage: number = 1;
+export class FormComponent extends EntityFormComponent {
 
-    itemForm: ControlGroup;
-    code: AbstractControl;
-
-    constructor(private _adminService: AdminService<Entity>, fb: FormBuilder) {
-
-        this.itemForm = fb.group({
-            "code": ['', Validators.required],
-            "description": []
-        });
-        this.code = this.itemForm.controls["code"];
+    constructor(_adminService: AdminService<Entity>, fb: FormBuilder) {
+        super(_adminService, fb);
     }
-
-
-    onSubmit(form: any): void {
-        var entity = new Entity();
-        entity.Code = form.code;
-        entity.Description = form.description;
-        console.log(entity);
-
-        this._adminService.add(entity).subscribe(ret => {
-            console.log(ret);
-        });
-
-    }
-
 }

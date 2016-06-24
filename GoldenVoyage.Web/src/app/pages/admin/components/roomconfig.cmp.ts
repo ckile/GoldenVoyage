@@ -1,6 +1,9 @@
 ﻿import { Component } from "@angular/core";
 import { RouteConfig } from "@angular/router-deprecated";
-import { HotelComponent, RoomTypeComponent, RoomFeatureComponent  } from "../components";
+import { HotelComponent,
+    RoomTypeComponent,
+    RoomFeatureComponent,
+    OutOfOrderReasonComponent  } from "./pages";
  
 @Component({
     selector: "gv-admin-roomconfig",
@@ -9,7 +12,8 @@ import { HotelComponent, RoomTypeComponent, RoomFeatureComponent  } from "../com
     @RouteConfig([
         { path: "/Hotel", name: "Hotel", component: HotelComponent, useAsDefault: true },
         { path: "/RoomType", name: "RoomType", component: RoomTypeComponent },
-        { path: "/RoomFeature", name: "RoomFeature", component: RoomFeatureComponent }
+        { path: "/RoomFeature", name: "RoomFeature", component: RoomFeatureComponent },
+        { path: "/OutOfOrderReason", name: "OutOfOrderReason", component: OutOfOrderReasonComponent}
     ])
 export class RoomConfigComponent {
 

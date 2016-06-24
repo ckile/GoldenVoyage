@@ -1,0 +1,12 @@
+﻿ <form [ngFormModel]="itemForm" (ngSubmit)="onSubmit(itemForm.value)">
+    <div class="form-group" [class.has-warning]="!code.valid && code.touched">
+        <label for="code1">代码</label>
+        <input type="text" class="form-control" id="code1" ngControl="code">
+    </div>
+    <div class="form-group">
+        <label for="description1">描述</label>
+        <input type="text" class="form-control" id="description1" ngControl="description">
+    </div>
+
+    <button [class.sr-only]="!itemForm.valid" type="submit" class="btn btn-success">添加</button>
+</form>

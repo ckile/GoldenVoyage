@@ -2,14 +2,14 @@
 import { AdminService } from "../../admin.service";
 import { Entity } from "../../../../models";
 import { GvCard } from "../../../../layout";
-import { ListComponent } from "./list";
-import { FormComponent } from "./form";
+import { EntityListComponent } from "../common/entitylist";
+import { EntityFormComponent } from "../common/entityform";
 
 @Component({
     selector: "gv-admin-roomtype",
     template: require("../common/cmp.html"),
     providers: [AdminService],
-    directives: [GvCard, FormComponent, ListComponent],
+    directives: [GvCard, EntityFormComponent, EntityListComponent],
 
 })
 export class RoomTypeComponent {

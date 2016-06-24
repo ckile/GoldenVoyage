@@ -6,15 +6,15 @@ import { EntityListComponent } from "../common/entitylist";
 import { EntityFormComponent } from "../common/entityform";
 
 @Component({
-    selector: "gv-admin-feature",
+    selector: "gv-admin-ethnicity",
     template: require("../common/cmp.html"),
     providers: [AdminService],
     directives: [GvCard, EntityFormComponent, EntityListComponent],
 })
-export class RoomFeatureComponent {
+export class EthnicityComponent {
     title: string;
     constructor(private _adminService: AdminService<Entity>) {
-        this.title = "房间属性";
-        _adminService.setEntityUrl("/RoomFeature");
+        this.title = "名族";
+        _adminService.setEntityUrl("/Ethnicity");
     }
 }

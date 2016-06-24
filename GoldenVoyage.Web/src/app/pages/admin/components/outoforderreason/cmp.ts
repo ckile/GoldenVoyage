@@ -6,15 +6,16 @@ import { EntityListComponent } from "../common/entitylist";
 import { EntityFormComponent } from "../common/entityform";
 
 @Component({
-    selector: "gv-admin-feature",
+    selector: "gv-admin-outoforderreason",
     template: require("../common/cmp.html"),
     providers: [AdminService],
     directives: [GvCard, EntityFormComponent, EntityListComponent],
+
 })
-export class RoomFeatureComponent {
+export class OutOfOrderReasonComponent {
     title: string;
     constructor(private _adminService: AdminService<Entity>) {
-        this.title = "房间属性";
-        _adminService.setEntityUrl("/RoomFeature");
+        this.title = "维修原因";
+        _adminService.setEntityUrl("/OutOfOrderReason");
     }
 }

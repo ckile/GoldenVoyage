@@ -1,5 +1,5 @@
 ﻿import {Component} from "@angular/core";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Validators  } from "@angular/common";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder } from "@angular/common";
 import { AdminService } from "../../admin.service";
 import { Entity } from "../../../../models";
 import { EntityFormComponent } from "../common/entityform";
@@ -10,7 +10,7 @@ import { EntityFormComponent } from "../common/entityform";
 })
 export class FormComponent extends EntityFormComponent {
 
-    constructor(  _adminService: AdminService<Entity>, fb: FormBuilder) {
+    constructor(_adminService: AdminService<Entity>, fb: FormBuilder) {
         super(_adminService, fb);
     }
 

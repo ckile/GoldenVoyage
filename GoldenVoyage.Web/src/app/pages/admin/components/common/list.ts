@@ -3,7 +3,7 @@ import { Column } from "../common/model";
 import { AdminService } from "../../admin.service";
 
 
-export class ListBase<T> {
+export abstract class ListBase<T> {
     columns: Array<Column> = new Array<Column>();
     items: Array<T>;
 
@@ -17,7 +17,7 @@ export class ListBase<T> {
         this.updateData();
     }
 
-    protected _initColumns(): void {}
+    protected abstract _initColumns();
 
     protected _getParamter(): PaginateParamter {
         this.draw += 1;

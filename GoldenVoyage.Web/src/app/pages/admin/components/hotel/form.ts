@@ -7,8 +7,7 @@ import { Hotel, HotelProfile } from "../../../../models";
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES],
     template: require("./form.html")
 })
-export class HotelFormComponent {
-    currentPage: number = 1;
+export class HotelFormComponent { 
 
     itemForm: ControlGroup;
     name: AbstractControl;
