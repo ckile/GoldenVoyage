@@ -69,6 +69,38 @@
                         enable: true,
                         title: "房间属性",
                         component: "RoomFeature"
+                    },
+                    {
+                        enable: true,
+                        title: "维修原因",
+                        component: "OutOfOrderReason"
+                    }
+                ]
+            },
+            {
+                enable: true,
+                title: "前台配置",
+                component: "FrontConfig",
+                subMenu: [
+                    {
+                        enable: true,
+                        title: "订单类型",
+                        component: "ReservationType"
+                    },
+                    {
+                        enable: true,
+                        title: "账户类型",
+                        component: "AccountType"
+                    },
+                    {
+                        enable: true,
+                        title: "市场代码",
+                        component: "Market"
+                    },
+                    {
+                        enable: true,
+                        title: "客源代码",
+                        component: "Source"
                     }
                 ]
             }
