@@ -103,6 +103,49 @@
                         component: "Source"
                     }
                 ]
+            },
+            {
+                enable: true,
+                title: "宾客配置",
+                component: "GuestConfig",
+                subMenu: [
+                    {
+                        enable: true,
+                        title: "宾客类型",
+                        component: "GuestType"
+                    },
+                    {
+                        enable: true,
+                        title: "称谓",
+                        component: "GuestTitle"
+                    },
+                    {
+                        enable: true,
+                        title: "语种",
+                        component: "Language"
+                    },
+                    {
+                        enable: true,
+                        title: "国家",
+                        component: "Country"
+                    },
+                    {
+                        enable: true,
+                        title: "省份",
+                        component: "Province"
+                    },
+                    {
+                        enable: true,
+                        title: "地区",
+                        component: "Region"
+                    },
+                    {
+                        enable: true,
+                        title: "名族",
+                        component: "Ethnicity"
+                    }
+
+                ]
             }
 
         ]

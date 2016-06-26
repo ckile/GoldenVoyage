@@ -10,7 +10,7 @@ import { GvProfilePicturePipe } from "../../pipes";
     <a href="#" class="al-sub-logo clearfix hidden-xs">金航酒店1</a>
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
-        <img src="{{ ( 'Nasta' | gvProfilePicture ) }}">
+        <img src="{{ ( 'Nick' | gvProfilePicture ) }}">
       </a>
       <div class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
         <li class="dropdown-item"><i class="dropdown-arr"></i></li>

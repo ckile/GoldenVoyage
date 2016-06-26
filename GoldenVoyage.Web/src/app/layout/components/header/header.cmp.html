@@ -1,6 +1,27 @@
 ﻿<div class="page-top clearfix blur" gvScrollPositon maxHeight="50" (scrollChange)="scrolledChanged($event)" [ngClass]="{scrolled: isScrolled}">
     <!--<a href="#" class="al-logo clearfix"><span>GV-</span>HS</a>-->
     <a (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
+ 
+    <div class="menu hidden-xs">
+        <a class="menu-link clearfix" href="#">
+            <span class="ion-android-walk"></span>
+            <span class="hidden-sm">步入</span>            
+        </a>
+        <a class="menu-link clearfix" href="#">
+        <span class="ion-android-call"></span>
+            <span class="hidden-sm">预订</span>
+         </a>
+        <a class="menu-link clearfix" href="#">
+        <span class="ion-compose"></span>
+            <span class="hidden-sm">入住</span>
+         </a>
+        <a class="menu-link clearfix" href="#">
+        <span class="ion-android-open"></span>
+            <span class="hidden-sm">退房</span>
+         </a>
+
+    </div>
+
 
     <div class="search">
         <i class="ion-ios-search-strong" ng-click="startSearch()"></i>

@@ -1,7 +1,14 @@
-﻿import {FormBuilder, ControlGroup, AbstractControl, Validators  } from "@angular/common";
+﻿import { Component } from "@angular/core";
+import { FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Validators  } from "@angular/common";
 import { AdminService } from "../../admin.service";
 import { Entity } from "../../../../models";
  
+
+@Component({
+    selector: "gv-form",
+    template:  require("./entityform.html"),
+    directives: [FORM_DIRECTIVES]
+})
 export class EntityFormComponent {
 
     itemForm: ControlGroup;
