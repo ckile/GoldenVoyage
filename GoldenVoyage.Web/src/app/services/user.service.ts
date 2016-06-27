@@ -2,7 +2,7 @@
 import { ApiService } from "./api.service";
 import { Subject, BehaviorSubject } from "rxjs";
 import 'rxjs/add/operator/map';
-import { Employee, EmployeeLogin } from "../models";
+import { Employee, EmployeeLogin, Task, Message } from "../models";
 import { appConstants } from "../app.constants";
 
 @Injectable()
@@ -12,8 +12,11 @@ export class UserService {
 
     currentEmployeeLogin: Subject<EmployeeLogin> = new BehaviorSubject<EmployeeLogin>(null);
 
-    constructor(private _apiService: ApiService) {
+    messages: Subject<Array<Message>> = new BehaviorSubject<Array<Message>>([]);
 
+    tasks: Subject<Array<Task>> = new BehaviorSubject<Array<Task>>([]);
+
+    constructor(private _apiService: ApiService) {
     }
 
     // 获取用户

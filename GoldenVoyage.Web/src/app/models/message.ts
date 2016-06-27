@@ -3,10 +3,9 @@
 
     Content: string;
 
-    MessageTime: Date;
+    PostTime: Date;
 
     FromUserId: number;
 
-
-    
+    ToUserId: number;
 }
