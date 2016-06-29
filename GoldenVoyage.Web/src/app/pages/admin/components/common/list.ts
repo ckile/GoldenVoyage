@@ -7,6 +7,8 @@ export abstract class ListBase<T> {
     columns: Array<Column> = new Array<Column>();
     items: Array<T>;
 
+
+
     currentPage: number = 0;
     pageLength: number = 10;
 
@@ -29,6 +31,9 @@ export abstract class ListBase<T> {
         return result;
     }
 
+    onEdit(item: T) {
+        this._adminService.editEntity.next(item);
+    }
 
     updateData(): void {
         var paramter = this._getParamter();

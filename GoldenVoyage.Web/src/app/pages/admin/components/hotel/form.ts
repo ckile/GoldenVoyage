@@ -5,7 +5,7 @@ import { Hotel, HotelProfile } from "../../../../models";
 @Component({
     selector: "gv-form",
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES],
-    template: require("./form.html")
+    template: require("../common/formheader.html") + require("./form.html") + require("../common/formfoot.html"),
 })
 export class HotelFormComponent { 
 

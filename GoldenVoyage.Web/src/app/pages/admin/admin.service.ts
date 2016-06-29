@@ -1,6 +1,6 @@
 ﻿import { Injectable } from "@angular/core";
 import { ApiService } from "../../services";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import "rxjs/add/operator/map";
 import { OperatorResult, PaginatedResult,PaginateParamter } from "../../models";
 
@@ -9,8 +9,10 @@ export class AdminService<T> {
 
     private url: string;
 
-    constructor(private _apiService: ApiService) {
+    editEntity: Subject<T>;
 
+    constructor(private _apiService: ApiService) {
+        this.editEntity = new Subject<T>(null);
     }
 
     setEntityUrl(url: string) {

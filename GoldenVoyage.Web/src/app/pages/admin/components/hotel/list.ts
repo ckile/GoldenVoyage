@@ -1,5 +1,5 @@
 ﻿import {Component} from "@angular/core";
-import { Hotel } from "../../../../models"; 
+import { Hotel } from "../../../../models";
 import { GvFieldSplit } from "../../../../common/pipes/gvFieldSplit.pipe";
 import { AdminService } from "../../admin.service";
 import { ListBase } from "../common/list";
@@ -7,12 +7,11 @@ import { ListBase } from "../common/list";
 @Component({
     selector: "gv-list",
     template: require("../common/list.html"),
-    pipes:[GvFieldSplit]
+    pipes: [GvFieldSplit]
 })
 export class HotelListComponent extends ListBase<Hotel> {
-
     constructor(_adminService: AdminService<Hotel>) {
-        super(_adminService); 
+        super(_adminService);
     }
 
     protected _initColumns(): void {
@@ -23,5 +22,7 @@ export class HotelListComponent extends ListBase<Hotel> {
             { title: "本地服务", field: "Profile.LocalServiceAddress" }
         ];
     }
+
+ 
 
 }

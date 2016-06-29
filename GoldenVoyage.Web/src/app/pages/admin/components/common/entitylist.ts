@@ -3,7 +3,7 @@ import { Entity } from "../../../../models";
 import { AdminService } from "../../admin.service";
 
 import { ListBase } from "../common/list";
-
+import { Column } from "../common/model";
 import { GvFieldSplit } from "../../../../common/pipes/gvFieldSplit.pipe";
 
 @Component({
@@ -23,5 +23,12 @@ export class EntityListComponent extends ListBase<Entity> {
             { title: "描述", field: "Description" }
         ];
     }
+
+ 
+
+    protected _addColumn(col: Column): void {
+        this.columns.push(col);
+    }
+
 
 }

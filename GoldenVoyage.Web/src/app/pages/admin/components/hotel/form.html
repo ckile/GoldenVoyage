@@ -1,5 +1,4 @@
-﻿<form [ngFormModel]="itemForm" (ngSubmit)="onSubmit(itemForm.value)">
-    <div class="form-group" [class.has-warning]="!name.valid && name.touched">
+﻿    <div class="form-group" [class.has-warning]="!name.valid && name.touched">
         <label for="hotelName1">酒店名称</label>
         <input type="text" class="form-control" id="hotelName1" ngControl="name">
     </div>
@@ -15,6 +14,3 @@
         <label for="localApi1">本地服务位置</label>
         <input type="text" class="form-control" id="localApi1" ngControl="localApi">
     </div>
-
-    <button [class.sr-only]="!itemForm.valid" type="submit" class="btn btn-success">添加</button>
-</form>

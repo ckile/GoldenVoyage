@@ -4,8 +4,10 @@ import { Entity } from "./entity";
 export class Room {
     Id: number;
     code: string;
+    HotelId: number;
     Hotel: Hotel;
-    type: Entity;
+    TypeId: number;
+    Type: Entity;
     Features: Array<any>;
     Floor: number;
     Beds: number;

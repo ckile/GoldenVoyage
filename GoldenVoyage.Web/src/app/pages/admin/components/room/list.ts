@@ -6,10 +6,10 @@ import { ListBase } from "../common/list";
 
 @Component({
     selector: "gv-list",
-    template: require("../common/list.html"),
+    template: require("../common/list.html") + require("./list.html"),
     pipes: [GvFieldSplit]
 })
-export class HotelListComponent extends ListBase<Room> {
+export class RoomListComponent extends ListBase<Room> {
     constructor(_adminService: AdminService<Room>) {
         super(_adminService);
     }
@@ -23,4 +23,6 @@ export class HotelListComponent extends ListBase<Room> {
             { title: "床位数", field: "Beds" },
         ];
     }
+
+ 
 }

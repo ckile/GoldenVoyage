@@ -74,6 +74,11 @@
                         enable: true,
                         title: "维修原因",
                         component: "OutOfOrderReason"
+                    },
+                    {
+                        enable: true,
+                        title: "房间配置",
+                        component: "Room",
                     }
                 ]
             },
