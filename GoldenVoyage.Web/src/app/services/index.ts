@@ -3,6 +3,7 @@
 export * from "./api.service";
 export * from "./security.service";
 export * from "./user.service";
+export * from "./search.service";
 
 import { ApiService } from "./api.service";
 import { SecurityService } from "./security.service";

@@ -6,6 +6,9 @@ import { RouteConfig } from "@angular/router-deprecated";
 
 import { PagesComponent } from "./pages";
 import { AppState } from "./app.state";
+
+import { UserService, SearchService } from "./services";
+
 import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
 import { GvThemeRun } from "./layout/directives";
 import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner } from "./layout/services";
@@ -22,7 +25,7 @@ import { layoutPaths } from "./layout";
     selector: "app",
     pipes: [],
     directives: [GvThemeRun],
-    providers: [GvLayoutConfigProvider, GvLayoutConfig, GvImageLoaderService, GvThemeSpinner],
+    providers: [SearchService, GvLayoutConfigProvider, GvLayoutConfig, GvImageLoaderService, GvThemeSpinner],
     encapsulation: ViewEncapsulation.None,
     styles: [require("normalize.css"), require("./app.scss")],
     template: `
