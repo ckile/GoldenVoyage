@@ -1,0 +1,4 @@
+﻿<div class="search">
+    <i class="ion-ios-search-strong" ng-click="startSearch($event)"></i>
+    <input id="searchInput" type="text" [(ngModel)]="searchText" [keydown.enter]="startSearch($event)" placeholder="搜索 ...">
+</div>

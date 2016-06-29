@@ -16,7 +16,13 @@ export class UserService {
 
     tasks: Subject<Array<Task>> = new BehaviorSubject<Array<Task>>([]);
 
-    constructor(private _apiService: ApiService) {
+    constructor(private _apiService: ApiService,
+        private _userService: UserService) {
+
+        _userService.currentEmployeeLogin.subscribe(login => {
+            // 获取登陆确定跳转
+        });
+
     }
 
     // 获取用户
