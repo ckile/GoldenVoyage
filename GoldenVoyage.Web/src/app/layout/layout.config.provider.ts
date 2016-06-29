@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 export class GvLayoutConfigProvider {
     basic = {
         default: '#ffffff',
-        defaultText: '#ffffff',
+        defaultText: '#000000',
         border: '#dddddd',
         borderDark: '#aaaaaa',
     };
@@ -67,7 +67,7 @@ export class GvLayoutConfigProvider {
 
             custom: {
                 dashboardLineChart: this.basic.defaultText,
-                dashboardPieChart: colorHelper.hexToRgbA(this.basic.defaultText, 0.8)
+                dashboardPieChart: colorHelper.hexToRgbA(this.colorScheme.info, 0.8)
             }
         }
     };

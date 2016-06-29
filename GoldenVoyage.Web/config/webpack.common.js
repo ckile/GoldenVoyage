@@ -35,7 +35,7 @@ module.exports = {
               {
                   test: /\.js$/,
                   loader: 'source-map-loader',
-                  exclude: [ 
+                  exclude: [
                     helpers.root('node_modules/rxjs')
                   ]
               }
@@ -84,7 +84,6 @@ module.exports = {
         ],
     },
 
-
     plugins: [
         new ExtractTextPlugin('initial.css', {
             allChunks: true
@@ -113,6 +112,7 @@ module.exports = {
             //filename: "../Views/Shared/_Layout.cshtml"
         }),
         new webpack.ProvidePlugin({
+            moment: "moment",
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery",

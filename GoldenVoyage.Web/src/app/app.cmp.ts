@@ -7,7 +7,7 @@ import { RouteConfig } from "@angular/router-deprecated";
 import { PagesComponent } from "./pages";
 import { AppState } from "./app.state";
 
-import { UserService, SearchService } from "./services";
+import { SearchService } from "./services";
 
 import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
 import { GvThemeRun } from "./layout/directives";

@@ -16,13 +16,7 @@ export class UserService {
 
     tasks: Subject<Array<Task>> = new BehaviorSubject<Array<Task>>([]);
 
-    constructor(private _apiService: ApiService,
-        private _userService: UserService) {
-
-        _userService.currentEmployeeLogin.subscribe(login => {
-            // 获取登陆确定跳转
-        });
-
+    constructor(private _apiService: ApiService ) {
     }
 
     // 获取用户
@@ -31,4 +25,44 @@ export class UserService {
             this.currentEmployeeLogin.next(res.json());
         });
     }
+}
+
+// model
+export class Tab { }
+
+// service
+export class TabSer {
+    createTab: Subject<Tab> = new Subject<Tab>(null); 
+
+    addTab(tab: Tab) {
+        this.createTab.next(tab);
+    }
+}
+
+// component 此处 注册TabSer的 供应商 provider
+export class AppCmp {
+
+    constructor(private _ser: TabSer) {}
+
+    onAddTab() {
+        let tab = new Tab();
+        this._ser.addTab(tab);
+    }
+
+}
+
+// 注入服务
+export class TabPageCmp { }
+
+// 注入服务
+export class TabNavCmp {
+
+    constructor(private _ser: TabSer) {
+        _ser.createTab.subscribe(tab => { this._addTab(tab) });
+    }
+
+    private _addTab(tab: Tab) {
+        // 处理添加
+    }
+
 }

@@ -1,12 +1,18 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+
+import { GvCard } from "../../layout";
+import { PieChart } from "./pieChart";
+
 @Component({
     selector: "gv-dashboard",
-    template: `<h1>Dashboard</h1>`
+    directives: [GvCard, PieChart],
+    encapsulation: ViewEncapsulation.None,
+    template: require("./dashboard.cmp.html"),
+    styles: [require("./dashboard.scss")],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent{
     constructor() {
     }
 
-    public ngOnInit(): void {
-    }
+ 
 }

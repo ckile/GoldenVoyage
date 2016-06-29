@@ -1,5 +1,7 @@
 ﻿// TypeScript 全局变量与js无关
 
+declare var moment: any;
+
 declare var jQuery: any;
 //declare var L: any;
 declare var ENV: string;

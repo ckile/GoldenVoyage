@@ -6,3 +6,4 @@ export * from './app.cmp';
 export const APP_PROVIDERS = [
     AppState
 ];
+

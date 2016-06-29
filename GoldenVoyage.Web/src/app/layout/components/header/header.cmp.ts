@@ -8,7 +8,7 @@ import { SearchComponent } from "../gvSearch/gvSearch";
     selector: "gv-header",
     styles: [require("./header.cmp.scss")],
     template: require("./header.cmp.html"),
-    directives: [ROUTER_DIRECTIVES, GvScrollPosition, UserInfoComponent, SearchComponent],
+    directives: [ROUTER_DIRECTIVES, GvScrollPosition, UserInfoComponent,  SearchComponent],
     encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
