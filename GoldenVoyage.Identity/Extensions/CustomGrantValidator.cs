@@ -15,7 +15,7 @@
  */
 
 using System.Threading.Tasks;
-using IdentityServer4.Core.Validation;
+using IdentityServer4.Validation;
 
 namespace GoldenVoyage.Identity.Extensions
 {

@@ -2,14 +2,14 @@
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Title } from '@angular/platform-browser';
-import { RouteConfig } from "@angular/router-deprecated";
+import { RouteConfig,Router } from "@angular/router-deprecated";
 
 import { PagesComponent } from "./pages";
 import { AppState } from "./app.state";
 
-import { SearchService } from "./services";
+import { SearchService,UserService } from "./services";
 
-import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
+import { GvLayoutConfigProvider, GvLayoutConfig, UnauthorizedComponent } from "./layout";
 import { GvThemeRun } from "./layout/directives";
 import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner } from "./layout/services";
 
@@ -35,17 +35,23 @@ import { layoutPaths } from "./layout";
         </main>
         `
 })
-@RouteConfig([
+    @RouteConfig([
         {
-            path: "/pages/...",
-            name: "Pages",
-            component: PagesComponent,
+            path: "/unauthorized",
+            name: "Unauthorized",
+            component: UnauthorizedComponent,
             useAsDefault: true
         },
         {
+            path: "/pages/...",
+            name: "Pages",
+            component: PagesComponent 
+        },
+        {
             path: "/**",
-            redirectTo: ["Pages"]
-        }
+            redirectTo: ["Unauthorized"]
+        },
+
 ])
 export class AppComponent {
 
@@ -55,15 +61,26 @@ export class AppComponent {
         private _imageLoader: GvImageLoaderService,
         private _spinner: GvThemeSpinner, 
         private _config: GvLayoutConfig, 
-        private _appTitle: Title) {
+        private _appTitle: Title,
+        private _userService: UserService,
+        private _router: Router) {
 
         _appTitle.setTitle("GVHS");
 
        // this._loadImages();
 
+        this._userService.currentEmployeeLogin.subscribe((login) => {
+            console.log(login);
+            _router.navigate(["Pages"]);
+        });
+
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
+
+
+        this._userService.getCurrentEmployeeLogin();
+
     }
 
     

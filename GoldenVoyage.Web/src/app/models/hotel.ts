@@ -1,20 +1,20 @@
 export class Hotel {
-    Id: number;
+    id: number;
 
-    Name: string;
+    name: string;
 
-    ProfileId: number;
+    profileId: number;
 
-    Profile: HotelProfile;
+    profile: HotelProfile;
 }
 
 export class HotelProfile {
 
-    Id: number;
+    id: number;
 
-    HotelDate: Date;
+    hotelDate: Date;
 
-    ReportDate: Date;
+    reportDate: Date;
 
-    LocalServiceAddress: string;
+    localServiceAddress: string;
 }

@@ -1,4 +1,4 @@
-﻿using IdentityServer4.Core.Models;
+﻿using IdentityServer4.Models;
 
 namespace GoldenVoyage.Identity.UI.Error
 {

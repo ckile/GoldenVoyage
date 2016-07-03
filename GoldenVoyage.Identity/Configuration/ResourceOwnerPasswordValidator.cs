@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoldenVoyage.Models;
 using GoldenVoyage.Models.Entities;
-using IdentityServer4.Core.Validation;
+using IdentityServer4.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoldenVoyage.Identity.Configuration

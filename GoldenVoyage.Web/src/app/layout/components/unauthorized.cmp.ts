@@ -3,7 +3,7 @@ import { CORE_DIRECTIVES } from '@angular/common';
 
 @Component({
     selector: 'unauthorized',
-    template: `<h1>Unauthorized</h1>`
+    template: `<h1>身份认证...</h1>`
 })
 
 export class UnauthorizedComponent implements OnInit {

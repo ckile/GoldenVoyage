@@ -1,7 +1,8 @@
-﻿using IdentityServer4.Core.Services;
+﻿using System.Threading.Tasks;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 
 namespace GoldenVoyage.Identity.UI.Login
 {
@@ -17,7 +18,7 @@ namespace GoldenVoyage.Identity.UI.Login
         public async Task ExecuteResultAsync(ActionContext context)
         {
             var interaction = context.HttpContext.RequestServices.GetRequiredService<SignInInteraction>();
-            await interaction.ProcessResponseAsync(_requestId, new IdentityServer4.Core.Models.SignInResponse());
+            await interaction.ProcessResponseAsync(_requestId, new SignInResponse());
         }
     }
 }

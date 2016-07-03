@@ -26,11 +26,11 @@ export class HotelFormComponent {
 
     onSubmit(form: any): void {
         var entity = new Hotel();
-        entity.Name = form.name;
-        entity.Profile = new HotelProfile();
-        entity.Profile.HotelDate = form.hotelDate;
-        entity.Profile.ReportDate = form.reportDate;
-        entity.Profile.LocalServiceAddress = form.localApi;
+        entity.name = form.name;
+        entity.profile = new HotelProfile();
+        entity.profile.hotelDate = form.hotelDate;
+        entity.profile.reportDate = form.reportDate;
+        entity.profile.localServiceAddress = form.localApi;
         console.log(entity);
 
         this._adminService.add(entity).subscribe(ret => {

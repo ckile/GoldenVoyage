@@ -5,9 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using GoldenVoyage.Models;
 using IdentityModel;
-using IdentityServer4.Core.Extensions;
-using IdentityServer4.Core.Models;
-using IdentityServer4.Core.Services;
+using IdentityServer4.Extensions;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 
 namespace GoldenVoyage.Identity.Configuration
 {

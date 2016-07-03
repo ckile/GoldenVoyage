@@ -1,5 +1,5 @@
 export class OperatorResult {
-    Flag: boolean;
-    Code: number;
-    Data: any;
+    flag: boolean;
+    code: number;
+    data: any;
 }

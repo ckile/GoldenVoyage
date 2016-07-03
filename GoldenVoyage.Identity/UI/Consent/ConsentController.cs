@@ -1,10 +1,10 @@
-﻿using IdentityServer4.Core;
-using IdentityServer4.Core.Services;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer4.Core.Models;
 
 namespace GoldenVoyage.Identity.UI.Consent
 {
@@ -79,7 +79,7 @@ namespace GoldenVoyage.Identity.UI.Consent
             return View("Error");
         }
 
-        async Task<IActionResult> BuildConsentResponse(string id, string[] scopesConsented, bool rememberConsent)
+        private async Task<IActionResult> BuildConsentResponse(string id, string[] scopesConsented, bool rememberConsent)
         {
             if (id != null)
             {
@@ -89,7 +89,7 @@ namespace GoldenVoyage.Identity.UI.Consent
             return View("Error");
         }
 
-        async Task<ConsentViewModel> BuildViewModelAsync(string id, ConsentInputModel model = null)
+        private async Task<ConsentViewModel> BuildViewModelAsync(string id, ConsentInputModel model = null)
         {
             if (id != null)
             {

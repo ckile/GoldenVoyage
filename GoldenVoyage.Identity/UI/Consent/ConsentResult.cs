@@ -1,8 +1,8 @@
-﻿using IdentityServer4.Core.Models;
-using IdentityServer4.Core.Services;
+﻿using System.Threading.Tasks;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 
 namespace GoldenVoyage.Identity.UI.Consent
 {

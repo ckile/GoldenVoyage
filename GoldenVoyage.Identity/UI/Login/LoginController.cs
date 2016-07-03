@@ -3,8 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using GoldenVoyage.Models.Entities;
 using IdentityModel;
-using IdentityServer4.Core;
-using IdentityServer4.Core.Services;
+using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenVoyage.Identity.UI.Login

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using GoldenVoyage.Identity.Configuration;
 using GoldenVoyage.Identity.Extensions;
 using GoldenVoyage.Models;
-using IdentityServer4.Core.Services;
-using IdentityServer4.Core.Validation;
+using IdentityServer4.Services;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +47,7 @@ namespace GoldenVoyage.Identity
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var builder = services.AddIdentityServer(options =>
             {
-                options.SigningCertificate = cert;
+                // options.SigningCertificate = cert;
             });
 
             builder.AddInMemoryClients(Clients.Get());
@@ -56,6 +56,8 @@ namespace GoldenVoyage.Identity
             builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
 
             builder.AddCustomGrantValidator<Extensions.CustomGrantValidator>();
+
+            builder.SetSigningCredential(cert);
 
             // for the UI
             services

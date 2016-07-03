@@ -19,11 +19,11 @@ export class RoomListComponent extends ListBase<Room> {
 
     protected _initColumns(): void {
         this.columns = [
-            { title: "房号", field: "Code" },
-            { title: "房间类型", field: "Type.Description" },
-            { title: "酒店", field: "Hotel.Name" },
-            { title: "楼层", field: "Floor" },
-            { title: "床位数", field: "Beds" },
+            { title: "房号", field: "code" },
+            { title: "房间类型", field: "type.description" },
+            { title: "酒店", field: "hotel.name" },
+            { title: "楼层", field: "floor" },
+            { title: "床位数", field: "beds" },
         ];
     }
 

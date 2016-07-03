@@ -1,7 +1,7 @@
-﻿using IdentityServer4.Core;
-using IdentityServer4.Core.Services;
+﻿using System.Threading.Tasks;
+using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace GoldenVoyage.Identity.UI.Error
 {
@@ -14,7 +14,7 @@ namespace GoldenVoyage.Identity.UI.Error
             _errorInteraction = errorInteraction;
         }
 
-        [Route(Constants.RoutePaths.Error, Name ="Error")]
+        [Route(Constants.RoutePaths.Error, Name = "Error")]
         public async Task<IActionResult> Index(string id)
         {
             var vm = new ErrorViewModel();

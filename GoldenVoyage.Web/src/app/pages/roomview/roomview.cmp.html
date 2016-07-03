@@ -1,1 +1,5 @@
-﻿<h1>RoomView</h1>
+﻿<div class="row">
+    <div *ngFor="let room of rooms">
+        <gv-roombox [room]="room"></gv-roombox>
+    </div>
+</div>

@@ -17,17 +17,19 @@ export class SidebarService {
     }
 
     // 选择一个
-    public selectMenuItem(items: Array<any>, currentPath: string): void {
+    public selectMenuItem(items: Array<any>): void {
+        
         let currentMenu;
         let assignCurrent = (menu) => (menu.selected ? currentMenu = menu : null);
 
         items.forEach((menu: any) => {
-            this._selectItem(currentPath, [menu.component], menu);
+            this._selectItem([menu.component], menu);
             assignCurrent(menu);
 
             if (menu.subMenu) {
                 menu.subMenu.forEach((subMenu) => {
-                    this._selectItem(currentPath, [menu.component, subMenu.component], subMenu, menu);
+                    this._selectItem([menu.component, subMenu.component], subMenu, menu);
+                    assignCurrent(subMenu);
                 });
             }
         });
@@ -35,9 +37,9 @@ export class SidebarService {
         return currentMenu;
     }
 
-    private _selectItem(currentPath, instructions, item, parentMenu = null) {
+    private _selectItem(instructions, item, parentMenu = null) {
         let route = this._generateRoute(instructions);
-        item.selected = !item.disabled && this._isCurrent(route) && this._resolvePath(route, '') == currentPath;
+        item.selected = !item.disabled && this._isCurrent(route);
         if (parentMenu) {
             parentMenu.expanded = parentMenu.expanded || item.selected;
         }
@@ -50,13 +52,5 @@ export class SidebarService {
     private _generateRoute(instructions) {
         return instructions.filter(i => typeof i !== 'undefined').length > 0 ? this._router.generate(instructions) : null;
     }
-
-    private _resolvePath(instruction, collected) {
-        if (instruction !== null) {
-            collected += instruction.urlPath + '/';
-            return this._resolvePath(instruction.child, collected)
-        } else {
-            return collected.slice(0, -1);
-        }
-    }
+     
 }

@@ -25,8 +25,8 @@ export class EntityFormComponent {
     // 构建一个form
     private _builddingForm(fb:FormBuilder, entity?: Entity): void {
         this.itemForm = fb.group({
-            "code": [entity && entity.Code || "", Validators.required],
-            "description": [entity && entity.Description || ""],
+            "code": [entity && entity.code || "", Validators.required],
+            "description": [entity && entity.description || ""],
         });
         this.code = this.itemForm.controls["code"];
 
@@ -35,8 +35,8 @@ export class EntityFormComponent {
 
     onSubmit(form: any): void {
         var entity = new Entity();
-        entity.Code = form.code;
-        entity.Description = form.description;
+        entity.code = form.code;
+        entity.description = form.description;
         console.log(entity);
 
         this._adminService.add(entity).subscribe(ret => {

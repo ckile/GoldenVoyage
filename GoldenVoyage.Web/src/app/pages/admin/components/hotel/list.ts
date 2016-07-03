@@ -19,10 +19,10 @@ export class HotelListComponent extends ListBase<Hotel> {
 
     protected _initColumns(): void {
         this.columns = [
-            { title: "名称", field: "Name" },
-            { title: "营业日期", field: "Profile.HotelDate" },
-            { title: "报表日期", field: "Profile.ReportDate" },
-            { title: "本地服务", field: "Profile.LocalServiceAddress" }
+            { title: "名称", field: "name" },
+            { title: "营业日期", field: "profile.hotelDate" },
+            { title: "报表日期", field: "profile.reportDate" },
+            { title: "本地服务", field: "profile.localServiceAddress" }
         ];
     }
 

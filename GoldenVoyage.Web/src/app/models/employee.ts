@@ -1,38 +1,38 @@
 ﻿import { Hotel} from "./hotel";
 
 export class Employee {
-	Id: number;
+	id: number;
 
-	Name: string;
+	name: string;
 
-	Role: number;
+	role: number;
 
-	UserCode: string;
+	userCode: string;
 
-	DepartmentId: number;
+	departmentId: number;
 
-	Department: any;
+	department: any;
 
-	PositionId: number;
+	positionId: number;
 
-	Position: any;
+	position: any;
 
-	DefaultHotelId: number;
+	defaultHotelId: number;
 
-	DefaultHotel: Hotel;
+	defaultHotel: Hotel;
 }
 
 export class EmployeeLogin {
-	Id: number;
+	id: number;
 
-	EmployeeId: number;
+	employeeId: number;
 
-	Employee: Employee;
+	employee: Employee;
 
-	CurrentHotelId: number;
+	currentHotelId: number;
 
-	CurrentHotel: Hotel;
+	currentHotel: Hotel;
 
-	LoginTime: Date;
+	loginTime: Date;
 
 }

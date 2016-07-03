@@ -1,6 +1,6 @@
 ﻿export class Entity {
-    Id: number;
-    Code: string;
-    Description: string;
+    id: number;
+    code: string;
+    description: string;
 
 }

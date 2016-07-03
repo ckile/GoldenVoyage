@@ -18,13 +18,12 @@ export class UserInfoComponent {
             this._updateUserInfo(login);
         });
 
-        this._userService.getCurrentEmployeeLogin();
     }
 
     private _updateUserInfo(login: EmployeeLogin): void {
        
-        this.hotelName = login && login.CurrentHotel && login.CurrentHotel.Name || "";
-        this.userName = login && login.Employee && login.Employee.Name || "";
+        this.hotelName = login && login.currentHotel && login.currentHotel.name || "";
+        this.userName = login && login.employee && login.employee.name || "";
     }
 
 

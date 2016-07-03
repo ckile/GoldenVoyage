@@ -60,7 +60,7 @@ namespace GoldenVoyage.ApiServices.Services
             var allCount = await Set().CountAsync();
 
             var query = Set()
-                        .PageOrderBy(GetOrderKeys(paramter))
+                       // .PageOrderBy(GetOrderKeys(paramter))
                         .Where(GetPredicate(paramter));
 
             var filterCount = await query.CountAsync();

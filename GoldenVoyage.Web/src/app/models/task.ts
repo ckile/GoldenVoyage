@@ -3,5 +3,5 @@
 
     content: string;
 
-    PostTime: Date;
+    postTime: Date;
 }

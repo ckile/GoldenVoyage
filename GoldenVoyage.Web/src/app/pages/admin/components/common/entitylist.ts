@@ -22,8 +22,8 @@ export class EntityListComponent extends ListBase<Entity> {
 
     protected _initColumns(): void {
         this.columns = [
-            { title: "代码", field: "Code" },
-            { title: "描述", field: "Description" }
+            { title: "代码", field: "code" },
+            { title: "描述", field: "description" }
         ];
     }
 

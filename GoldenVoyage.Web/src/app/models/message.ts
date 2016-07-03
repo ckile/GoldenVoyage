@@ -1,11 +1,11 @@
 ﻿export class Message {
-    Id: number;
+    id: number;
 
-    Content: string;
+    content: string;
 
-    PostTime: Date;
+    postTime: Date;
 
-    FromUserId: number;
+    fromUserId: number;
 
-    ToUserId: number;
+    toUserId: number;
 }
