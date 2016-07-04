@@ -110,7 +110,7 @@ export class SidebarComponent implements OnInit {
     }
 
     private _selectMenuItem(currentPath = null): void {
-        let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems, currentPath);
+        let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems);
 
         this._state.notifyDataChanged('menu.activeLink', currentMenu);
         // hide menu after natigation on mobile devises

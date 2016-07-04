@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using GoldenVoyage.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldenVoyage.ApiServices.Services
 {
@@ -15,5 +17,14 @@ namespace GoldenVoyage.ApiServices.Services
         {
             return ServiceContext.DbContext;
         }
+
+        protected Task<EmployeeLogin> GetLogin()
+        {
+            return ServiceContext.DbContext.Set<EmployeeLogin>()
+             .Include(t => t.Employee)
+             .Include(t => t.CurrentHotel)
+             .FirstOrDefaultAsync(t => t.Id.Equals(ServiceContext.LoginId));
+        }
+
     }
 }

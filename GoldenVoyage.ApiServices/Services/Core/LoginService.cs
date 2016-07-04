@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GoldenVoyage.Models;
 using GoldenVoyage.Models.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldenVoyage.ApiServices.Services.Core
 {
@@ -18,10 +15,7 @@ namespace GoldenVoyage.ApiServices.Services.Core
         public async Task<EmployeeLogin> GetLoginInfo()
         {
             var loginId = ServiceContext.LoginId;
-            return await ServiceContext.DbContext.Set<EmployeeLogin>()
-                         .Include(t => t.Employee)
-                         .Include(t => t.CurrentHotel)
-                         .FirstOrDefaultAsync(t => t.Id.Equals(loginId));
+            return await GetLogin();
         }
 
         public Task<OperatorResult> SwitchHotel(int hotelId)

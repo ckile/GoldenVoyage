@@ -26,10 +26,10 @@ export class RoomFormComponent {
     onSubmit(form: any): void {
         var entity = new Room();
         entity.code = form.code;
-        entity.HotelId = form.hotelId;
-        entity.TypeId = form.typeId;
-        entity.Floor = form.floor;
-        entity.Beds = form.beds;
+        entity.hotelId = form.hotelId;
+        entity.typeId = form.typeId;
+        entity.floor = form.floor;
+        entity.beds = form.beds;
         console.log(entity);
 
         this._adminService.add(entity).subscribe(ret => {

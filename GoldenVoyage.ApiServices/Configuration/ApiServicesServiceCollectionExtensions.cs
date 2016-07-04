@@ -6,6 +6,7 @@ using GoldenVoyage.ApiServices.Configuration.Options;
 using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.ApiServices.Services.Core;
 using GoldenVoyage.ApiServices.Services.Entities;
+using GoldenVoyage.ApiServices.Services.Modules;
 using GoldenVoyage.Models;
 using GoldenVoyage.Models.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,7 @@ namespace GoldenVoyage.ApiServices.Configuration
 
         private static IServiceCollection AddModuleServices(this IServiceCollection services)
         {
+            // Entities
             services.AddTransient<IEntityService<Hotel>, HotelService>();
             services.AddTransient<IEntityService<Employee>, EmployeeService>();
             services.AddEntityService<RoomType>();
@@ -68,6 +70,8 @@ namespace GoldenVoyage.ApiServices.Configuration
             services.AddEntityService<TransactCode>();
             services.AddEntityService<TransactClassify>();
 
+            // Modules
+            services.AddTransient<IRoomViewService, RoomViewService>();
             return services;
         }
 

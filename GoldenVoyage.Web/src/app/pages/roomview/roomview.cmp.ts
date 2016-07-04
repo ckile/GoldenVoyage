@@ -10,11 +10,13 @@ import { RoomBoxComponent } from "./components";
     directives: [RoomBoxComponent]
 })
 export class RoomviewComponent implements OnInit {
-
     rooms: Array<Room> = new Array<Room>();
 
     public constructor(private _roomViewService: RoomViewService) {
-         
+        this._roomViewService.rooms.subscribe((rooms) => {
+            this.rooms = rooms;
+        });
+        _roomViewService.getRooms();
     }
 
     public ngOnInit(): void {
