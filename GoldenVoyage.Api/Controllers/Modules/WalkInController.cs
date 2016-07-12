@@ -1,4 +1,7 @@
-﻿using GoldenVoyage.ApiServices.Services;
+﻿using System.Threading.Tasks;
+using GoldenVoyage.ApiServices.Services;
+using GoldenVoyage.Models.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenVoyage.Api.Controllers.Modules
 {
@@ -6,6 +9,14 @@ namespace GoldenVoyage.Api.Controllers.Modules
     {
         public WalkInController(IApiServicesProvider apiServicesProvider) : base(apiServicesProvider)
         {
+        }
+
+        public async Task<IActionResult> GetParamters()
+        {
+            return Ok(new
+            {
+                accountTypes = await Create<IEntityService<Account>>().GetAll()
+            });
         }
     }
 }

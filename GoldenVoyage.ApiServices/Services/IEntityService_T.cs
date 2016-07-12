@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using GoldenVoyage.Models;
 
 namespace GoldenVoyage.ApiServices.Services
 {
     public interface IEntityService<TEntity>
     {
+        Task<IEnumerable<TEntity>> GetAll();
+
         Task<TEntity> GetBy(int id);
 
         Task<PaginatedResult<TEntity>> GetBy(PaginateParamter paramter);

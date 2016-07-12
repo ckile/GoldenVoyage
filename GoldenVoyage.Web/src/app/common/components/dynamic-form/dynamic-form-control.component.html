@@ -1,0 +1,10 @@
+﻿<div [formGroup]="form">
+    <label [attr.for]="control.key">{{ control.label }}</label>
+    <!--<div [ngSwitch]="control.controlType">
+        <input [id]="control.key" *ngSwitchCase="'textbox'" [formControlName]="control.key"
+               [type]="'text'">
+        <select [id]="control.key" *ngSwitchCase="'dropdown'" [formControlName]="control.key">
+            <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+    </div>-->
+</div>

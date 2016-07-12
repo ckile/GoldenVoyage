@@ -60,7 +60,7 @@ namespace GoldenVoyage.ApiServices.Services
             var allCount = await Set().CountAsync();
 
             var query = Set()
-                       // .PageOrderBy(GetOrderKeys(paramter))
+                        // .PageOrderBy(GetOrderKeys(paramter))
                         .Where(GetPredicate(paramter));
 
             var filterCount = await query.CountAsync();
@@ -121,9 +121,41 @@ namespace GoldenVoyage.ApiServices.Services
                                 .FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public Task<OperatorResult> Update(int id, TEntity entity)
+        public async Task<OperatorResult> Update(int id, TEntity entity)
         {
-            throw new NotImplementedException();
+            var oldEntity = await GetBy(id);
+            if (oldEntity == null) return Error(ErrorCodes.NotFound, id.ToString());
+            var updateResult = UpdateProperties(oldEntity, entity);
+            if (!updateResult.Flag)
+                return updateResult;
+            DetachAndAttach(oldEntity, entity);
+            var result = await ServiceContext.SaveChangesAsync();
+            return result.Flag ? Success(id.ToString())
+                    : result;
+        }
+
+        protected virtual OperatorResult UpdateProperties(TEntity oldEntity, TEntity entity)
+        {
+            // if (!entity.RowVersion.SequenceEqual(oldEntity.RowVersion)) return OperatorResult.Success();
+            //  return OperatorResult.Error(typeof(TEntity).Name + ": 行版本错误！");
+            return Success();
+        }
+
+        /// <summary>
+        /// 更新实体 - 释放原有实体
+        /// </summary>
+        /// <param name="oldEntity"></param>
+        /// <param name="entity"></param>
+        protected virtual void DetachAndAttach(TEntity oldEntity, TEntity entity)
+        {
+            ServiceContext.DbContext.Entry(oldEntity).State = EntityState.Detached;
+            Set().Attach(entity);
+            Set().Update(entity);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAll()
+        {
+            return await Include(Set()).ToListAsync();
         }
     }
 }

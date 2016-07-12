@@ -70,6 +70,7 @@ namespace GoldenVoyage.Models.Entities
         /// </summary>
         public int? ShareId { get; set; }
 
+        [JsonIgnore]
         [ForeignKey(nameof(ShareId))]
         public AccountShare Share { get; set; }
 

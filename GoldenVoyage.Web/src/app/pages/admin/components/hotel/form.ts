@@ -1,19 +1,20 @@
 ﻿import {Component} from "@angular/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, AbstractControl, Validators  } from "@angular/common";
+
+import { provideForms } from "@angular/forms";
+
 import { AdminService } from "../../admin.service";
 import { Hotel, HotelProfile } from "../../../../models";
 @Component({
     selector: "gv-form",
-    directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
     template: require("../common/formheader.html") + require("./form.html") + require("../common/formfoot.html"),
 })
-export class HotelFormComponent { 
-
+export class HotelFormComponent {
     itemForm: ControlGroup;
     name: AbstractControl;
 
-    constructor(private _adminService: AdminService<Hotel>, fb: FormBuilder) { 
-
+    constructor(private _adminService: AdminService<Hotel>, fb: FormBuilder) {
         this.itemForm = fb.group({
             "name": ['', Validators.required],
             "hotelDate": [],
@@ -22,7 +23,6 @@ export class HotelFormComponent {
         });
         this.name = this.itemForm.controls["name"];
     }
-
 
     onSubmit(form: any): void {
         var entity = new Hotel();
@@ -36,7 +36,5 @@ export class HotelFormComponent {
         this._adminService.add(entity).subscribe(ret => {
             console.log(ret);
         });
-
     }
-
 }

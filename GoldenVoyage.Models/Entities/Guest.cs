@@ -132,6 +132,8 @@ namespace GoldenVoyage.Models.Entities
         // 所属宾客
         public int GuestId { get; set; }
 
+        public int SpecialRequestId { get; set; }
+        
         // 特殊要求
         public SpecialRequest SpecialRequest { get; set; }
     }

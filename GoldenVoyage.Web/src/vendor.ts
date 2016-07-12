@@ -19,5 +19,6 @@ import "lodash";
 
 import "jquery-ui";
 import "slimscroll";
+   
 import "bootstrap-datepicker";
 import "bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min"; 

@@ -3,11 +3,14 @@ import { RouteConfig } from "@angular/router-deprecated";
 
 import { HeaderComponent, SidebarComponent, GvBackTop, GvContentTop } from "../layout";
 import { DashboardComponent } from "./dashboard";
-import { WalkinComponent } from "./walkin";
+import { WalkInComponent } from "./walkin";
 import { BookingComponent } from "./booking";
+import { CheckInComponent } from "./checkin";
+import { CheckOutComponent } from "./checkout";
 import { RoomviewComponent } from "./roomview";
 import { AdminComponent } from "./admin";
-import { GuestsComponent } from "./guests";
+import { GuestsComponent,CreateGuestComponent } from "./guests";
+
 
 @Component({
     selector: "pages",
@@ -18,10 +21,13 @@ import { GuestsComponent } from "./guests";
 })
 @RouteConfig([
         { path: "/Dashboard", name: "Dashboard", component: DashboardComponent, useAsDefault: true },
-        { path: "/Walkin", name: "Walkin", component: WalkinComponent },
+        { path: "/WalkIn", name: "WalkIn", component: WalkInComponent },
         { path: "/Booking", name: "Booking", component: BookingComponent },
+        { path: "/CheckIn", name: "CheckIn", component: CheckInComponent },
+        { path: "/CheckOut", name: "CheckOut", component: CheckOutComponent },
         { path: "/RoomView", name: "RoomView", component: RoomviewComponent },
         { path: "/Guests", name: "Guests", component: GuestsComponent },
+        { path: "/CreateGuest", name: "CreateGuest", component: CreateGuestComponent },
         { path: "/Admin/...", name: "Admin", component: AdminComponent }
 
     ])

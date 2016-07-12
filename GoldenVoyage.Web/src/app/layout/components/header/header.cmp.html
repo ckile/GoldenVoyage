@@ -3,25 +3,38 @@
     <a (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
  
     <div class="menu hidden-xs">
-        <a class="menu-link clearfix" href="#">
+        <a class="menu-link clearfix" href="javascript:;"  [routerLink]="['WalkIn']">
             <span class="ion-android-walk"></span>
             <span class="hidden-sm">步入</span>            
         </a>
-        <a class="menu-link clearfix" href="#">
+        <a class="menu-link clearfix" href="javascript:;"  [routerLink]="['Booking']">
         <span class="ion-android-call"></span>
             <span class="hidden-sm">预订</span>
          </a>
-        <a class="menu-link clearfix" href="#">
+        <a class="menu-link clearfix" href="javascript:;"  [routerLink]="['CheckIn']">
         <span class="ion-compose"></span>
             <span class="hidden-sm">入住</span>
          </a>
-        <a class="menu-link clearfix" href="#">
+        <a class="menu-link clearfix" href="javascript:;"  [routerLink]="['CheckOut']">
         <span class="ion-android-open"></span>
             <span class="hidden-sm">退房</span>
-         </a>
-
+         </a> 
+      
     </div>
-
+    <div class="dropdown">
+        <a id="new-object-dd" class="menu-link dropdown-toggle" data-toggle="dropdown">
+            <span class="ion-plus"></span>
+            <span class="hidden-sm hidden-xs">新建</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="new-object-dd">
+            <li class="dropdown-item">
+                <a class="menu-link clearfix" href="javascript:;"  [routerLink]="['CreateGuest']">
+                    <span class="ion-android-open"></span> 宾客
+                </a>
+            </li>
+        </ul>
+    </div>
     <gv-search></gv-search>
 
     <gv-user-info></gv-user-info>
