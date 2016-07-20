@@ -5,11 +5,11 @@ import { FormControlBase } from "../../models";
 
 @Injectable()
 export class FormControlService {
-    toFormGroup(controls: FormControlBase<any>[]): FormGroup {
+    toFormGroup(controls: FormControlBase<any>[]) {
         let group: any = {};
         controls.forEach(control => {
             group[control.key] = control.required ? new FormControl(control.value || "", Validators.required) : new FormControl(control.value || "");
-        });
+        }); 
         return new FormGroup(group);
     }
 }

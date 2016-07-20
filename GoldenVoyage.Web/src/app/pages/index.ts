@@ -4,3 +4,4 @@ export * from "./booking";
 export * from "./guests";
 export * from "./roomview";
 export * from "./walkin";
+export * from "./pages.routes";

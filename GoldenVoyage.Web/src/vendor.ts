@@ -5,7 +5,7 @@ import "@angular/platform-browser-dynamic";
 import "@angular/core";
 import "@angular/common";
 import "@angular/http";
-import "@angular/router-deprecated";
+import "@angular/router";
 
 // RxJS
 import "rxjs";
@@ -22,3 +22,11 @@ import "slimscroll";
    
 import "bootstrap-datepicker";
 import "bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min"; 
+
+if ('production' === ENV) {
+    // Production
+
+} else {
+    // Development
+
+}

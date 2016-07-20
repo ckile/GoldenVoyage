@@ -1,0 +1,1 @@
+﻿export * from "./gvMenu.component.ts";

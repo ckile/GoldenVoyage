@@ -19,9 +19,9 @@ export class DynamicFormComponent implements OnInit {
     payLoad = "";
     constructor(private _fcs: FormControlService) {
     }
-    ngOnInit() {
-        console.log(this.controls);
+    ngOnInit() { 
         this.form = this._fcs.toFormGroup(this.controls);
+        console.log(this.form);
     }
 
     onSubmit() {

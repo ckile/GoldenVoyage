@@ -1,15 +1,13 @@
 ﻿import "./app.loader.ts";
 
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { Title } from '@angular/platform-browser';
-import { RouteConfig, Router } from "@angular/router-deprecated";
-
-import { PagesComponent } from "./pages";
+import { Title } from '@angular/platform-browser'; 
+ 
 import { AppState } from "./app.state";
 
 import { SearchService, UserService } from "./services";
 
-import { GvLayoutConfigProvider, GvLayoutConfig, UnauthorizedComponent } from "./layout";
+import { GvLayoutConfigProvider, GvLayoutConfig } from "./layout";
 import { GvThemeRun } from "./layout/directives";
 import { GvImageLoaderService, GvThemePreloader, GvThemeSpinner } from "./layout/services";
 
@@ -33,26 +31,9 @@ import { layoutPaths } from "./layout";
             <router-outlet></router-outlet>
         </main>
         `
-})
-@RouteConfig([
-    {
-        path: "/unauthorized",
-        name: "Unauthorized",
-        component: UnauthorizedComponent,
-        useAsDefault: true
-    },
-    {
-        path: "/pages/...",
-        name: "Pages",
-        component: PagesComponent
-    },
-    {
-        path: "/**",
-        redirectTo: ["Unauthorized"]
-    },
-
-])
+}) 
 export class AppComponent {
+
     isMenuCollapsed: boolean = false;
 
     constructor(private _state: AppState,
@@ -60,12 +41,11 @@ export class AppComponent {
         private _spinner: GvThemeSpinner,
         private _config: GvLayoutConfig,
         private _appTitle: Title,
-        private _userService: UserService,
-        private _router: Router) {
+        private _userService: UserService ) {
 
-        this._userService.currentEmployeeLogin.subscribe((login) => {
-            _router.navigate(["Pages"]);
-        });
+        //this._userService.currentEmployeeLogin.subscribe((login) => {
+        //    _router.navigate(["Pages"]);
+        //});
 
         this._userService.getCurrentEmployeeLogin();
 

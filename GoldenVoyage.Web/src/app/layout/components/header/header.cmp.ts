@@ -1,5 +1,4 @@
-﻿import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ROUTER_DIRECTIVES } from "@angular/router-deprecated";
+﻿import { Component, OnInit, ViewEncapsulation } from "@angular/core"; 
 import { AppState } from "../../../app.state";
 import { GvScrollPosition } from "../../directives";
 import { UserInfoComponent } from "../userinfo";
@@ -8,7 +7,7 @@ import { SearchComponent } from "../gvSearch/gvSearch";
     selector: "gv-header",
     styles: [require("./header.cmp.scss")],
     template: require("./header.cmp.html"),
-    directives: [ROUTER_DIRECTIVES, GvScrollPosition, UserInfoComponent,  SearchComponent],
+    directives: [GvScrollPosition, UserInfoComponent,  SearchComponent],
     encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {

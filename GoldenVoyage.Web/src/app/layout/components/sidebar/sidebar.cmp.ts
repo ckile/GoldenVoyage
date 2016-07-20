@@ -1,11 +1,13 @@
-﻿import { Component, OnInit, ElementRef, HostListener, ViewEncapsulation } from "@angular/core";
-import { ROUTER_DIRECTIVES, Router } from "@angular/router-deprecated";
+﻿import { Component, OnInit, ElementRef, HostListener, ViewEncapsulation } from "@angular/core"; 
+
+import { routes } from "../../../../app/app.routes";
 
 import { AppState } from "../../../app.state";
-import { layoutSizes, GvSlimScroll } from "../../../layout";
+import { layoutSizes } from "../../../layout";
 import { SidebarService } from "./sidebar.service";
 import { UserService } from "../../../services";
 import { EmployeeLogin } from "../../../models";
+import { GvMenu } from "../gvMenu";
 
 @Component({
     selector: "gv-sidebar",
@@ -13,28 +15,23 @@ import { EmployeeLogin } from "../../../models";
     styles: [require("./sidebar.cmp.scss")],
     template: require("./sidebar.cmp.html"),
     providers: [SidebarService],
-    directives: [GvSlimScroll]
+    directives: [GvMenu]
 })
 export class SidebarComponent implements OnInit {
-    public menuItems: Array<any>;
 
+    public routes = routes;
+ 
     public menuHeight: number;
     public isMenuCollapsed: boolean = false;
     public isMenuShouldCollapsed: boolean = false;
 
-    public showHoverElem: boolean;
-    public hoverElemHeight: number;
-    public hoverElemTop: number;
+ 
 
-    public outOfArea: number = -200;
-
-    constructor(private _elementRef: ElementRef,
-        private _router: Router,
+    constructor(private _elementRef: ElementRef, 
         private _state: AppState,
         private _sidebarService: SidebarService,
         private _userService: UserService) {
-        this.menuItems = _sidebarService.getMenuItems();
-        this._router.root.subscribe((path) => this._selectMenuItem(path));
+           
         this._state.subscribe("menu.isCollapsed", (isCollapsed) => {
             this.isMenuCollapsed = isCollapsed;
         });
@@ -50,7 +47,7 @@ export class SidebarComponent implements OnInit {
     }
 
     public ngAfterViewInit(): void {
-        this.updateSidebarHeight();
+        setTimeout(()=>this.updateSidebarHeight());
     }
 
     @HostListener('window:resize')
@@ -64,59 +61,28 @@ export class SidebarComponent implements OnInit {
         this.updateSidebarHeight();
     }
 
-    public updateSidebarHeight(): void {
-        // TODO: get rid of magic 84 constant
-        this.menuHeight = this._elementRef.nativeElement.childNodes[0].clientHeight - 84;
+    public menuExpand(): void {
+        this.menuCollapseStateChange(false);
     }
 
     public menuCollapse(): void {
         this.menuCollapseStateChange(true);
     }
 
-    public menuExpand(): void {
-        this.menuCollapseStateChange(false);
+
+    public updateSidebarHeight(): void {
+        // TODO: get rid of magic 84 constant
+        this.menuHeight = this._elementRef.nativeElement.childNodes[0].clientHeight - 84;
     }
 
+ 
     public menuCollapseStateChange(isCollapsed: boolean): void {
         this.isMenuCollapsed = isCollapsed;
         this._state.notifyDataChanged('menu.isCollapsed', this.isMenuCollapsed);
-    }
-
-    public hoverItem($event): void {
-        this.showHoverElem = true;
-        this.hoverElemHeight = $event.currentTarget.clientHeight;
-        // TODO: get rid of magic 66 constant
-        this.hoverElemTop = $event.currentTarget.getBoundingClientRect().top - 66;
-    }
-
-    public toggleSubMenu($event, item): boolean {
-        var submenu = jQuery($event.currentTarget).next();
-
-        if (this.isMenuCollapsed) {
-            this.menuExpand();
-            if (!item.expanded) {
-                item.expanded = true;
-            }
-        } else {
-            item.expanded = !item.expanded;
-            submenu.slideToggle();
-        }
-
-        return false;
-    }
+    } 
 
     private _shouldMenuCollapse(): boolean {
         return window.innerWidth <= layoutSizes.resWidthCollapseSidebar;
-    }
-
-    private _selectMenuItem(currentPath = null): void {
-        let currentMenu = this._sidebarService.setRouter(this._router).selectMenuItem(this.menuItems);
-
-        this._state.notifyDataChanged('menu.activeLink', currentMenu);
-        // hide menu after natigation on mobile devises
-        if (this._shouldMenuCollapse()) {
-            this.menuCollapse();
-        }
     }
 
     private _updateEmployeeLogin(login: EmployeeLogin): void {

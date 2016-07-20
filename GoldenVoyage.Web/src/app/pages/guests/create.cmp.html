@@ -1,1 +1,11 @@
-﻿<h1>Create Guest</h1>
+﻿<gv-card title="新建宾客档案"> 
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control" formControlName="name" />
+                <div class="alert alert-danger" [hidden]="form.controls.name.valid">必须填写姓名</div>
+            </div>
+
+            <button type="submit" class="btn btn-default" [disabled]="!form.valid">确定</button>
+        </form>
+</gv-card>

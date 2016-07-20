@@ -9,3 +9,4 @@ export * from "./paginatedresult";
 export * from "./paginateparamter.ts";
 export * from "./account";
 export * from "./reservation";
+export * from "./guest";
