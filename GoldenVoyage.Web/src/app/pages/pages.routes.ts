@@ -62,12 +62,15 @@ export const PagesRoutes: RouterConfig = [
                 path: "admin",
                 component: AdminComponent,
                 data: {
-                    enable: true,
-                    title: "管理", 
-                    icon: "ion-ios-toggle",
-                    selected: false,
-                    expanded: false,
-                    order: 300
+                    menu: {
+                        enable: true,
+                        title: "管理", 
+                        icon: "ion-ios-toggle",
+                        selected: false,
+                        expanded: false,
+                        order: 300
+                    }
+
                 }
             },
             {

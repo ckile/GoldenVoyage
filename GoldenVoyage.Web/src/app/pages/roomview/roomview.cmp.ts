@@ -2,11 +2,11 @@
 
 import { Room } from "../../models";
 import { RoomViewService } from "./roomview.service";
-import { RoomBoxComponent } from "./components";
+import { RoomBoxComponent,RoomBoxService } from "./components";
 @Component({
     selector: "gv-roomview",
     template: require("./roomview.cmp.html"),
-    providers: [RoomViewService],
+    providers: [RoomViewService, RoomBoxService],
     directives: [RoomBoxComponent]
 })
 export class RoomviewComponent implements OnInit {

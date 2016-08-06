@@ -1,6 +1,5 @@
-﻿<div class="col-xs-4 col-sm-3 col-md-2 col-lg-1">
-    <gv-card>
-        <p>{{ room.code }}</p>
-        <p class="text-nowrap">{{ room.type.description }}</p>
-    </gv-card>
+﻿<div class="row">
+    <div *ngFor="let room of rooms">
+        <gv-room [room]="room"></gv-room>
+    </div>
 </div>

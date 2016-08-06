@@ -1,0 +1,54 @@
+﻿@import "../../../../../../layout/sass/conf/conf.scss"; 
+$card-title-height: 44px;
+$card-header-font-size: 16px;
+
+.room {
+  @include scrollbars(.4em, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.7));
+  color: $content-text;
+  background-color: #FFF;
+  border: 0;
+  border-radius: $bootstrap-panel-radius;
+  position: relative;
+  margin-bottom: 5px;
+  box-shadow: $bootstrap-panel-shadow;
+  &.animated {
+    animation-duration: 0.5s;
+  }
+  &.small-room {
+    height: $small-card-height;
+  }
+  &.xsmall-room {
+    height: $xsmall-card-height;
+  }
+  &.medium-room {
+    height: $medium-card-height;
+  }
+  &.xmedium-room {
+    height: $extra-medium-card-height;
+  }
+  &.large-room {
+    height: $large-card-height;
+  }
+  &.viewport100 {
+    height: calc(100vh - 218px);
+  }
+
+  &.with-scroll {
+    .room-body {
+      height: calc(100% - #{$card-title-height});
+      overflow-y: auto;
+    }
+  }
+}
+
+.room {
+  > .room-body {
+    padding: 5px 5px;
+    height: 100%;
+  }
+  > .room-header {
+    color: $default-text;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  } 
+}
