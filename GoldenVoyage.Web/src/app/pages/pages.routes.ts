@@ -10,6 +10,7 @@ import { RoomviewComponent } from "./roomview";
 import { AdminComponent } from "./admin";
 import { GuestsComponent, CreateGuestComponent } from "./guests";
 
+import { AdminRoutes } from "./admin";
 
 export const PagesRoutes: RouterConfig = [
     {
@@ -23,7 +24,7 @@ export const PagesRoutes: RouterConfig = [
                     menu: {
                         enable: true,
                         title: "仪表盘",
-                        icon: "ion-android-home", 
+                        icon: "ion-android-home",
                         selected: false,
                         expanded: false,
                         order: 1
@@ -36,7 +37,7 @@ export const PagesRoutes: RouterConfig = [
                 data: {
                     menu: {
                         enable: true,
-                        title: "房态盘", 
+                        title: "房态盘",
                         icon: "ion-grid",
                         selected: false,
                         expanded: false,
@@ -50,7 +51,7 @@ export const PagesRoutes: RouterConfig = [
                 data: {
                     menu: {
                         enable: true,
-                        title: "宾客列表", 
+                        title: "宾客列表",
                         icon: "ion-person-stalker",
                         selected: false,
                         expanded: false,
@@ -59,27 +60,12 @@ export const PagesRoutes: RouterConfig = [
                 }
             },
             {
-                path: "admin",
-                component: AdminComponent,
-                data: {
-                    menu: {
-                        enable: true,
-                        title: "管理", 
-                        icon: "ion-ios-toggle",
-                        selected: false,
-                        expanded: false,
-                        order: 300
-                    }
-
-                }
-            },
-            {
                 path: "walkin",
                 component: WalkInComponent
             },
             {
                 path: "checkin",
-                component: CheckInComponent                
+                component: CheckInComponent
             },
             {
                 path: "checkout",
@@ -92,8 +78,8 @@ export const PagesRoutes: RouterConfig = [
             {
                 path: "createguest",
                 component: CreateGuestComponent
-            }
-
+            },
+            ...AdminRoutes
         ]
     }
 

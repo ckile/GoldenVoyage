@@ -6,6 +6,10 @@ using static GoldenVoyage.Models.OperatorResult;
 
 namespace GoldenVoyage.ApiServices.Services
 {
+    /// <summary>
+    /// 服务上下文
+    /// 负责服务的初始化，获取当前用户，提供服务间相互引用
+    /// </summary>
     public class ServiceContext
     {
         private IApiServicesProvider _apiServicesProvider;
@@ -32,7 +36,7 @@ namespace GoldenVoyage.ApiServices.Services
             _apiServicesProvider = apiServicesProvider;
         }
 
-        public TService Create<TService>()
+        public TService CreateRepository<TService>()
         {
             return _apiServicesProvider.Create<TService>(LoginId);
         }

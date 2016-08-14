@@ -15,7 +15,7 @@ namespace GoldenVoyage.Api.Controllers.Modules
         {
             return Ok(new
             {
-                accountTypes = await Create<IEntityService<Account>>().GetAll()
+                accountTypes = await Create<IEntityRepository<Account>>().GetAll()
             });
         }
     }

@@ -36,6 +36,7 @@ export class GvMenuService {
         let menu = [];
         items.forEach((item) => {
             let menuItem;
+            console.log(item);
             if (item.skip) {
                 if (item.children && item.children.length > 0) {
                     menuItem = item.children;
@@ -52,12 +53,15 @@ export class GvMenuService {
         return [].concat.apply([], menu);
     }
 
-
     protected _convertArrayToItems(routes: any[], parent?: any): any[] {
         let items = [];
-        routes.forEach((route) => {
-            items.push(this._convertObjectToItem(route, parent));
+        routes.forEach((route) => { 
+            let item = this._convertObjectToItem(route, parent);
+ 
+                items.push(item);
+ 
         });
+        
         return items;
     }
 
@@ -92,7 +96,6 @@ export class GvMenuService {
 
     protected _prepareItem(object: any): any {
         if (!object.skip) {
-
             let itemUrl = this._router.serializeUrl(this._router.createUrlTree(object.route.paths));
             object.url = object.url ? object.url : '/#' + itemUrl;
 

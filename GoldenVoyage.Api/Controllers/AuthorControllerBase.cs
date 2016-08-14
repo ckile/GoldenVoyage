@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.ApiServices.Services.Core;
+using GoldenVoyage.Models;
 using GoldenVoyage.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static GoldenVoyage.Models.OperatorResult;
 
 namespace GoldenVoyage.Api.Controllers
 {
+    /// <summary>
+    /// 认证控制器基础类
+    /// 获取登录，创建服务
+    /// </summary>
     [Authorize]
     public class AuthorControllerBase : Controller
     {
@@ -39,6 +44,16 @@ namespace GoldenVoyage.Api.Controllers
             var sub = claims.Value;
             if (string.IsNullOrWhiteSpace(sub)) return 0;
             return Convert.ToInt32(sub);
+        }
+
+        protected IActionResult InvaildArgument()
+        {
+            return BadRequest(Error(ErrorCodes.InvalidArgument));
+        }
+
+        protected IActionResult NotFoundEntity()
+        {
+            return NotFound(Error(ErrorCodes.NotFound));
         }
     }
 }

@@ -7,6 +7,7 @@ using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.ApiServices.Services.Core;
 using GoldenVoyage.ApiServices.Services.Entities;
 using GoldenVoyage.ApiServices.Services.Modules;
+using GoldenVoyage.ApiServices.Services.Modules.Guests;
 using GoldenVoyage.Models;
 using GoldenVoyage.Models.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,12 +45,12 @@ namespace GoldenVoyage.ApiServices.Configuration
         private static IServiceCollection AddModuleServices(this IServiceCollection services)
         {
             // Entities
-            services.AddTransient<IEntityService<Hotel>, HotelService>();
-            services.AddTransient<IEntityService<Employee>, EmployeeService>();
+            services.AddTransient<IEntityRepository<Hotel>, HotelRepository>();
+            services.AddTransient<IEntityRepository<Employee>, EmployeeRepository>();
             services.AddEntityService<RoomType>();
             services.AddEntityService<RoomFeature>();
             services.AddEntityService<OutOfOrderReason>();
-            services.AddTransient<IEntityService<Room>, RoomService>();
+            services.AddTransient<IEntityRepository<Room>, RoomRepository>();
             services.AddEntityService<ReservationType>();
             services.AddEntityService<AccountType>();
             services.AddEntityService<Market>();
@@ -71,14 +72,17 @@ namespace GoldenVoyage.ApiServices.Configuration
             services.AddEntityService<TransactClassify>();
 
             // Modules
+            services.AddTransient<IEntityRepository<Guest>, GuestRepository>();
+            services.AddTransient<IGuestsService, GuestsService>();
             services.AddTransient<IRoomViewService, RoomViewService>();
+
             return services;
         }
 
         private static IServiceCollection AddEntityService<TEntity>(this IServiceCollection services)
             where TEntity : ItemBase
         {
-            services.AddTransient<IEntityService<TEntity>, EntityService<TEntity>>();
+            services.AddTransient<IEntityRepository<TEntity>, EntityRepository<TEntity>>();
             return services;
         }
     }

@@ -2,7 +2,6 @@
 using GoldenVoyage.ApiServices.Services;
 using GoldenVoyage.Models;
 using Microsoft.AspNetCore.Mvc;
-using static GoldenVoyage.Models.OperatorResult;
 
 namespace GoldenVoyage.Api.Controllers
 {
@@ -12,9 +11,9 @@ namespace GoldenVoyage.Api.Controllers
         public EntityControllerBase(IApiServicesProvider apiServicesProvider) : base(apiServicesProvider)
         { }
 
-        private IEntityService<TEntity> GetService()
+        private IEntityRepository<TEntity> GetService()
         {
-            return Create<IEntityService<TEntity>>();
+            return Create<IEntityRepository<TEntity>>();
         }
 
         /// <summary>
@@ -91,16 +90,6 @@ namespace GoldenVoyage.Api.Controllers
             var result = await GetService().Delete(id);
             if (!result.Flag) return BadRequest(result);
             return Ok(result);
-        }
-
-        private IActionResult InvaildArgument()
-        {
-            return BadRequest(Error(ErrorCodes.InvalidArgument));
-        }
-
-        private IActionResult NotFoundEntity()
-        {
-            return NotFound(Error(ErrorCodes.NotFound));
         }
     }
 }
