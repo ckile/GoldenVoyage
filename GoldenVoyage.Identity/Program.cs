@@ -12,7 +12,8 @@ namespace GoldenVoyage.Identity
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel() 
+                .UseKestrel()
+                .UseUrls("http://*:51647")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

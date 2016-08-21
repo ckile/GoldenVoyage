@@ -13,6 +13,7 @@ namespace GoldenVoyage.Api
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("http://*:54455")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

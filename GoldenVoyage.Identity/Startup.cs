@@ -57,7 +57,7 @@ namespace GoldenVoyage.Identity
 
             builder.AddCustomGrantValidator<Extensions.CustomGrantValidator>();
 
-            builder.SetSigningCredential(cert);
+            builder.SetSigningCredentials(cert);
 
             // for the UI
             services

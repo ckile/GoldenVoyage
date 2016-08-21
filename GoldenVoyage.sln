@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Identity", "GoldenVoyage.Identity\GoldenVoyage.Identity.xproj", "{DF7ED04D-4AE0-4A70-9400-33C2A66B5645}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.ApiServices", "GoldenVoyage.ApiServices\GoldenVoyage.ApiServices.xproj", "{F7EF9E1B-CC83-4631-A762-463B97F234D4}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Web", "GoldenVoyage.Web\GoldenVoyage.Web.xproj", "{3FA030B0-C335-43FD-A165-142892799691}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GoldenVoyage.Identity4", "GoldenVoyage.Identity4\GoldenVoyage.Identity4.xproj", "{D9342BD7-0002-4851-9312-9713D7511896}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Web", "Web\Web.xproj", "{10BD1208-BDB3-46FF-BE21-24BFF35EC894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{3FA030B0-C335-43FD-A165-142892799691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA030B0-C335-43FD-A165-142892799691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FA030B0-C335-43FD-A165-142892799691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9342BD7-0002-4851-9312-9713D7511896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9342BD7-0002-4851-9312-9713D7511896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9342BD7-0002-4851-9312-9713D7511896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9342BD7-0002-4851-9312-9713D7511896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10BD1208-BDB3-46FF-BE21-24BFF35EC894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10BD1208-BDB3-46FF-BE21-24BFF35EC894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10BD1208-BDB3-46FF-BE21-24BFF35EC894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10BD1208-BDB3-46FF-BE21-24BFF35EC894}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
