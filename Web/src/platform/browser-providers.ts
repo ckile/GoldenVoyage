@@ -8,10 +8,13 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HTTP_PROVIDERS } from '@angular/http';
 // Angular 2 Router
 import { provideRouter } from '@angular/router';
+
+import { provideWebpack } from '@angularclass/webpack-toolkit';
+
 // Angular 2 forms
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
-import { routes } from '../app/app.routes';
+import { routes, asyncRoutes } from '../app/app.routes';
 
 /*
  * Application Providers/Directives/Pipes
@@ -23,7 +26,7 @@ export const APPLICATION_PROVIDERS = [
     provideForms(),
     // 初始化路由库
     provideRouter(routes),
-
+    provideWebpack(asyncRoutes),
     ...HTTP_PROVIDERS,
 
     { provide: LocationStrategy, useClass: HashLocationStrategy }
